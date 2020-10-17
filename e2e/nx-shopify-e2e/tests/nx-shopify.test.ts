@@ -15,7 +15,7 @@ describe('nx-shopify e2e', () => {
     expect(result.stdout).toContain('Successfully built');
 
     done();
-  });
+  }, 250000);
 
   describe('--directory', () => {
     it('should create src in the specified directory', async (done) => {
