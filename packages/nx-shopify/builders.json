@@ -10,6 +10,11 @@
       "implementation": "./src/builders/deploy/builder",
       "schema": "./src/builders/deploy/schema.json",
       "description": "deploy builder"
+    },
+    "serve": {
+      "implementation": "./src/builders/serve/builder",
+      "schema": "./src/builders/serve/schema.json",
+      "description": "serve builder"
     }
   }
 }
