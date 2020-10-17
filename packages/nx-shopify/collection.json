@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "name": "nx-shopify",
+  "version": "0.0.1",
+  "schematics": {
+    "nx-shopify": {
+      "factory": "./src/schematics/nx-shopify/schematic",
+      "schema": "./src/schematics/nx-shopify/schema.json",
+      "description": "nx-shopify schematic"
+    }
+  }
+}

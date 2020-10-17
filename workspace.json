@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "projects": {
+    "nx-shopify": {
+      "root": "packages/nx-shopify",
+      "sourceRoot": "packages/nx-shopify/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["packages/nx-shopify/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "packages/nx-shopify/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/packages/nx-shopify",
+            "tsConfig": "packages/nx-shopify/tsconfig.lib.json",
+            "packageJson": "packages/nx-shopify/package.json",
+            "main": "packages/nx-shopify/src/index.ts",
+            "assets": [
+              "packages/nx-shopify/*.md",
+              {
+                "input": "./packages/nx-shopify/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/nx-shopify",
+                "glob": "collection.json",
+                "output": "."
+              },
+              {
+                "input": "./packages/nx-shopify",
+                "glob": "builders.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "nx-shopify-e2e": {
+      "projectType": "application",
+      "root": "e2e/nx-shopify-e2e",
+      "sourceRoot": "e2e/nx-shopify-e2e/src",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "nx-shopify:build",
+            "npmPackageName": "@trafilea/nx-shopify",
+            "pluginOutputPath": "dist/packages/nx-shopify",
+            "jestConfig": "e2e/nx-shopify-e2e/jest.config.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  }
+}
