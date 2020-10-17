@@ -1,6 +1,25 @@
 {
   "name": "@trafilea/nx-shopify",
   "version": "0.0.1",
+  "description": "A Nx plugin for developing performance-first Shopify themes",
+  "license": "MIT",
+  "homepage": "https://trafilea.github.io/nx-shopify",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trafilea/nx-shopify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/trafilea/nx-shopify/issues"
+  },
+  "keywords": [
+    "nx",
+    "nrwl-nx",
+    "nx-plugin",
+    "trafilea",
+    "ecommerce",
+    "shopify",
+    "themekit"
+  ],
   "main": "src/index.js",
   "schematics": "./collection.json",
   "builders": "./builders.json"
