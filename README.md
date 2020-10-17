@@ -1,10 +1,23 @@
-# Trafilea
+<p align="center">
 
-This project was generated using [Nx](https://nx.dev).
+<img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" height="100">
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+</p>
+<h1 align="center">
+  Nx-Shopify
+</h1>
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+<div align="center">
+
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![License](https://img.shields.io/github/license/trafilea/nx-shopify)](https://github.com/trafilea/nx-shopify/blob/master/LICENSE)
+![npm (scoped)](https://img.shields.io/npm/v/@trafilea/nx-shopify)
+![npm](https://img.shields.io/npm/dm/@trafilea/nx-shopify)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
+</div>
+
+🔎 **A [Nx](https://nx.dev) plugin for developing performance-first Shopify themes.**
 
 ## Adding capabilities to your workspace
 
