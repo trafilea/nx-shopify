@@ -10,7 +10,7 @@ describe('nx-shopify e2e', () => {
     const plugin = uniq('nx-shopify');
     ensureNxProject('@trafilea/nx-shopify', 'dist/packages/nx-shopify');
     await runNxCommandAsync(
-      `generate @trafilea/nx-shopify:nxShopify ${plugin}`
+      `generate @trafilea/nx-shopify:nx-shopify ${plugin}`
     );
 
     const result = await runNxCommandAsync(`build ${plugin}`);
@@ -24,7 +24,7 @@ describe('nx-shopify e2e', () => {
       const plugin = uniq('nx-shopify');
       ensureNxProject('@trafilea/nx-shopify', 'dist/packages/nx-shopify');
       await runNxCommandAsync(
-        `generate @trafilea/nx-shopify:nxShopify ${plugin} --directory subdir`
+        `generate @trafilea/nx-shopify:nx-shopify ${plugin} --directory subdir`
       );
       expect(() =>
         checkFilesExist(`libs/subdir/${plugin}/src/index.ts`)
@@ -38,7 +38,7 @@ describe('nx-shopify e2e', () => {
       const plugin = uniq('nx-shopify');
       ensureNxProject('@trafilea/nx-shopify', 'dist/packages/nx-shopify');
       await runNxCommandAsync(
-        `generate @trafilea/nx-shopify:nxShopify ${plugin} --tags e2etag,e2ePackage`
+        `generate @trafilea/nx-shopify:nx-shopify ${plugin} --tags e2etag,e2ePackage`
       );
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
