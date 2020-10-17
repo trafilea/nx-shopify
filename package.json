@@ -1,6 +1,7 @@
 {
   "name": "trafilea",
   "version": "0.0.0",
+  "description": "A Nx plugin for developing performance-first Shopify themes",
   "license": "MIT",
   "scripts": {
     "nx": "nx",
