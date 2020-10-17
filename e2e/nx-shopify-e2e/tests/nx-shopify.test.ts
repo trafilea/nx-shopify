@@ -9,12 +9,10 @@ describe('nx-shopify e2e', () => {
   it('should create nx-shopify', async (done) => {
     const plugin = uniq('nx-shopify');
     ensureNxProject('@trafilea/nx-shopify', 'dist/packages/nx-shopify');
-    await runNxCommandAsync(
-      `generate @trafilea/nx-shopify:nx-shopify ${plugin}`
-    );
+    await runNxCommandAsync(`generate @trafilea/nx-shopify:theme ${plugin}`);
 
     const result = await runNxCommandAsync(`build ${plugin}`);
-    expect(result.stdout).toContain('Builder ran');
+    expect(result.stdout).toContain('Successfully built');
 
     done();
   });
@@ -24,10 +22,10 @@ describe('nx-shopify e2e', () => {
       const plugin = uniq('nx-shopify');
       ensureNxProject('@trafilea/nx-shopify', 'dist/packages/nx-shopify');
       await runNxCommandAsync(
-        `generate @trafilea/nx-shopify:nx-shopify ${plugin} --directory subdir`
+        `generate @trafilea/nx-shopify:theme ${plugin} --directory subdir`
       );
       expect(() =>
-        checkFilesExist(`libs/subdir/${plugin}/src/index.ts`)
+        checkFilesExist(`apps/subdir/${plugin}/config.yml`)
       ).not.toThrow();
       done();
     });
@@ -38,7 +36,7 @@ describe('nx-shopify e2e', () => {
       const plugin = uniq('nx-shopify');
       ensureNxProject('@trafilea/nx-shopify', 'dist/packages/nx-shopify');
       await runNxCommandAsync(
-        `generate @trafilea/nx-shopify:nx-shopify ${plugin} --tags e2etag,e2ePackage`
+        `generate @trafilea/nx-shopify:theme ${plugin} --tags e2etag,e2ePackage`
       );
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
