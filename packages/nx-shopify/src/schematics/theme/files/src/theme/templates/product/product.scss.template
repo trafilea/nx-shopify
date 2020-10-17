@@ -1,0 +1,3 @@
+.product-form {
+    border: 1px solid pink;
+}

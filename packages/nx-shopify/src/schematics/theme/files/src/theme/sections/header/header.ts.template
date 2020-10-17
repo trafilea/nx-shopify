@@ -1,0 +1,5 @@
+import { MessageSnippet } from '../../snippets';
+
+export class HeaderSection {
+  message = new MessageSnippet();
+}

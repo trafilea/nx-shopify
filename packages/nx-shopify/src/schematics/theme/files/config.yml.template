@@ -1,0 +1,11 @@
+# See https://shopify.github.io/themekit/configuration/ for more about this config file.
+
+development:
+    password: <your_password>
+    theme_id: "<your_theme_id>"
+    store: <you_store_name>.myshopify.com
+
+production:
+    password: <your_password>
+    theme_id: "<your_theme_id>"
+    store: <you_store_name>.myshopify.com

@@ -1,0 +1,31 @@
+<div class="header_container">
+    <div class="header_block">
+        {% for block in section.blocks %}
+            <div class="header_message">
+                <span class="">{{ block.settings.footer | escape }}</span>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% include 'message' %}
+
+{% schema %}
+{
+  "name": "Footer",
+	"max_blocks": 3,
+  "settings": [],
+	"blocks": [
+	  {
+		  "type": "message",
+		  "name": "Bottom message",
+		  "settings": [
+        {
+          "type": "text",
+          "id": "footer",
+          "label": "Footer"
+        }
+		  ]
+	  }
+	]
+}
+{% endschema %}
