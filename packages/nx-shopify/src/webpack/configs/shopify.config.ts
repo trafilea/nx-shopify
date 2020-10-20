@@ -2,7 +2,10 @@ import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as glob from 'glob';
 import { Configuration } from 'webpack';
 import * as webpackMerge from 'webpack-merge';
+import * as HTMLWebpackPlugin from 'html-webpack-plugin';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BuildBuilderOptions } from '../../builders/build/schema';
+import { getTemplatesLiquidFiles } from '../utils/template-utils';
 import { getCommonWebpackPartialConfig } from './common.config';
 
 function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
@@ -16,11 +19,25 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
       return acc;
     }, {});
 
+  function generateHtmlPlugins(dir) {
+    const files = getTemplatesLiquidFiles(dir);
+    return files.map((item) => {
+      const parts = item.split('.');
+      const name = parts[0];
+      return new HTMLWebpackPlugin({
+        filename: `templates/${name}.liquid`,
+        template: `${dir}/${name}/${name}.liquid`,
+        inject: false,
+        templateBundle: `${name}`,
+      });
+    });
+  }
+
   const webpackConfig: Configuration = {
     entry: templatesEntries,
     output: {
       path: options.outputPath,
-      chunkFilename: './assets/[name].bundle.js',
+      // chunkFilename: './assets/[name].bundle.js',
       filename: './assets/[name].[contenthash].js',
     },
     node: false,
@@ -48,10 +65,10 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
             from: `./${sourceRoot}/theme/layout/theme.liquid`,
             to: 'layout/[name].[ext]',
           },
-          {
-            from: `./${sourceRoot}/theme/templates/customers/*.liquid`,
-            to: 'templates/[folder]/[name].[ext]',
-          },
+          // {
+          //   from: `./${sourceRoot}/theme/templates/customers/*.liquid`,
+          //   to: 'templates/[folder]/[name].[ext]',
+          // },
           {
             from: `./${sourceRoot}/theme/templates/*/*.liquid`,
             to: 'templates/[name].[ext]',
@@ -69,6 +86,10 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
           },
         ],
       }),
+      new MiniCssExtractPlugin({
+        filename: 'assets/[name].[contenthash].css',
+      }),
+      ...generateHtmlPlugins(`${sourceRoot}/theme/templates`),
     ],
   };
   return webpackConfig;
