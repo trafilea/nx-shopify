@@ -1,1 +1,3 @@
 <!-- /templates/customers/account.liquid -->
+
+<%= entryPointsInjection() %>

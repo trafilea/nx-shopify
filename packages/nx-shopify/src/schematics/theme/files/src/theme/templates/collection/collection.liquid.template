@@ -16,3 +16,5 @@
     {{ paginate | default_pagination }}
   {% endif %}
 {% endpaginate %}
+
+<%= entryPointsInjection() %>

@@ -1,11 +1,11 @@
 import { readTsConfig } from '@nrwl/workspace';
-import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { LicenseWebpackPlugin } from 'license-webpack-plugin';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TsConfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { ScriptTarget } from 'typescript';
 import { Configuration, Plugin, ProgressPlugin } from 'webpack';
-import { AssetObj, BuildBuilderOptions } from '../../builders/build/schema';
+import { BuildBuilderOptions } from '../../builders/build/schema';
 import { getAliases, getStatsConfig } from '../../utils/webpack-utils';
 
 import CircularDependencyPlugin = require('circular-dependency-plugin');
@@ -94,6 +94,11 @@ export function getCommonWebpackPartialConfig(
             // https://github.com/TypeStrong/ts-loader/pull/685
             experimentalWatchApi: true,
           },
+        },
+        {
+          test: /\.scss$/,
+          exclude: /node_modules/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
         },
       ],
     },

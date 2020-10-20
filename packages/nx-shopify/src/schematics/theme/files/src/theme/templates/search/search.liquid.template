@@ -20,3 +20,5 @@
 
   {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
 {% endpaginate %}
+
+<%= entryPointsInjection() %>

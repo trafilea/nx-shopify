@@ -1,1 +1,3 @@
+import './404.scss';
+
 console.log('We are in 404 template');
