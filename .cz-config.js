@@ -19,6 +19,7 @@ module.exports = {
     { name: 'deploy', description: "anything 'deploy' builder specific" },
     { name: 'serve', description: "anything 'serve' builder specific" },
     { name: 'theme', description: "anything 'theme' schematic specific" },
+    { name: 'e2e', description: 'anything e2e tests specific' },
     { name: 'core', description: 'anything workspace specific' },
     { name: 'docs', description: 'anything related to docs infrastructure' },
     {
