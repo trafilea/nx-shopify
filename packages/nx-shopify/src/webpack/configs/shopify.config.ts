@@ -29,6 +29,7 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
         template: `${dir}/${name}/${name}.liquid`,
         inject: false,
         templateBundle: `${name}`,
+        cache: false,
       });
     });
   }
@@ -38,7 +39,7 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
     output: {
       path: options.outputPath,
       // chunkFilename: './assets/[name].bundle.js',
-      filename: './assets/[name].[contenthash].js',
+      filename: './assets/[name].js',
     },
     node: false,
     plugins: [
@@ -70,13 +71,6 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
           //   to: 'templates/[folder]/[name].[ext]',
           // },
           {
-            from: `./${sourceRoot}/theme/templates/*/*.liquid`,
-            to: 'templates/[name].[ext]',
-            globOptions: {
-              ignore: ['**/src/theme/templates/customers/**/*'],
-            },
-          },
-          {
             from: `./${sourceRoot}/theme/snippets/**/*.liquid`,
             to: 'snippets/[name].[ext]',
           },
@@ -87,7 +81,7 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
         ],
       }),
       new MiniCssExtractPlugin({
-        filename: 'assets/[name].[contenthash].css',
+        filename: 'assets/[name].css',
       }),
       ...generateHtmlPlugins(`${sourceRoot}/theme/templates`),
     ],
