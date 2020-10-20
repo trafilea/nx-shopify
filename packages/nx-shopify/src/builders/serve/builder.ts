@@ -29,13 +29,6 @@ export function runBuilder(
     themekitEnv: env = 'development',
   } = options;
 
-  const $themekitOpen = runThemekitCommand(
-    context,
-    'open',
-    { env },
-    { cwd: outputPath }
-  );
-
   let isFirstBuild = true;
 
   const $buildWatch = scheduleTargetAndForget(
@@ -53,14 +46,23 @@ export function runBuilder(
           context,
           { env },
           { cwd: outputPath }
-        ).then(() => (open ? $themekitOpen.toPromise() : null));
+        ).then(() =>
+          open
+            ? runThemekitCommand(
+                context,
+                'open',
+                { env },
+                { cwd: outputPath }
+              ).toPromise()
+            : null
+        );
         isFirstBuild = false;
       }
       context.reportRunning();
     })
   );
 
-  return merge($buildWatch).pipe(
+  return $buildWatch.pipe(
     catchError((err) => {
       const error = typeof err === 'string' ? err : undefined;
       const info = err && err instanceof Object ? err : undefined;

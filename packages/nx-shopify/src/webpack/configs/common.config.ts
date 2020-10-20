@@ -67,7 +67,14 @@ function getExtraPlugins(options: BuildBuilderOptions) {
 export function getCommonWebpackPartialConfig(
   options: BuildBuilderOptions
 ): Configuration {
-  const { tsConfig } = options;
+  const {
+    tsConfig,
+    sourceMap,
+    optimization,
+    memoryLimit,
+    watch,
+    poll,
+  } = options;
 
   const {
     options: { target },
@@ -80,8 +87,13 @@ export function getCommonWebpackPartialConfig(
   const extensions = ['.ts', '.tsx', '.js', '.jsx'];
 
   const webpackConfig: Configuration = {
-    devtool: options.sourceMap ? 'source-map' : false,
-    mode: options.optimization ? 'production' : 'development',
+    devtool:
+      sourceMap && typeof sourceMap === 'boolean'
+        ? 'source-map'
+        : sourceMap
+        ? sourceMap
+        : false,
+    mode: optimization ? 'production' : 'development',
     module: {
       rules: [
         {
@@ -120,16 +132,16 @@ export function getCommonWebpackPartialConfig(
     plugins: [
       new ForkTsCheckerWebpackPlugin({
         typescript: {
-          configFile: options.tsConfig,
-          memoryLimit: options.memoryLimit || 2048,
+          configFile: tsConfig,
+          memoryLimit: memoryLimit || 2048,
         },
       }),
       new CleanWebpackPlugin(),
       ...getExtraPlugins(options),
     ],
-    watch: options.watch,
+    watch,
     watchOptions: {
-      poll: options.poll,
+      poll,
     },
     stats: getStatsConfig(options),
   };

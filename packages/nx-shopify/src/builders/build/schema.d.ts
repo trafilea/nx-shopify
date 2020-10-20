@@ -7,6 +7,8 @@ export interface AssetObj {
   ignore?: string;
 }
 
+export type SourceMapOptions = 'source-map' | 'inline-source-map';
+
 export type Asset = string | AssetObj;
 export interface BuildBuilderOptions extends JsonObject {
   outputPath: string;
