@@ -49,8 +49,13 @@ export function runBuilder(
         webpackFactory: require('webpack'),
       })
     ),
-    tap(() => {
-      context.logger.info(`🎉 Successfully built ${projectName} theme\n`);
+    tap((builderOutput) => {
+      // context.logger.info(JSON.stringify(builderOutput.webpackStats['errors']));
+      if (builderOutput.success) {
+        context.logger.info(`🎉 Successfully built ${projectName} theme\n`);
+      } else {
+        context.logger.error(`❌ Failed to build ${projectName} theme\n`);
+      }
     })
   );
 }
