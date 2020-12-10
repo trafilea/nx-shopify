@@ -8,7 +8,6 @@ import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BuildBuilderOptions } from '../../builders/build/schema';
 import {
   getTemplateEntryPoints,
-  getTemplatesLiquidFiles,
 } from '../utils/template-utils';
 import { getCommonWebpackPartialConfig } from './common.config';
 
