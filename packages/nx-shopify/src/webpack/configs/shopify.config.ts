@@ -48,10 +48,14 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
             from: `./${sourceRoot}/theme/layout/theme.liquid`,
             to: 'layout/[name].[ext]',
           },
-          // {
-          //   from: `./${sourceRoot}/theme/templates/customers/*.liquid`,
-          //   to: 'templates/[folder]/[name].[ext]',
-          // },
+          {
+            from: `./${sourceRoot}/theme/templates/**/*.liquid`,
+            to: 'templates/[name].[ext]',
+          },
+          {
+              from: `./${sourceRoot}/theme/templates/customers/**/*.liquid`,
+              to: 'templates/customers/[name].[ext]',
+          },
           {
             from: `./${sourceRoot}/theme/snippets/**/*.liquid`,
             to: 'snippets/[name].[ext]',
