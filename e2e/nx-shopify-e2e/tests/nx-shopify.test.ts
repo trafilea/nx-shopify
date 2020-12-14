@@ -29,7 +29,7 @@ describe('nx-shopify e2e', () => {
         checkFilesExist(`apps/subdir/${plugin}/config.yml`)
       ).not.toThrow();
       done();
-    });
+    }, 120000);
   });
 
   describe('--tags', () => {
@@ -41,6 +41,6 @@ describe('nx-shopify e2e', () => {
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
       done();
-    });
+    }, 120000);
   });
 });
