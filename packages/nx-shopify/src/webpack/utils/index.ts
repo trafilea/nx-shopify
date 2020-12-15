@@ -1,2 +1,2 @@
-export * from './theme-layouts-utils';
-export * from './theme-template-utils';
+export * from './theme-entrypoints-utils';
+export * from './chunks-utils';

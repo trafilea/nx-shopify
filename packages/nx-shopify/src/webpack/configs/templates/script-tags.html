@@ -14,8 +14,8 @@
         <link rel="prefetch" href="<%= src %>" as="script">
       {%- endif -%}
   
-    <% } else if (chunk.split('@').length > 1) { %>
-      <% var pages = chunk.split('@') %>
+    <% } else if (templateFull.split('%40').length > 1) { %>
+      <% var pages = templateFull.split('%40') %>
       <% var conditions = [] %>
   
       <% pages.forEach(function(page){ %>

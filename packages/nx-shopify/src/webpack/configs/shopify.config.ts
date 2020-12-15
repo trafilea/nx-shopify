@@ -6,7 +6,11 @@ import * as webpackMerge from 'webpack-merge';
 import * as HTMLWebpackPlugin from 'html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BuildBuilderOptions } from '../../builders/build/schema';
-import { getTemplateEntryPoints, getLayoutEntryPoints } from '../utils';
+import {
+  getTemplateEntryPoints,
+  getLayoutEntryPoints,
+  getChunkName,
+} from '../utils';
 import { getCommonWebpackPartialConfig } from './common.config';
 
 function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
@@ -100,6 +104,13 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
         liquidLayouts: getLayoutEntryPoints(sourceRoot),
       }),
     ],
+
+    optimization: {
+      splitChunks: {
+        chunks: 'initial',
+        name: getChunkName,
+      },
+    },
   };
   return webpackConfig;
 }
