@@ -51,6 +51,9 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
           {
             from: `./${sourceRoot}/theme/templates/**/*.liquid`,
             to: 'templates/[name].[ext]',
+            globOptions: {
+              ignore: ['**/customers/**/*']
+            }
           },
           {
               from: `./${sourceRoot}/theme/templates/customers/**/*.liquid`,
