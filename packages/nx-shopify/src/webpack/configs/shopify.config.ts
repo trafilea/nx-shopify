@@ -5,6 +5,8 @@ import { Configuration } from 'webpack';
 import * as webpackMerge from 'webpack-merge';
 import * as HTMLWebpackPlugin from 'html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import * as CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import * as TerserPlugin from 'terser-webpack-plugin';
 import { BuildBuilderOptions } from '../../builders/build/schema';
 import {
   getTemplateEntryPoints,
@@ -55,12 +57,12 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
             from: `./${sourceRoot}/theme/templates/**/*.liquid`,
             to: 'templates/[name].[ext]',
             globOptions: {
-              ignore: ['**/customers/**/*']
-            }
+              ignore: ['**/customers/**/*'],
+            },
           },
           {
-              from: `./${sourceRoot}/theme/templates/customers/**/*.liquid`,
-              to: 'templates/customers/[name].[ext]',
+            from: `./${sourceRoot}/theme/templates/customers/**/*.liquid`,
+            to: 'templates/customers/[name].[ext]',
           },
           {
             from: `./${sourceRoot}/theme/snippets/**/*.liquid`,
@@ -117,6 +119,7 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
         chunks: 'initial',
         name: getChunkName,
       },
+      minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
     },
   };
   return webpackConfig;
