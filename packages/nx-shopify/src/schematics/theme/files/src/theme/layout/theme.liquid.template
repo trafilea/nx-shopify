@@ -7,6 +7,10 @@
   <meta name="description" content="{{ page_description | escape }}">
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+  {% include 'style-tags', layout: 'theme' %}
+  {% include 'script-tags', layout: 'theme' %}
+
   {{ content_for_header }} <!-- Header hook for plugins -->
 </head>
 <body>
