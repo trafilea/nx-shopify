@@ -82,6 +82,23 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
         liquidTemplates: getTemplateEntryPoints(sourceRoot),
         liquidLayouts: getLayoutEntryPoints(sourceRoot),
       }),
+      new HTMLWebpackPlugin({
+        filename: `snippets/style-tags.liquid`,
+        template: path.resolve(__dirname, 'templates', 'style-tags.html'),
+        inject: false,
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeAttributeQuotes: false,
+          preserveLineBreaks: true,
+          // more options:
+          // https://github.com/kangax/html-minifier#options-quick-reference
+        },
+        // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+        chunksSortMode: 'auto',
+        liquidTemplates: getTemplateEntryPoints(sourceRoot),
+        liquidLayouts: getLayoutEntryPoints(sourceRoot),
+      }),
     ],
   };
   return webpackConfig;
