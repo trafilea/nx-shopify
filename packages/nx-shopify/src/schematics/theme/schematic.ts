@@ -18,7 +18,6 @@ import {
 } from '@nrwl/workspace';
 import { uniq } from '../../utils/output-dir-utils';
 import { ThemeSchematicSchema } from './schema';
-import { getEntrypointsInjectionTemplate } from './utils';
 
 /**
  * Depending on your needs, you can change this to either `Library` or `Application`
@@ -60,7 +59,6 @@ function addFiles(options: NormalizedSchema): Rule {
         ...names(options.name),
         offsetFromRoot: offsetFromRoot(options.projectRoot),
         dot: '.',
-        entryPointsInjection: getEntrypointsInjectionTemplate,
       }),
       move(options.projectRoot),
     ])

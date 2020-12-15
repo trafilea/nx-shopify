@@ -103,5 +103,3 @@
 <p>{{ 'customer.order.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</p>
 
 {{ order.shipping_address | format_address }}
-
-<%= entryPointsInjection() %>

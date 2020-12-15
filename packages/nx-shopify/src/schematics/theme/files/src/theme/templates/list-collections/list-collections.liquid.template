@@ -15,5 +15,3 @@
     {% endfor %}
   {% endunless %}
 {% endfor %}
-
-<%= entryPointsInjection() %>

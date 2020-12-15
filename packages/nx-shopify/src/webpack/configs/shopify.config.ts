@@ -5,10 +5,14 @@ import { Configuration } from 'webpack';
 import * as webpackMerge from 'webpack-merge';
 import * as HTMLWebpackPlugin from 'html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import * as CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import * as TerserPlugin from 'terser-webpack-plugin';
 import { BuildBuilderOptions } from '../../builders/build/schema';
 import {
   getTemplateEntryPoints,
-} from '../utils/template-utils';
+  getLayoutEntryPoints,
+  getChunkName,
+} from '../utils';
 import { getCommonWebpackPartialConfig } from './common.config';
 
 function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
@@ -17,6 +21,7 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
   const webpackConfig: Configuration = {
     entry: {
       ...getTemplateEntryPoints(sourceRoot),
+      ...getLayoutEntryPoints(sourceRoot),
     },
     output: {
       path: options.outputPath,
@@ -52,12 +57,12 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
             from: `./${sourceRoot}/theme/templates/**/*.liquid`,
             to: 'templates/[name].[ext]',
             globOptions: {
-              ignore: ['**/customers/**/*']
-            }
+              ignore: ['**/customers/**/*'],
+            },
           },
           {
-              from: `./${sourceRoot}/theme/templates/customers/**/*.liquid`,
-              to: 'templates/customers/[name].[ext]',
+            from: `./${sourceRoot}/theme/templates/customers/**/*.liquid`,
+            to: 'templates/customers/[name].[ext]',
           },
           {
             from: `./${sourceRoot}/theme/snippets/**/*.liquid`,
@@ -72,7 +77,50 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
       new MiniCssExtractPlugin({
         filename: 'assets/[name].css',
       }),
+      new HTMLWebpackPlugin({
+        excludeChunks: ['static'],
+        filename: `snippets/script-tags.liquid`,
+        template: path.resolve(__dirname, 'templates', 'script-tags.html'),
+        inject: false,
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeAttributeQuotes: false,
+          preserveLineBreaks: true,
+          // more options:
+          // https://github.com/kangax/html-minifier#options-quick-reference
+        },
+        // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+        chunksSortMode: 'auto',
+        liquidTemplates: getTemplateEntryPoints(sourceRoot),
+        liquidLayouts: getLayoutEntryPoints(sourceRoot),
+      }),
+      new HTMLWebpackPlugin({
+        filename: `snippets/style-tags.liquid`,
+        template: path.resolve(__dirname, 'templates', 'style-tags.html'),
+        inject: false,
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeAttributeQuotes: false,
+          preserveLineBreaks: true,
+          // more options:
+          // https://github.com/kangax/html-minifier#options-quick-reference
+        },
+        // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+        chunksSortMode: 'auto',
+        liquidTemplates: getTemplateEntryPoints(sourceRoot),
+        liquidLayouts: getLayoutEntryPoints(sourceRoot),
+      }),
     ],
+
+    optimization: {
+      splitChunks: {
+        chunks: 'initial',
+        name: getChunkName,
+      },
+      minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
+    },
   };
   return webpackConfig;
 }
