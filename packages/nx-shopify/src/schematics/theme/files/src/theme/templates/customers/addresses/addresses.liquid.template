@@ -286,5 +286,3 @@
   {% endif %}
 
 {% endpaginate %}
-
-<%= entryPointsInjection() %>

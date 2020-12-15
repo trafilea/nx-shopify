@@ -8,5 +8,3 @@
     </a>
   </div>
 {% endfor %}
-
-<%= entryPointsInjection() %>

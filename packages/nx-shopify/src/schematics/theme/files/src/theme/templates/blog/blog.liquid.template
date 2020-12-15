@@ -20,5 +20,3 @@
 {% endif %}
 
 {% endpaginate %}
-
-<%= entryPointsInjection() %>

@@ -49,5 +49,3 @@
   </p>
   <a href="{{ shop.url }}">{{ 'customer.register.cancel' | t }}</a>
 {% endform %}
-
-<%= entryPointsInjection() %>

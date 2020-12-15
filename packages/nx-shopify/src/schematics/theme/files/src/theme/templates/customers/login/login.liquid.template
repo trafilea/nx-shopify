@@ -85,5 +85,3 @@
     <input type="submit" class="button" value="{{ 'customer.login.guest_continue' | t }}">
   {% endform %}
 {% endif %}
-
-<%= entryPointsInjection() %>

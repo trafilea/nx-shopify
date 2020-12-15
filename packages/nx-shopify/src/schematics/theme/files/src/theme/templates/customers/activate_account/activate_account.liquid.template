@@ -27,5 +27,3 @@
   <input type="submit" class="button" value="{{ 'customer.activate_account.submit' | t }}">
   <input type="submit" class="button button--secondary" name="decline" value="{{ 'customer.activate_account.cancel' | t }}">
 {% endform %}
-
-<%= entryPointsInjection() %>

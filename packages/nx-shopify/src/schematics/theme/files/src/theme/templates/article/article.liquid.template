@@ -39,5 +39,3 @@
     {% endform %}
   </div>
 {% endif %}
-
-<%= entryPointsInjection() %>
