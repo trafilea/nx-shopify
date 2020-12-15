@@ -16,7 +16,7 @@ export type ThemeKitOptions = {
 export type ThemeKitFlags = {
   env?: string;
   noIgnore?: string;
-  allowLive?: string;
+  allowLive?: boolean;
   ignoredFile?: string;
   ignoredFiles?: string;
   notify?: string;

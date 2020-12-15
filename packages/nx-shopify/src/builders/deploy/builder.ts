@@ -24,6 +24,7 @@ export function runBuilder(
     buildConfiguration,
     open,
     themekitEnv: env = 'development',
+    allowLive,
   } = options;
 
   return scheduleTargetAndForget(
@@ -37,7 +38,12 @@ export function runBuilder(
   ).pipe(
     concatMap(() => runThemekitCommand(context, 'version')),
     concatMap(() =>
-      runThemekitCommand(context, 'deploy', { env }, { cwd: outputPath })
+      runThemekitCommand(
+        context,
+        'deploy',
+        { env, allowLive },
+        { cwd: outputPath }
+      )
     ),
     concatMap((themekitRunResult) =>
       open

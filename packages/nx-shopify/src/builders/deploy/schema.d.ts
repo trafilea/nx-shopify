@@ -5,4 +5,5 @@ export interface DeployBuilderSchema extends JsonObject {
   buildConfiguration: string;
   themekitEnv: string;
   open: boolean;
+  allowLive: boolean;
 }
