@@ -18,6 +18,7 @@ import {
 } from '@nrwl/workspace';
 import { uniq } from '../../utils/output-dir-utils';
 import { ThemeSchematicSchema } from './schema';
+import init from '../init/schematic';
 
 /**
  * Depending on your needs, you can change this to either `Library` or `Application`
@@ -71,6 +72,10 @@ export default function (options: ThemeSchematicSchema): Rule {
   const { projectName, projectRoot } = normalizedOptions;
 
   return chain([
+    init({
+      ...options,
+      skipFormat: true,
+    }),
     updateWorkspace((workspace) => {
       const project = workspace.projects.add({
         name: projectName,
