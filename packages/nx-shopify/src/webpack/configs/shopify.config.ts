@@ -50,7 +50,7 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
             to: '[name].[ext]',
           },
           {
-            from: `./${sourceRoot}/theme/layout/theme.liquid`,
+            from: `./${sourceRoot}/theme/layout/**/*.liquid`,
             to: 'layout/[name].[ext]',
           },
           {
