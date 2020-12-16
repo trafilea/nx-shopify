@@ -27,6 +27,7 @@ export function runBuilder(
     buildConfiguration,
     open,
     themekitEnv: env = 'development',
+    allowLive,
   } = options;
 
   let isFirstBuild = true;
@@ -44,7 +45,7 @@ export function runBuilder(
       if (isFirstBuild) {
         runThemekitWatchPromise(
           context,
-          { env },
+          { env, allowLive },
           { cwd: outputPath }
         ).then(() =>
           open
