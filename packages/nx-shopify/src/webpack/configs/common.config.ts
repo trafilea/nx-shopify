@@ -69,6 +69,7 @@ export function getCommonWebpackPartialConfig(
 ): Configuration {
   const {
     tsConfig,
+    postcssConfig,
     sourceMap,
     optimization,
     memoryLimit,
@@ -110,7 +111,19 @@ export function getCommonWebpackPartialConfig(
         {
           test: /\.scss$/,
           exclude: /node_modules/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                postcssOptions: {
+                  config: postcssConfig,
+                },
+              },
+            },
+            'sass-loader',
+          ],
         },
       ],
     },

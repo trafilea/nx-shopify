@@ -13,6 +13,7 @@ export type Asset = string | AssetObj;
 export interface BuildBuilderOptions extends JsonObject {
   outputPath: string;
   tsConfig: string;
+  postcssConfig: string;
   themekitConfig: string;
 
   watch?: boolean;
