@@ -108,8 +108,9 @@ export function getCommonWebpackPartialConfig(
           },
         },
         {
-          test: /\.scss$/,
+          test: /\.s?css$/,
           exclude: /node_modules/,
+          sideEffects: true,
           use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
         },
       ],
