@@ -1,0 +1,16 @@
+.layout-elements {
+    margin: 3em 0;
+}
+
+@media screen and (min-width: 460px) {
+  .layout-elements {
+    margin: 2em 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .layout-elements {
+    margin: 1em 0;
+  }
+}
+

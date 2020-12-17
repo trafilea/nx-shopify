@@ -6503,6 +6503,16 @@ mdn-data@2.0.4:
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.4.tgz#699b3c38ac6f1d728091a64650b65d388502fd5b"
   integrity sha512-iV3XNKw06j5Q7mi6h+9vbx23Tv7JkjEVgKHW4pimwyDGWm0OIQntJJ+u1C6mg6mK1EaTv42XQ7w76yuzH7M2cA==
 
+media-query-plugin@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/media-query-plugin/-/media-query-plugin-1.4.0.tgz#7fdf529e2a2952d46b2e225918fa4711eef757a1"
+  integrity sha512-Cht8LWE9C7UJ8tGw9c14vkaS2S8mKsHMdkJhAIZuC4x/3Dcyu35ZGQoOkwUwrPb/Uw2kcy4cL0OLa/m5wll43A==
+  dependencies:
+    loader-utils "^2.0.0"
+    postcss "^7.0.32"
+    webpack "^4.44.1"
+    webpack-sources "^1.4.3"
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
@@ -7872,7 +7882,7 @@ postcss-value-parser@^4.0.2, postcss-value-parser@^4.1.0:
   resolved "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-4.1.0.tgz#443f6a20ced6481a2bda4fa8532a6e55d789a2cb"
   integrity sha512-97DXOFbQJhk71ne5/Mt6cOu6yxsSfM0QGQyl0L25Gca4yGWEGJaig7l7gbCX623VqTBNGLRLaVUCnNkcedlRSQ==
 
-postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.27:
+postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.27, postcss@^7.0.32:
   version "7.0.35"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.35.tgz#d2be00b998f7f211d8a276974079f2e92b970e24"
   integrity sha512-3QT8bBJeX/S5zKTTjTCIjRF3If4avAT6kqxcASlTWEtAFCb9NH0OUxNDfgZSWdP5fJnBYCMEWkIFfWeugjzYMg==
@@ -10148,7 +10158,7 @@ webpack-sources@^1.1.0, webpack-sources@^1.2.0, webpack-sources@^1.4.0, webpack-
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@4:
+webpack@4, webpack@^4.44.1:
   version "4.44.2"
   resolved "https://registry.npmjs.org/webpack/-/webpack-4.44.2.tgz#6bfe2b0af055c8b2d1e90ed2cd9363f841266b72"
   integrity sha512-6KJVGlCxYdISyurpQ0IPTklv+DULv05rs2hseIXer6D7KrUicRDLFb4IUM1S6LUAKypPM/nSiVSuv8jHu1m3/Q==

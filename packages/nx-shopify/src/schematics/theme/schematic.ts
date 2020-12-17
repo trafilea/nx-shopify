@@ -91,6 +91,7 @@ export default function (options: ThemeSchematicSchema): Rule {
           outputPath: `dist/${projectRootDir(projectType)}/${projectName}`,
           tsConfig: `${projectRoot}/tsconfig.app.json`,
           postcssConfig: `${projectRoot}/postcss.config.js`,
+          mediaQueriesConfig: `${projectRoot}/media-queries.config.js`,
           themekitConfig: `${projectRoot}/config.yml`,
           sourceMap: true,
         },

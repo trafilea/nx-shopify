@@ -14,6 +14,7 @@ export interface BuildBuilderOptions extends JsonObject {
   outputPath: string;
   tsConfig: string;
   postcssConfig: string;
+  mediaQueriesConfig: string;
   themekitConfig: string;
 
   watch?: boolean;

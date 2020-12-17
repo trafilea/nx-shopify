@@ -78,6 +78,7 @@ export function normalizeBuildOptions<T extends BuildBuilderOptions>(
     sourceRoot: sourceRoot,
     outputPath: resolve(root, options.outputPath),
     tsConfig: resolve(root, options.tsConfig),
+    mediaQueriesConfig: resolve(root, options.mediaQueriesConfig),
     fileReplacements: normalizeFileReplacements(root, options.fileReplacements),
     assets: options.assets
       ? normalizeAssets(options.assets, root, sourceRoot)
