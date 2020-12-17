@@ -1,0 +1,9 @@
+.title-404 {
+  border: 1px solid red;
+}
+
+@media print, screen and (min-width: 460px) {
+  .title-404 {
+    border: 3px solid magenta;
+  }
+}

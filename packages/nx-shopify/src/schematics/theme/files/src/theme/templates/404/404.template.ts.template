@@ -1,0 +1,3 @@
+import './404.template.scss';
+
+console.log('We are in 404 template');

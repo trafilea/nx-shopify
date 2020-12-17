@@ -3,6 +3,11 @@
   "name": "nx-shopify",
   "version": "0.0.1",
   "schematics": {
+    "init": {
+      "factory": "./src/schematics/init/schematic",
+      "schema": "./src/schematics/init/schema.json",
+      "description": "init schematic"
+    },
     "theme": {
       "factory": "./src/schematics/theme/schematic",
       "schema": "./src/schematics/theme/schema.json",

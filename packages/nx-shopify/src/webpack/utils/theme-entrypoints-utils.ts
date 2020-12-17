@@ -8,7 +8,10 @@ export function getLayoutEntryPoints(sourceRoot) {
 
   templatesEntries.forEach((filePath) => {
     const entryName = path.parse(filePath).name;
-    entrypoints[`layout.${entryName}`] = filePath;
+
+    if (entryName.endsWith('.layout')) {
+      entrypoints[entryName] = filePath;
+    }
   });
 
   return entrypoints;
@@ -23,7 +26,9 @@ export function getTemplateEntryPoints(sourceRoot) {
 
   templatesEntries.forEach((filePath) => {
     const entryName = path.parse(filePath).name;
-    entrypoints[`template.${entryName}`] = filePath;
+    if (entryName.endsWith('.template')) {
+      entrypoints[entryName] = filePath;
+    }
   });
 
   const templatesCustomersEntries = glob.sync(
@@ -31,7 +36,9 @@ export function getTemplateEntryPoints(sourceRoot) {
   );
   templatesCustomersEntries.forEach((filePath) => {
     const entryName = path.parse(filePath).name;
-    entrypoints[`template.customers.${entryName}`] = filePath;
+    if (entryName.startsWith('customers.') && entryName.endsWith('.template')) {
+      entrypoints[entryName] = filePath;
+    }
   });
 
   return entrypoints;

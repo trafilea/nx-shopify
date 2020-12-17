@@ -1,0 +1,3 @@
+import './theme.layout.scss';
+
+console.log('Hello from theme.ts! :)');

@@ -18,6 +18,7 @@ module.exports = {
     { name: 'build', description: "anything 'build' builder specific" },
     { name: 'deploy', description: "anything 'deploy' builder specific" },
     { name: 'serve', description: "anything 'serve' builder specific" },
+    { name: 'init', description: "anything 'init' schematic specific" },
     { name: 'theme', description: "anything 'theme' schematic specific" },
     { name: 'e2e', description: 'anything e2e tests specific' },
     { name: 'core', description: 'anything workspace specific' },

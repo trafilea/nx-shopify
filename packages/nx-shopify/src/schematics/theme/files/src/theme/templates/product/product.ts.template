@@ -1,7 +1,0 @@
-import { HeaderSection } from '../../sections';
-import { MessageSnippet } from '../../snippets';
-
-const header = new HeaderSection();
-new MessageSnippet();
-
-console.log('We are on product template');
