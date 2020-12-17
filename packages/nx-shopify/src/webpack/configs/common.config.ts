@@ -65,16 +65,16 @@ function getExtraPlugins(options: BuildBuilderOptions) {
   }
 
   if (mediaQueriesConfig) {
-    console.log('Media quieries are: ', mediaQueriesConfig);
-
     const mediaQueries = require(mediaQueriesConfig);
 
-    extraPlugins.push(
-      new MediaQueryPlugin({
-        include: /.*/,
-        queries: mediaQueries,
-      })
-    );
+    if (typeof mediaQueries === 'object' && mediaQueries !== null) {
+      extraPlugins.push(
+        new MediaQueryPlugin({
+          include: /.*/,
+          queries: mediaQueries,
+        })
+      );
+    }
   }
 
   return extraPlugins;
