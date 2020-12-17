@@ -2,6 +2,7 @@ import { readTsConfig } from '@nrwl/workspace';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { LicenseWebpackPlugin } from 'license-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import * as MediaQueryPlugin from 'media-query-plugin';
 import TsConfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { ScriptTarget } from 'typescript';
 import { Configuration, Plugin, ProgressPlugin } from 'webpack';
@@ -13,6 +14,8 @@ import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 function getExtraPlugins(options: BuildBuilderOptions) {
   const extraPlugins: Plugin[] = [];
+
+  const { mediaQueriesConfig } = options;
 
   if (options.progress) {
     extraPlugins.push(new ProgressPlugin());
@@ -59,6 +62,19 @@ function getExtraPlugins(options: BuildBuilderOptions) {
         exclude: /[\\/]node_modules[\\/]/,
       })
     );
+  }
+
+  if (mediaQueriesConfig) {
+    const mediaQueries = require(mediaQueriesConfig);
+
+    if (typeof mediaQueries === 'object' && mediaQueries !== null) {
+      extraPlugins.push(
+        new MediaQueryPlugin({
+          include: /.*/,
+          queries: mediaQueries,
+        })
+      );
+    }
   }
 
   return extraPlugins;
@@ -114,6 +130,7 @@ export function getCommonWebpackPartialConfig(
           use: [
             MiniCssExtractPlugin.loader,
             'css-loader',
+            MediaQueryPlugin.loader,
             {
               loader: 'postcss-loader',
               options: {

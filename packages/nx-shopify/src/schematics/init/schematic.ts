@@ -4,7 +4,10 @@ import {
   formatFiles,
   setDefaultCollection,
 } from '@nrwl/workspace';
-import { autoprefixerVersion } from '../../utils/versions';
+import {
+  autoprefixerVersion,
+  postcssCombineMediaQueryVersion,
+} from '../../utils/versions';
 import { InitSchematicSchema } from './schema';
 
 function updateDependencies(): Rule {
@@ -12,6 +15,7 @@ function updateDependencies(): Rule {
     {},
     {
       autoprefixer: autoprefixerVersion,
+      'postcss-combine-media-query': postcssCombineMediaQueryVersion,
     }
   );
 }

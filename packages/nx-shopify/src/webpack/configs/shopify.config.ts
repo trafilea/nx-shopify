@@ -12,6 +12,7 @@ import {
   getTemplateEntryPoints,
   getLayoutEntryPoints,
   getChunkName,
+  getExtractedStyles,
 } from '../utils';
 import { getCommonWebpackPartialConfig } from './common.config';
 
@@ -111,6 +112,7 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
         chunksSortMode: 'auto',
         liquidTemplates: getTemplateEntryPoints(sourceRoot),
         liquidLayouts: getLayoutEntryPoints(sourceRoot),
+        getExtractedStyles,
       }),
     ],
 

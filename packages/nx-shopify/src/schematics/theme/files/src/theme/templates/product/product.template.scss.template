@@ -1,0 +1,9 @@
+.product-form {
+    border: 1px solid pink;
+}
+
+@media print, screen and (min-width: 460px) {
+  .product-form {
+    background: green;
+  }
+}
