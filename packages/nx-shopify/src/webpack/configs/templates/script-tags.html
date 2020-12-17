@@ -1,59 +1,62 @@
-<% for (var chunk in htmlWebpackPlugin.files.js) { %>
-    <% if (htmlWebpackPlugin.options.isDevServer === true) { %>
-      <% var src = htmlWebpackPlugin.files.js[chunk] %>
-    <% } else { %>
-      <% var templateName = htmlWebpackPlugin.files.js[chunk].split('/').reverse()[0].replace('.js', '').split('.')[1] %>
-      <% var templateFull = htmlWebpackPlugin.files.js[chunk].split('/').reverse()[0].replace('.js', '') %>
-      <% var basename = htmlWebpackPlugin.files.js[chunk].split('/').reverse()[0]; %>
-      <% var src = `{{ '${basename}' | asset_url }}` %>
-    <% } %>
-    <% if (typeof htmlWebpackPlugin.options.liquidLayouts[templateFull] !== 'undefined') { %>
-      {%- if layout == '<%= templateName %>' -%}
+<% var liquidTemplates = htmlWebpackPlugin.options.liquidTemplates; %>
+<% var liquidLayouts = htmlWebpackPlugin.options.liquidLayouts; %>
+
+<% for (var jsFile of htmlWebpackPlugin.files.js) { %>
+  <% if (htmlWebpackPlugin.options.isDevServer === true) { %>
+    <% var src = jsFile %>
+  <% } else { %>
+    <% var basename = jsFile.split('/').reverse()[0]; %>
+    <% var templateFull = basename.replace('.js', '') %>
+    <% var templateName = templateFull.split('.').slice(0, -1).join('.') %>
+    <% var src = `{{ '${basename}' | asset_url }}` %>
+  <% } %>
+  <% if (typeof htmlWebpackPlugin.options.liquidLayouts[templateFull] !== 'undefined') { %>
+    {%- if layout == '<%= templateName %>' -%}
+      <script type="text/javascript" src="<%= src %>" defer></script>
+    {%- else -%}
+      <link rel="prefetch" href="<%= src %>" as="script">
+    {%- endif -%}
+
+  <% } else if (templateFull.split('%40').length > 1) { %>
+    <% var pages = templateFull.split('%40') %>
+    <% var conditions = [] %>
+
+    <% pages.forEach(function(page){ %>
+      <% var pageTemplate = liquidTemplates[page] %>
+      <% if (typeof pageTemplate !== 'undefined') { %>
+        <% var pageTemplateName = page.split('.').slice(0, -1).join('.'); %>
+        <% if (pageTemplate.includes('customers\\') || pageTemplate.includes('customers/')) { %>
+          <% conditions.push("template == 'customers/" + pageTemplateName.split('.').slice(1).join('.') + "'") %>
+        <% } else { %>
+          <% conditions.push("template == '" + pageTemplateName + "'") %>
+        <% } %>
+      <% } else if (typeof htmlWebpackPlugin.options.liquidLayouts[page] !== 'undefined') { %>
+        <% conditions.push("layout == '" + page.split('.')[1] + "'") %>
+      <% } %>
+    <% }); %>
+
+    {%- if <%= conditions.join(' or ') %> -%}
+      <script type="text/javascript" src="<%= decodeURIComponent(src) %>" defer></script>
+    {%- else -%}
+      <link rel="prefetch" href="<%= decodeURIComponent(src) %>" as="script">
+    {%- endif -%}
+
+  <% } else if (typeof liquidTemplates[templateFull] !== 'undefined') { %>
+    <% var chunkTemplate = liquidTemplates[templateFull] %>
+    <% if (chunkTemplate.includes('customers\\') || chunkTemplate.includes('customers/')) { %>
+      {%- if template == 'customers/<%= templateName.split('.').slice(1).join('.') %>' -%}
         <script type="text/javascript" src="<%= src %>" defer></script>
       {%- else -%}
         <link rel="prefetch" href="<%= src %>" as="script">
       {%- endif -%}
-  
-    <% } else if (templateFull.split('%40').length > 1) { %>
-      <% var pages = templateFull.split('%40') %>
-      <% var conditions = [] %>
-  
-      <% pages.forEach(function(page){ %>
-        <% var pageTemplate = htmlWebpackPlugin.options.liquidTemplates[page] %>
-        <% if (typeof pageTemplate !== 'undefined') { %>
-          <% if (pageTemplate.includes('customers\\') || pageTemplate.includes('customers/')) { %>
-            <% conditions.push("template == 'customers/" + page.split('.').slice(1).join('.') + "'") %>
-          <% } else { %>
-            <% conditions.push("template == '" + page.split('.').slice(1).join('.') + "'") %>
-          <% } %>
-        <% } else if (typeof htmlWebpackPlugin.options.liquidLayouts[page] !== 'undefined') { %>
-          <% conditions.push("layout == '" + page.split('.')[1] + "'") %>
-        <% } %>
-      <% }); %>
-  
-      {%- if <%= conditions.join(' or ') %> -%}
-        <script type="text/javascript" src="<%= decodeURIComponent(src) %>" defer></script>
-      {%- else -%}
-        <link rel="prefetch" href="<%= decodeURIComponent(src) %>" as="script">
-      {%- endif -%}
-  
-    <% } else if (typeof htmlWebpackPlugin.options.liquidTemplates[templateFull] !== 'undefined') { %>
-      <% var chunkTemplate = htmlWebpackPlugin.options.liquidTemplates[templateFull] %>
-      <% if (chunkTemplate.includes('customers\\') || chunkTemplate.includes('customers/')) { %>
-        {%- if template == 'customers/<%= chunk.split('.').slice(1).join('.') %>' -%}
-          <script type="text/javascript" src="<%= src %>" defer></script>
-        {%- else -%}
-          <link rel="prefetch" href="<%= src %>" as="script">
-        {%- endif -%}
-      <% } else { %>
-        {%- if template == '<%= templateName %>' -%}
-          <script type="text/javascript" src="<%= src %>" defer></script>
-        {%- else -%}
-          <link rel="prefetch" href="<%= src %>" as="script">
-        {%- endif -%}
-      <% } %>
     <% } else { %>
-      <script type="text/javascript" src="<%= src %>" defer></script>
+      {%- if template == '<%= templateName %>' -%}
+        <script type="text/javascript" src="<%= src %>" defer></script>
+      {%- else -%}
+        <link rel="prefetch" href="<%= src %>" as="script">
+      {%- endif -%}
     <% } %>
+  <% } else { %>
+    <script type="text/javascript" src="<%= src %>" defer></script>
   <% } %>
-  
+<% } %>
