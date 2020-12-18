@@ -24,7 +24,7 @@ export function runBuilder(
     buildConfiguration,
     open,
     themekitEnv: env = 'development',
-    allowLive,
+    allowLive = false,
   } = options;
 
   return scheduleTargetAndForget(

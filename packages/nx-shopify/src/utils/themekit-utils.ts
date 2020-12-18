@@ -27,14 +27,14 @@ export type ThemekitRunResult = { success: boolean };
 export function runThemekitCommand(
   context: BuilderContext,
   command: ThemeKitCommand,
-  flagObj?: ThemeKitFlags,
+  flagObj: ThemeKitFlags = {},
   options?: ThemeKitOptions
 ): Observable<ThemekitRunResult> {
   return from(themekit.command(command, flagObj, options)).pipe(
     map(() => ({ success: true })),
     catchError((err) => {
       context.logger.error(
-        `❌ Failed to execute themekit ${command}${
+        `❌ Failed to execute themekit '${command}'${
           err && typeof err === 'string' ? `. Error: ${err}` : ''
         }`,
         err && err instanceof Object ? err : undefined
@@ -69,13 +69,4 @@ export function runThemekitWatch(
       );
     });
   });
-}
-
-export function runThemekitWatchPromise(
-  context: BuilderContext,
-  flagObj?: ThemeKitFlags,
-  options?: ThemeKitOptions
-): Promise<void> {
-  context.logger.info('Themekit Watch runned!');
-  return themekit.command('watch', flagObj, options);
 }

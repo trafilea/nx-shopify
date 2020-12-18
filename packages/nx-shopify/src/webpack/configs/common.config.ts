@@ -3,6 +3,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { LicenseWebpackPlugin } from 'license-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as MediaQueryPlugin from 'media-query-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import TsConfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { ScriptTarget } from 'typescript';
 import { Configuration, Plugin, ProgressPlugin } from 'webpack';
@@ -15,7 +16,7 @@ import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 function getExtraPlugins(options: BuildBuilderOptions) {
   const extraPlugins: Plugin[] = [];
 
-  const { mediaQueriesConfig } = options;
+  const { mediaQueriesConfig, watch, analyze } = options;
 
   if (options.progress) {
     extraPlugins.push(new ProgressPlugin());
@@ -75,6 +76,15 @@ function getExtraPlugins(options: BuildBuilderOptions) {
         })
       );
     }
+  }
+
+  if (analyze) {
+    extraPlugins.push(
+      new BundleAnalyzerPlugin({
+        generateStatsFile: true,
+        analyzerMode: watch ? 'server' : 'static',
+      })
+    );
   }
 
   return extraPlugins;

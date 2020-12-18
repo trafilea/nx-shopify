@@ -20,6 +20,7 @@ export interface BuildBuilderOptions extends JsonObject {
   watch?: boolean;
   sourceMap?: boolean | SourceMapOptions;
   optimization?: boolean | OptimizationOptions;
+  analyze?: boolean;
   showCircularDependencies?: boolean;
   memoryLimit?: number;
   poll?: number;
