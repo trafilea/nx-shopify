@@ -127,11 +127,11 @@ export default function (options: ThemeSchematicSchema): Rule {
         name: 'serve',
         builder: '@trafilea/nx-shopify:serve',
         options: {
-          outputPath: `tmp/${uniq(projectName)}`,
+          buildTarget: `${projectName}:build`,
         },
         configurations: {
           production: {
-            buildConfiguration: 'production',
+            buildTarget: `${projectName}:build:production`,
             themekitEnv: 'production',
           },
         },

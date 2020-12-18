@@ -117,6 +117,7 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
     ],
 
     optimization: {
+      usedExports: true,
       splitChunks: {
         chunks: 'initial',
         name: getChunkName,
