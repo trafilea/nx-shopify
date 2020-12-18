@@ -23,15 +23,15 @@
 
     <% pages.forEach(function(page){ %>
       <% var pageTemplate = liquidTemplates[page] %>
+      <% var pageTemplateName = page.split('.').slice(0, -1).join('.'); %>
       <% if (typeof pageTemplate !== 'undefined') { %>
-        <% var pageTemplateName = page.split('.').slice(0, -1).join('.'); %>
         <% if (pageTemplate.includes('customers\\') || pageTemplate.includes('customers/')) { %>
           <% conditions.push("template == 'customers/" + pageTemplateName.split('.').slice(1).join('.') + "'") %>
         <% } else { %>
           <% conditions.push("template == '" + pageTemplateName + "'") %>
         <% } %>
       <% } else if (typeof htmlWebpackPlugin.options.liquidLayouts[page] !== 'undefined') { %>
-        <% conditions.push("layout == '" + page.split('.')[1] + "'") %>
+        <% conditions.push("layout == '" + pageTemplateName + "'") %>
       <% } %>
     <% }); %>
 
