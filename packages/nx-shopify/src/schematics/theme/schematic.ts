@@ -101,8 +101,8 @@ export default function (options: ThemeSchematicSchema): Rule {
             sourceMap: false,
             fileReplacements: [
               {
-                replace: 'src/environments/environment.ts',
-                with: 'src/environments/environment.prod.ts',
+                replace: `${projectRoot}/src/environments/environment.ts`,
+                with: `${projectRoot}/src/environments/environment.prod.ts`,
               },
             ],
           },
