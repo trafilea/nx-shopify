@@ -43,6 +43,7 @@ function getExtraPlugins(options: BuildBuilderOptions) {
           // Now we remove starting slash to make Webpack place it from the output root.
           to: asset.output,
           from: asset.glob,
+          flatten: true,
           globOptions: {
             ignore: [
               '.gitkeep',

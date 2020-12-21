@@ -29,7 +29,7 @@ function normalizeAssets(
       const input = isDirectory
         ? resolvedAssetPath
         : dirname(resolvedAssetPath);
-      const output = relative(resolvedSourceRoot, resolve(root, input));
+      const output = 'assets';
       const glob = isDirectory ? '**/*' : basename(resolvedAssetPath);
       return {
         input,
