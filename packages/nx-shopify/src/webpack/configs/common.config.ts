@@ -9,6 +9,7 @@ import { ScriptTarget } from 'typescript';
 import { Configuration, Plugin, ProgressPlugin } from 'webpack';
 import { BuildBuilderOptions } from '../../builders/build/schema';
 import { getAliases, getStatsConfig } from '../../utils/webpack-utils';
+import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 
 import CircularDependencyPlugin = require('circular-dependency-plugin');
 import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -35,26 +36,28 @@ function getExtraPlugins(options: BuildBuilderOptions) {
   }
 
   // process asset entries
-  if (options.assets) {
-    // const copyWebpackPluginAssetsPatterns = options.assets.map(
-    //   (asset: AssetObj) => {
-    //     console.log('Assets is ', JSON.stringify(asset));
-    //     return {
-    //       context: asset.input,
-    //       // Now we remove starting slash to make Webpack place it from the output root.
-    //       to: asset.output,
-    //       from: asset.glob,
-    //       globOptions: {
-    //         ignore: [asset.ignore, '.gitkeep', '**/.DS_Store', '**/Thumbs.db'],
-    //         dot: true,
-    //       },
-    //     };
-    //   }
-    // );
-    // const copyWebpackPluginInstance = new CopyWebpackPlugin({
-    //   patterns: [...copyWebpackPluginAssetsPatterns],
-    // });
-    // extraPlugins.push(copyWebpackPluginInstance);
+  if (Array.isArray(options.assets) && options.assets.length > 0) {
+    const copyWebpackPluginInstance = new CopyWebpackPlugin({
+      patterns: options.assets.map((asset: any) => {
+        return {
+          context: asset.input,
+          // Now we remove starting slash to make Webpack place it from the output root.
+          to: asset.output,
+          from: asset.glob,
+          flatten: true,
+          globOptions: {
+            ignore: [
+              '.gitkeep',
+              '**/.DS_Store',
+              '**/Thumbs.db',
+              ...(asset.ignore ? asset.ignore : []),
+            ],
+            dot: true,
+          },
+        };
+      }),
+    });
+    extraPlugins.push(copyWebpackPluginInstance);
   }
 
   if (options.showCircularDependencies) {
