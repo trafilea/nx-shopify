@@ -34,11 +34,6 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: `${sourceRoot}/assets/**/*`,
-            to: 'assets/',
-            flatten: true,
-          },
-          {
             from: `./${sourceRoot}/config/*.json`,
             to: 'config/[name].[ext]',
           },
