@@ -41,7 +41,6 @@ function getExtraPlugins(options: BuildBuilderOptions) {
       patterns: options.assets.map((asset: any) => {
         return {
           context: asset.input,
-          // Now we remove starting slash to make Webpack place it from the output root.
           to: asset.output,
           from: asset.glob,
           flatten: true,
@@ -52,7 +51,6 @@ function getExtraPlugins(options: BuildBuilderOptions) {
               '**/Thumbs.db',
               ...(asset.ignore ? asset.ignore : []),
             ],
-            dot: true,
           },
         };
       }),

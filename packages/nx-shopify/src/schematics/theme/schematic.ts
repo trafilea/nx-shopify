@@ -94,6 +94,7 @@ export default function (options: ThemeSchematicSchema): Rule {
           mediaQueriesConfig: `${projectRoot}/media-queries.config.js`,
           themekitConfig: `${projectRoot}/config.yml`,
           sourceMap: true,
+          assets: [`${projectRoot}/src/assets`],
         },
         configurations: {
           production: {
