@@ -10,15 +10,21 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["packages/nx-shopify/**/*.ts"]
+            "lintFilePatterns": [
+              "packages/nx-shopify/**/*.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "packages/nx-shopify/jest.config.js",
-            "passWithNoTests": true
-          }
+            "passWithNoTests": true,
+            "tsConfig": "packages/nx-shopify/tsconfig.spec.json"
+          },
+          "outputs": [
+            "coverage/packages/nx-shopify"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -45,7 +51,10 @@
                 "output": "."
               }
             ]
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
