@@ -17,7 +17,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </div>
@@ -117,6 +117,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 <table>
   <tr>
     <td align="center"><a href="https://sebastiandg7.github.io/"><img src="https://avatars0.githubusercontent.com/u/13395979?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sebastian Duque Gutierrez</b></sub></a><br /><a href="https://github.com/trafilea/nx-shopify/commits?author=sebastiandg7" title="Code">💻</a> <a href="#infra-sebastiandg7" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-sebastiandg7" title="Ideas, Planning, & Feedback">🤔</a> <a href="#blog-sebastiandg7" title="Blogposts">📝</a> <a href="https://github.com/trafilea/nx-shopify/commits?author=sebastiandg7" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.karensantana.co/"><img src="https://avatars1.githubusercontent.com/u/2827260?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Karen Santana</b></sub></a><br /><a href="https://github.com/trafilea/nx-shopify/commits?author=karensantana" title="Code">💻</a> <a href="#ideas-karensantana" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
