@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[14],{84:function(o){o.exports=JSON.parse('{"allTagsPath":"/nx-shopify/blog/tags","slug":"hello","name":"hello","count":2,"permalink":"/nx-shopify/blog/tags/hello"}')}}]);

@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[19],{89:function(e){e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Welcome","permalink":"/nx-shopify/blog/welcome"},{"title":"Hello","permalink":"/nx-shopify/blog/hello-world"},{"title":"Hola","permalink":"/nx-shopify/blog/hola"}]}')}}]);
