@@ -9,6 +9,20 @@
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
-  "contributors": [],
+  "contributors": [
+    {
+      "login": "sebastiandg7",
+      "name": "Sebastian Duque Gutierrez",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/13395979?v=4",
+      "profile": "https://sebastiandg7.github.io/",
+      "contributions": [
+        "code",
+        "infra",
+        "ideas",
+        "blog",
+        "doc"
+      ]
+    }
+  ],
   "contributorsPerLine": 7
 }
