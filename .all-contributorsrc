@@ -1,0 +1,75 @@
+{
+  "projectName": "nx-shopify",
+  "projectOwner": "trafilea",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "sebastiandg7",
+      "name": "Sebastian Duque Gutierrez",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/13395979?v=4",
+      "profile": "https://sebastiandg7.github.io/",
+      "contributions": [
+        "code",
+        "infra",
+        "ideas",
+        "blog",
+        "doc"
+      ]
+    },
+    {
+      "login": "karensantana",
+      "name": "Karen Santana",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2827260?v=4",
+      "profile": "https://www.karensantana.co/",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "andisadiazl",
+      "name": "Andisa Diaz",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/31493497?v=4",
+      "profile": "https://github.com/andisadiazl",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mvuljevas",
+      "name": "Mauricio Vuljevas",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/14046897?v=4",
+      "profile": "https://www.mvuljevas.com/",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "jsalinasvela",
+      "name": "Jesus Salinas Vela",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/28662284?v=4",
+      "profile": "https://github.com/jsalinasvela",
+      "contributions": [
+        "ideas",
+        "projectManagement"
+      ]
+    },
+    {
+      "login": "sophiecarreras",
+      "name": "Sophie",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/49928680?v=4",
+      "profile": "https://github.com/sophiecarreras",
+      "contributions": [
+        "projectManagement"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
