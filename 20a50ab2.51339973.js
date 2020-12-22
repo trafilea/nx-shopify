@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{75:function(o){o.exports=JSON.parse('{"allTagsPath":"/nx-shopify/blog/tags","slug":"facebook","name":"facebook","count":1,"permalink":"/nx-shopify/blog/tags/facebook"}')}}]);
