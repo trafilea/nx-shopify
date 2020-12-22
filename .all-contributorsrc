@@ -50,6 +50,16 @@
       "contributions": [
         "ideas"
       ]
+    },
+    {
+      "login": "jsalinasvela",
+      "name": "Jesus Salinas Vela",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/28662284?v=4",
+      "profile": "https://github.com/jsalinasvela",
+      "contributions": [
+        "ideas",
+        "projectManagement"
+      ]
     }
   ],
   "contributorsPerLine": 7
