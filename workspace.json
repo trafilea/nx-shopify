@@ -18,7 +18,8 @@
           "options": {
             "jestConfig": "packages/nx-shopify/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/packages/nx-shopify"]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -45,7 +46,8 @@
                 "output": "."
               }
             ]
-          }
+          },
+          "outputs": ["{options.outputPath}"]
         }
       }
     },

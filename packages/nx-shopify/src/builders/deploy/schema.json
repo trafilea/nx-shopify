@@ -1,6 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "https://json-schema.org/draft-07/schema",
+  "$schema": "http://json-schema.org/schema",
   "title": "Deploy theme builder",
   "description": "Builds the theme and deploys it to Shopify with the passed env configuration ('development' by default)",
   "type": "object",
