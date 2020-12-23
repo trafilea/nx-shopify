@@ -25,7 +25,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "commit": "cz",
-    "check-commit": "node ./scripts/commit-lint.js",
+    "check-commit": "node ./tools/scripts/commit-lint.js",
     "contributors:add": "npx all-contributors-cli add",
     "contributors:generate": "npx all-contributors-cli generate",
     "workspace-generator": "nx workspace-generator"
