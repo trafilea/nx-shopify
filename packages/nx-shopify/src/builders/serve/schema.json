@@ -1,8 +1,35 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "title": "Serve builder",
-  "description": "",
+  "title": "Shopify Theme Serve Target",
+  "description": "Shopify theme serve target options",
   "type": "object",
-  "properties": {},
-  "required": []
+  "properties": {
+    "buildTarget": {
+      "type": "string",
+      "description": "Name of the target to be used in the theme build process."
+    },
+    "analyze": {
+      "type": "boolean",
+      "description": "Analyze the generated bundle and open webpack-bundle-analyzer in the browser",
+      "default": false
+    },
+    "themekitEnv": {
+      "type": "string",
+      "description": "Name of the themekit config.yml environment to be used in the deployment ('development' by default)",
+      "default": "development"
+    },
+    "allowLive": {
+      "type": "boolean",
+      "description": "Enables making changes to the Shopify Live Theme",
+      "default": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Open theme preview in the broswer when the deployment is done.",
+      "default": false,
+      "alias": "o"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["buildTarget"]
 }

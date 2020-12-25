@@ -5,20 +5,13 @@ import {
   scheduleTargetAndForget,
   targetFromTargetString,
 } from '@angular-devkit/architect';
-import { json } from '@angular-devkit/core';
 import { from, Observable, of } from 'rxjs';
 import { catchError, concatMap, skip, switchMap } from 'rxjs/operators';
 import { runThemekitCommand } from '../../utils/themekit-utils';
 import { BuildBuilderOptions } from '../build/schema';
 import { ServeBuilderSchema } from './schema';
 
-const devServerBuildOverriddenKeys: (keyof BuildBuilderOptions)[] = [
-  'watch',
-  'optimization',
-  'analyze',
-  'sourceMap',
-  'open',
-];
+const devServerBuildOverriddenKeys: (keyof BuildBuilderOptions)[] = ['analyze'];
 
 export function runBuilder(
   options: ServeBuilderSchema,
