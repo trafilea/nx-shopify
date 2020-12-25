@@ -15,6 +15,7 @@
 
 <div align="center">
 
+[![documentation](https://github.com/trafilea/nx-shopify/workflows/documentation/badge.svg)](https://trafilea.github.io/nx-shopify/)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![License](https://img.shields.io/github/license/trafilea/nx-shopify)](https://github.com/trafilea/nx-shopify/blob/master/LICENSE)
 ![npm (scoped)](https://img.shields.io/npm/v/@trafilea/nx-shopify)
