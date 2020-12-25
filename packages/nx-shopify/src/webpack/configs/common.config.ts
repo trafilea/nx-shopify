@@ -17,7 +17,7 @@ import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 function getExtraPlugins(options: BuildBuilderOptions) {
   const extraPlugins: Plugin[] = [];
 
-  const { mediaQueriesConfig, watch, analyze } = options;
+  const { mediaQueriesConfig, watch, analyze, statsJson } = options;
 
   if (options.progress) {
     extraPlugins.push(new ProgressPlugin());
@@ -79,11 +79,17 @@ function getExtraPlugins(options: BuildBuilderOptions) {
     }
   }
 
-  if (analyze) {
+  if (analyze || statsJson) {
     extraPlugins.push(
       new BundleAnalyzerPlugin({
-        generateStatsFile: true,
-        analyzerMode: watch ? 'server' : 'static',
+        analyzerMode: analyze
+          ? statsJson
+            ? 'json'
+            : watch
+            ? 'server'
+            : 'static'
+          : 'disabled',
+        generateStatsFile: statsJson,
       })
     );
   }
