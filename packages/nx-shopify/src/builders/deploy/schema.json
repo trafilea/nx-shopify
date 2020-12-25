@@ -1,27 +1,34 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "title": "Deploy theme builder",
-  "description": "Builds the theme and deploys it to Shopify with the passed env configuration ('development' by default)",
+  "title": "Shopify Theme Deploy Target",
+  "description": "Shopify theme deploy target options",
   "type": "object",
   "properties": {
     "outputPath": {
       "type": "string",
-      "description": "Path where output will be placed.",
-      "default": "development"
+      "description": "Path where output will be placed."
     },
-    "buildConfiguration": {
+    "buildTarget": {
       "type": "string",
-      "description": "Name of the configuration to be used in the theme build process."
+      "description": "Name of the target to be used in the theme build process."
     },
     "themekitEnv": {
       "type": "string",
-      "description": "Name of the themekit config.yml environment to be used in the deployment.",
+      "description": "Name of the themekit config.yml environment to be used in the deployment ('development' by default)",
       "default": "development"
+    },
+    "allowLive": {
+      "type": "boolean",
+      "description": "Enables making changes to the Shopify Live Theme",
+      "default": "false"
     },
     "open": {
       "type": "boolean",
-      "description": "Open theme preview in the broswer when the deployment is done."
+      "description": "Open theme preview in the broswer when the deployment is done.",
+      "default": false,
+      "alias": "o"
     }
   },
-  "required": []
+  "additionalProperties": false,
+  "required": ["outputPath", "buildTarget"]
 }

@@ -115,10 +115,11 @@ export default function (options: ThemeSchematicSchema): Rule {
         builder: '@trafilea/nx-shopify:deploy',
         options: {
           outputPath: `dist/${projectRootDir(projectType)}/${projectName}`,
+          buildTarget: `${projectName}:build`,
         },
         configurations: {
           production: {
-            buildConfiguration: 'production',
+            buildTarget: `${projectName}:build:production`,
             themekitEnv: 'production',
           },
         },

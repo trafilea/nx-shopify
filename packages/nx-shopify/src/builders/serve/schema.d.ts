@@ -1,6 +1,9 @@
-import { DeployBuilderSchema } from '../deploy/schema';
+import { JsonObject } from '@angular-devkit/core';
 
-export interface ServeBuilderSchema extends DeployBuilderSchema {
+export interface ServeBuilderSchema extends JsonObject {
   buildTarget: string;
+  themekitEnv: string;
+  open: boolean;
+  allowLive: boolean;
   analyze?: boolean;
 }

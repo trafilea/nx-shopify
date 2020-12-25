@@ -4,17 +4,17 @@
     "build": {
       "implementation": "./src/builders/build/builder",
       "schema": "./src/builders/build/schema.json",
-      "description": "build builder"
+      "description": "Build a Shopify theme"
     },
     "deploy": {
       "implementation": "./src/builders/deploy/builder",
       "schema": "./src/builders/deploy/schema.json",
-      "description": "deploy builder"
+      "description": "Deploy a Shopify theme to Shopify"
     },
     "serve": {
       "implementation": "./src/builders/serve/builder",
       "schema": "./src/builders/serve/schema.json",
-      "description": "serve builder"
+      "description": "Serves a Shopify theme for development"
     }
   }
 }
