@@ -9,6 +9,11 @@ export interface AssetObj {
 
 export type SourceMapOptions = 'source-map' | 'inline-source-map';
 
+export interface FileReplacement {
+  replace: string;
+  with: string;
+}
+
 export type Asset = string | AssetObj;
 export interface BuildBuilderOptions extends JsonObject {
   outputPath: string;
@@ -20,7 +25,6 @@ export interface BuildBuilderOptions extends JsonObject {
   watch?: boolean;
   sourceMap?: boolean | SourceMapOptions;
   optimization?: boolean | OptimizationOptions;
-  analyze?: boolean;
   showCircularDependencies?: boolean;
   memoryLimit?: number;
   poll?: number;
@@ -29,6 +33,7 @@ export interface BuildBuilderOptions extends JsonObject {
   assets?: Array<Asset>;
 
   progress?: boolean;
+  analyze?: boolean;
   statsJson?: boolean;
   extractLicenses?: boolean;
   verbose?: boolean;
@@ -37,9 +42,4 @@ export interface BuildBuilderOptions extends JsonObject {
 
   root?: string;
   sourceRoot?: Path;
-}
-
-export interface FileReplacement {
-  replace: string;
-  with: string;
 }
