@@ -6,12 +6,12 @@
     "init": {
       "factory": "./src/schematics/init/schematic",
       "schema": "./src/schematics/init/schema.json",
-      "description": "init schematic"
+      "description": "Initialize plugin"
     },
     "theme": {
       "factory": "./src/schematics/theme/schematic",
       "schema": "./src/schematics/theme/schema.json",
-      "description": "theme schematic"
+      "description": "Generate new Shopify theme"
     }
   }
 }
