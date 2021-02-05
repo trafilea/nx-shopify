@@ -20,7 +20,7 @@
     "allowLive": {
       "type": "boolean",
       "description": "Enables making changes to the Shopify Live Theme",
-      "default": "false"
+      "default": false
     },
     "open": {
       "type": "boolean",
