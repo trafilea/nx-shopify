@@ -752,10 +752,10 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.11.tgz#aeb16f50649a91af79dbe36574b66d0f9e4d9f71"
   integrity sha512-3NsZsJIA/22P3QUyrEDNA2D133H4j224twJrdipXN38dpnIOzAbUDtOwkcJ5pXmn75w7LSQDjA4tO9dm1XlqlA==
 
-"@shopify/themekit@^1.1.6":
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/@shopify/themekit/-/themekit-1.1.6.tgz#7c9438b49a394633a1268213b782515bfc077dab"
-  integrity sha512-occfH7+1q8eqKrTkqhJ8sRtyliDpFbc2ideAnoUygbynPDiOFNoA7OaDL6JWz4o+hCDAXBu+Z2Mwbpi0+W+Sdw==
+"@shopify/themekit@^1.1.7":
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/@shopify/themekit/-/themekit-1.1.7.tgz#06a1b81cca12b744c3fb72c9d937fd78793a83db"
+  integrity sha512-GuIORV/WtvxKzsHZ8Ly2/0T5xFT2anWO1MXmsqbVaxPSRqWppI0k10ulU4Aj118J+D28x03Gq0E1/ejAZgQqXw==
   dependencies:
     bin-wrapper "^4.1.0"
     minimist "^1.2.5"
