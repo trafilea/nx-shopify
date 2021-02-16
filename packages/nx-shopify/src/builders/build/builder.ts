@@ -8,7 +8,7 @@ import { from, Observable } from 'rxjs';
 import { concatMap, map, tap } from 'rxjs/operators';
 import { deleteOutputDir } from '../../utils/output-dir-utils';
 import { normalizeBuildOptions } from '../../utils/normalize-utils';
-import { getSourceRoot } from '../../utils/workspace-utils';
+import { getSourceRootNg } from '../../utils/workspace-utils';
 import { getShopifyWebpackConfig } from '../../webpack/configs/shopify.config';
 import { BuildBuilderOptions } from './schema';
 
@@ -24,12 +24,12 @@ export function runBuilder(
   // Delete output path before bundling
   deleteOutputDir(context.workspaceRoot, options.outputPath);
 
-  return from(getSourceRoot(context)).pipe(
+  return from(getSourceRootNg(context)).pipe(
     map((sourceRoot) =>
       normalizeBuildOptions(options, context.workspaceRoot, sourceRoot)
     ),
     map((normalizedOptions) => {
-      let webpackConfig = getShopifyWebpackConfig(normalizedOptions);
+      let webpackConfig = getShopifyWebpackConfig(normalizedOptions, false);
       if (normalizedOptions.webpackConfig) {
         webpackConfig = require(normalizedOptions.webpackConfig)(
           webpackConfig,

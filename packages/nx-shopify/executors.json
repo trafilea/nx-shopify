@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/@angular-devkit/architect/src/builders-schema.json",
-  "builders": {
+  "executors": {
     "build": {
       "implementation": "./src/builders/build/builder",
       "schema": "./src/builders/build/schema.json",
@@ -12,7 +12,7 @@
       "description": "Deploy a Shopify theme to Shopify"
     },
     "serve": {
-      "implementation": "./src/executors/serve/executor",
+      "implementation": "./src/executors/serve/serve.executor",
       "schema": "./src/executors/serve/schema.json",
       "description": "Serves a Shopify theme for local development"
     }

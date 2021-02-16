@@ -1,20 +1,20 @@
 {
-  "version": 1,
+  "version": 2,
   "projects": {
     "nx-shopify": {
       "root": "packages/nx-shopify",
       "sourceRoot": "packages/nx-shopify/src",
       "projectType": "library",
-      "schematics": {},
-      "architect": {
+      "generators": {},
+      "targets": {
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["packages/nx-shopify/**/*.ts"]
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "packages/nx-shopify/jest.config.js",
             "passWithNoTests": true
@@ -22,7 +22,7 @@
           "outputs": ["coverage/packages/nx-shopify"]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "executor": "@nrwl/node:package",
           "options": {
             "outputPath": "dist/packages/nx-shopify",
             "tsConfig": "packages/nx-shopify/tsconfig.lib.json",
@@ -34,6 +34,16 @@
                 "input": "./packages/nx-shopify/src",
                 "glob": "**/*.!(ts)",
                 "output": "./src"
+              },
+              {
+                "input": "./packages/nx-shopify",
+                "glob": "generators.json",
+                "output": "."
+              },
+              {
+                "input": "./packages/nx-shopify",
+                "glob": "executors.json",
+                "output": "."
               },
               {
                 "input": "./packages/nx-shopify",
@@ -55,9 +65,9 @@
       "projectType": "application",
       "root": "e2e/nx-shopify-e2e",
       "sourceRoot": "e2e/nx-shopify-e2e/src",
-      "architect": {
+      "targets": {
         "e2e": {
-          "builder": "@nrwl/nx-plugin:e2e",
+          "executor": "@nrwl/nx-plugin:e2e",
           "options": {
             "target": "nx-shopify:build",
             "npmPackageName": "@trafilea/nx-shopify",
