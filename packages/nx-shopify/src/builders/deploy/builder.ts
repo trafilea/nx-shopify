@@ -7,7 +7,7 @@ import {
 } from '@angular-devkit/architect';
 import { Observable, of, from } from 'rxjs';
 import { catchError, concatMap, map, tap, switchMap } from 'rxjs/operators';
-import { runThemekitCommand } from '../../utils/themekit-utils';
+import { runThemekitCommandObservable } from '../../utils/themekit';
 import { BuildBuilderOptions } from '../build/schema';
 import { DeployBuilderSchema } from './schema';
 
@@ -38,9 +38,9 @@ export function runBuilder(
     switchMap(({ browserOptions }) => {
       const { outputPath } = browserOptions;
       return scheduleTargetAndForget(context, buildTarget, browserOptions).pipe(
-        concatMap(() => runThemekitCommand(context, 'version')),
+        concatMap(() => runThemekitCommandObservable(context, 'version')),
         concatMap(() =>
-          runThemekitCommand(
+          runThemekitCommandObservable(
             context,
             'deploy',
             { env, allowLive },
@@ -49,7 +49,12 @@ export function runBuilder(
         ),
         concatMap((themekitRunResult) =>
           open
-            ? runThemekitCommand(context, 'open', { env }, { cwd: outputPath })
+            ? runThemekitCommandObservable(
+                context,
+                'open',
+                { env },
+                { cwd: outputPath }
+              )
             : of(themekitRunResult)
         ),
         tap(() => {

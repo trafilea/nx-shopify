@@ -4,13 +4,15 @@ import { BuildBuilderOptions } from '../builders/build/schema';
 export function getAliases(
   options: BuildBuilderOptions
 ): { [key: string]: string } {
-  return options.fileReplacements.reduce(
-    (aliases, replacement) => ({
-      ...aliases,
-      [replacement.replace]: replacement.with,
-    }),
-    {}
-  );
+  return options.fileReplacements
+    ? options.fileReplacements.reduce(
+        (aliases, replacement) => ({
+          ...aliases,
+          [replacement.replace]: replacement.with,
+        }),
+        {}
+      )
+    : null;
 }
 
 export function getStatsConfig(

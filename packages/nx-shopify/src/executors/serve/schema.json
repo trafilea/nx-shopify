@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "title": "Shopify Theme Serve Target",
-  "description": "Shopify theme serve target options",
+  "cli": "nx",
+  "title": "Serve executor",
+  "description": "",
   "type": "object",
   "properties": {
     "buildTarget": {
@@ -28,6 +29,16 @@
       "description": "Open theme preview in the broswer when the deployment is done.",
       "default": false,
       "alias": "o"
+    },
+    "skipFirstDeploy": {
+      "type": "boolean",
+      "description": "Tell if the first deploy should be skipped.",
+      "default": false
+    },
+    "devServerIpAddress": {
+      "type": "string",
+      "description": "Set the local web server ip address. Valid values are: private (default), public, <interface name>, <ip v4/6 address>",
+      "default": "private"
     }
   },
   "additionalProperties": false,

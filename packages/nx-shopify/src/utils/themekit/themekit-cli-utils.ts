@@ -1,10 +1,11 @@
 import { BuilderContext } from '@angular-devkit/architect';
+import { ExecutorContext } from '@nrwl/devkit';
 import * as themekit from '@shopify/themekit';
 import * as fs from 'fs';
 import { resolve } from 'path';
 import { from, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { uniq } from './output-dir-utils';
+import { uniq } from '../output-dir-utils';
 
 export type ThemeKitCommand = 'version' | 'watch' | 'deploy' | 'open';
 
@@ -14,17 +15,22 @@ export type ThemeKitOptions = {
 };
 
 export type ThemeKitFlags = {
+  password?: string;
+  store?: string;
+  themeid?: string;
   env?: string;
   noIgnore?: string;
   allowLive?: boolean;
   ignoredFile?: string;
-  ignoredFiles?: string;
+  ignoredFiles?: string[];
   notify?: string;
+  nodelete?: boolean;
+  files?: string[];
 };
 
 export type ThemekitRunResult = { success: boolean };
 
-export function runThemekitCommand(
+export function runThemekitCommandObservable(
   context: BuilderContext,
   command: ThemeKitCommand,
   flagObj: ThemeKitFlags = {},
@@ -42,6 +48,14 @@ export function runThemekitCommand(
       return throwError(err);
     })
   );
+}
+
+export function runThemekitCommand(
+  command: ThemeKitCommand,
+  flagObj: ThemeKitFlags = {},
+  options?: ThemeKitOptions
+): Promise<void> {
+  return themekit.command(command, flagObj, options);
 }
 
 export function runThemekitWatch(

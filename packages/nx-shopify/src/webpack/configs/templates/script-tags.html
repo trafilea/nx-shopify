@@ -2,12 +2,12 @@
 <% var liquidLayouts = htmlWebpackPlugin.options.liquidLayouts; %>
 
 <% for (var jsFile of htmlWebpackPlugin.files.js) { %>
+  <% var basename = jsFile.split('/').reverse()[0]; %>
+  <% var templateFull = basename.replace('.js', '') %>
+  <% var templateName = templateFull.split('.').slice(0, -1).join('.') %>
   <% if (htmlWebpackPlugin.options.isDevServer === true) { %>
     <% var src = jsFile %>
   <% } else { %>
-    <% var basename = jsFile.split('/').reverse()[0]; %>
-    <% var templateFull = basename.replace('.js', '') %>
-    <% var templateName = templateFull.split('.').slice(0, -1).join('.') %>
     <% var src = `{{ '${basename}' | asset_url }}` %>
   <% } %>
   <% if (typeof htmlWebpackPlugin.options.liquidLayouts[templateFull] !== 'undefined') { %>

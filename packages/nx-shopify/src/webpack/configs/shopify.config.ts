@@ -16,7 +16,10 @@ import {
 } from '../utils';
 import { getCommonWebpackPartialConfig } from './common.config';
 
-function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
+function getShopifyWebpackPartialConfig(
+  options: BuildBuilderOptions,
+  isDevServer: boolean
+) {
   const { sourceRoot, themekitConfig } = options;
 
   const webpackConfig: Configuration = {
@@ -27,7 +30,7 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
     output: {
       path: options.outputPath,
       // chunkFilename: './assets/[name].bundle.js',
-      filename: './assets/[name].js',
+      filename: 'assets/[name].js',
     },
     node: false,
     plugins: [
@@ -88,6 +91,7 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
         },
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'auto',
+        isDevServer,
         liquidTemplates: getTemplateEntryPoints(sourceRoot),
         liquidLayouts: getLayoutEntryPoints(sourceRoot),
       }),
@@ -105,6 +109,7 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
         },
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'auto',
+        isDevServer,
         liquidTemplates: getTemplateEntryPoints(sourceRoot),
         liquidLayouts: getLayoutEntryPoints(sourceRoot),
         getExtractedStyles,
@@ -124,10 +129,11 @@ function getShopifyWebpackPartialConfig(options: BuildBuilderOptions) {
 }
 
 export function getShopifyWebpackConfig(
-  options: BuildBuilderOptions
+  options: BuildBuilderOptions,
+  isDevServer: boolean
 ): Configuration {
   return webpackMerge.merge(
     getCommonWebpackPartialConfig(options),
-    getShopifyWebpackPartialConfig(options)
+    getShopifyWebpackPartialConfig(options, isDevServer)
   );
 }
