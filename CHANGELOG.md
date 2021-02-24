@@ -1,3 +1,10 @@
+# [1.0.0-alpha.4](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2021-02-24)
+
+
+### Bug Fixes
+
+* **build:** include missing dependencies in generated package.json ([c9cdc92](https://github.com/trafilea/nx-shopify/commit/c9cdc92a6cb82cfae2f4b15060aa46a7c51d0ea6))
+
 # [1.0.0-alpha.3](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-02-24)
 
 
