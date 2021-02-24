@@ -1,3 +1,31 @@
+# [1.0.0-alpha.4](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2021-02-24)
+
+
+### Bug Fixes
+
+* **build:** include missing dependencies in generated package.json ([c9cdc92](https://github.com/trafilea/nx-shopify/commit/c9cdc92a6cb82cfae2f4b15060aa46a7c51d0ea6))
+
+# [1.0.0-alpha.3](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-02-24)
+
+
+### Bug Fixes
+
+* **build:** add angular devkit architect as package dependency ([f3ddade](https://github.com/trafilea/nx-shopify/commit/f3ddadebe8e259c22d10634a7ddb69c18c7ffe12))
+
+# [1.0.0-alpha.2](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-02-24)
+
+
+### Bug Fixes
+
+* **build:** add license-webpack-plugin as package dependency ([8783490](https://github.com/trafilea/nx-shopify/commit/8783490e1cc025dd4dc574fb35af9f18bb6dea3e))
+* **build:** add missing webpack plugins as dependencies ([9416a90](https://github.com/trafilea/nx-shopify/commit/9416a902c5a7942509c8d3a9d6e180e0416b4ce8))
+
+# [1.0.0-alpha.2](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-02-24)
+
+### Bug Fixes
+
+- **build:** add license-webpack-plugin as package dependency ([8783490](https://github.com/trafilea/nx-shopify/commit/8783490e1cc025dd4dc574fb35af9f18bb6dea3e))
+
 # 1.0.0-alpha.1 (2021-02-24)
 
 ### Bug Fixes

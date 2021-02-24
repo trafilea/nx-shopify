@@ -1,6 +1,6 @@
 {
   "name": "@trafilea/nx-shopify",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "A Nx plugin for developing performance-first Shopify themes 🚀",
   "license": "MIT",
   "homepage": "https://trafilea.github.io/nx-shopify",
@@ -26,7 +26,15 @@
   "builders": "./builders.json",
   "generators": "./generators.json",
   "executors": "./executors.json",
-  "dependencies": {},
+  "dependencies": {
+    "css-loader": "^5.0.0",
+    "fork-ts-checker-webpack-plugin": "^6.1.0",
+    "postcss": "^8.2.1",
+    "postcss-loader": "^4.1.0",
+    "sass": "^1.27.0",
+    "sass-loader": "^10.0.3",
+    "ts-loader": "^8.0.17"
+  },
   "publishConfig": {
     "access": "public"
   }
