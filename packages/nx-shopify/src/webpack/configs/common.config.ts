@@ -11,7 +11,7 @@ import { BuildBuilderOptions } from '../../builders/build/schema';
 import { getAliases, getStatsConfig } from '../../utils/webpack-utils';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 
-import CircularDependencyPlugin = require('circular-dependency-plugin');
+import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 function getExtraPlugins(options: BuildBuilderOptions) {
