@@ -58,6 +58,13 @@
             ]
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "release": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build nx-shopify", "npx semantic-release"],
+            "parallel": false
+          }
         }
       }
     },
@@ -73,6 +80,34 @@
             "npmPackageName": "@trafilea/nx-shopify",
             "pluginOutputPath": "dist/packages/nx-shopify",
             "jestConfig": "e2e/nx-shopify-e2e/jest.config.js"
+          }
+        }
+      }
+    },
+    "nx-shopify-docs": {
+      "projectType": "application",
+      "root": "e2e/nx-shopify-e2e",
+      "targets": {
+        "setup": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["yarn"],
+            "cwd": "docs"
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["yarn start"],
+            "cwd": "docs"
+          }
+        },
+        "release": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx setup nx-shopify-docs", "yarn deploy"],
+            "cwd": "docs",
+            "parallel": false
           }
         }
       }

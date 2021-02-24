@@ -26,5 +26,8 @@
   "builders": "./builders.json",
   "generators": "./generators.json",
   "executors": "./executors.json",
-  "dependencies": {}
+  "dependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
 }
