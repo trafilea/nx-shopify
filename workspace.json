@@ -76,6 +76,33 @@
           }
         }
       }
+    },
+    "nx-shopify-docs": {
+      "projectType": "application",
+      "root": "e2e/nx-shopify-e2e",
+      "targets": {
+        "setup": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["yarn"],
+            "cwd": "docs"
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["yarn start"],
+            "cwd": "docs"
+          }
+        },
+        "release": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["yarn deploy"],
+            "cwd": "docs"
+          }
+        }
+      }
     }
   },
   "cli": {
