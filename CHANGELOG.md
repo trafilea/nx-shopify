@@ -1,3 +1,10 @@
+# [1.0.0-alpha.3](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2021-02-24)
+
+
+### Bug Fixes
+
+* **build:** add angular devkit architect as package dependency ([f3ddade](https://github.com/trafilea/nx-shopify/commit/f3ddadebe8e259c22d10634a7ddb69c18c7ffe12))
+
 # [1.0.0-alpha.2](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-02-24)
 
 
