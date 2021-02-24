@@ -1,3 +1,9 @@
+# [1.0.0-alpha.2](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2021-02-24)
+
+### Bug Fixes
+
+- **build:** add license-webpack-plugin as package dependency ([8783490](https://github.com/trafilea/nx-shopify/commit/8783490e1cc025dd4dc574fb35af9f18bb6dea3e))
+
 # 1.0.0-alpha.1 (2021-02-24)
 
 ### Bug Fixes
