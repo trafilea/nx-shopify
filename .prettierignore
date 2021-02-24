@@ -2,5 +2,6 @@
 
 /dist
 /coverage
+CHANGELOG.md
 /packages/nx-shopify/src/webpack/configs/templates/script-tags.html
 /packages/nx-shopify/src/webpack/configs/templates/style-tags.html
