@@ -58,6 +58,13 @@
             ]
           },
           "outputs": ["{options.outputPath}"]
+        },
+        "release": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["nx build nx-shopify", "npx semantic-release"],
+            "parallel": false
+          }
         }
       }
     },
