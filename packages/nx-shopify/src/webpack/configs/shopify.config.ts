@@ -133,7 +133,7 @@ export function getShopifyWebpackConfig(
   isDevServer: boolean
 ): Configuration {
   return webpackMerge.merge(
-    getCommonWebpackPartialConfig(options),
+    getCommonWebpackPartialConfig(options, isDevServer),
     getShopifyWebpackPartialConfig(options, isDevServer)
   );
 }

@@ -1,20 +1,20 @@
 import { readTsConfig } from '@nrwl/workspace';
+import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import { LicenseWebpackPlugin } from 'license-webpack-plugin';
-import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as MediaQueryPlugin from 'media-query-plugin';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TsConfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { ScriptTarget } from 'typescript';
 import { Configuration, Plugin, ProgressPlugin } from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { BuildBuilderOptions } from '../../builders/build/schema';
 import { getAliases, getStatsConfig } from '../../utils/webpack-utils';
-import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 
-import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-function getExtraPlugins(options: BuildBuilderOptions) {
+function getExtraPlugins(options: BuildBuilderOptions, isDevServer: boolean) {
   const extraPlugins: Plugin[] = [];
 
   const { mediaQueriesConfig, watch, analyze, statsJson } = options;
@@ -85,7 +85,7 @@ function getExtraPlugins(options: BuildBuilderOptions) {
         analyzerMode: analyze
           ? statsJson
             ? 'json'
-            : watch
+            : isDevServer || watch
             ? 'server'
             : 'static'
           : 'disabled',
@@ -98,7 +98,8 @@ function getExtraPlugins(options: BuildBuilderOptions) {
 }
 
 export function getCommonWebpackPartialConfig(
-  options: BuildBuilderOptions
+  options: BuildBuilderOptions,
+  isDevServer: boolean
 ): Configuration {
   const {
     tsConfig,
@@ -185,7 +186,7 @@ export function getCommonWebpackPartialConfig(
         },
       }),
       new CleanWebpackPlugin(),
-      ...getExtraPlugins(options),
+      ...getExtraPlugins(options, isDevServer),
     ],
     watch,
     watchOptions: {

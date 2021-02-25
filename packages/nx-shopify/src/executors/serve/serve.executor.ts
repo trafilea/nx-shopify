@@ -1,15 +1,17 @@
-import { ExecutorContext, logger } from '@nrwl/devkit';
+import {
+  ExecutorContext,
+  logger,
+  parseTargetString,
+  readTargetOptions,
+} from '@nrwl/devkit';
+import { BuildBuilderOptions } from '../../builders/build/schema';
 import {
   getAvailablePortSeries,
   getIpAddress,
 } from '../../utils/local-server/network-utils';
 import { normalizeBuildOptions } from '../../utils/normalize-utils';
 import { getThemekitEnvironmentConfig } from '../../utils/themekit';
-import {
-  getProjectFromTarget,
-  getSourceRoot,
-  getTargetOptions,
-} from '../../utils/workspace-utils';
+import { getSourceRoot } from '../../utils/workspace-utils';
 import { getShopifyWebpackConfig } from '../../webpack/configs/shopify.config';
 import { LocalAssetServer } from './local-assets-server';
 import { LocalDevelopmentServer } from './local-development-server';
@@ -21,11 +23,12 @@ export default async function runExecutor(
 ) {
   const { buildTarget, themekitEnv, skipFirstDeploy } = options;
 
-  const buildTargetOptions = await getTargetOptions(buildTarget, context);
+  const targetConfig = parseTargetString(buildTarget);
+  const buildOptions: BuildBuilderOptions = getBuildOptions(options, context);
   const normalizedBuildOptions = normalizeBuildOptions(
-    buildTargetOptions,
+    buildOptions,
     context.root,
-    await getSourceRoot(context, await getProjectFromTarget(buildTarget))
+    await getSourceRoot(context, targetConfig.project)
   );
 
   const { themekitConfig } = normalizedBuildOptions;
@@ -69,4 +72,26 @@ export default async function runExecutor(
     console.error(error);
     process.exit(1);
   }
+}
+
+function getBuildOptions(
+  options: ServeExecutorSchema,
+  context: ExecutorContext
+): BuildBuilderOptions {
+  const target = parseTargetString(options.buildTarget);
+  const overrides: Partial<BuildBuilderOptions> = {
+    watch: false,
+  };
+
+  const { analyze } = options;
+
+  if (analyze) {
+    overrides.analyze = analyze;
+  }
+  const buildOptions = readTargetOptions(target, context);
+
+  return {
+    ...buildOptions,
+    ...overrides,
+  };
 }
