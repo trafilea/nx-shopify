@@ -16,7 +16,7 @@
     },
     "themekitEnv": {
       "type": "string",
-      "description": "Name of the themekit config.yml environment to be used in the deployment ('development' by default)",
+      "description": "Name of the themekit config.yml environment to be used in the deployment",
       "default": "development"
     },
     "allowLive": {
