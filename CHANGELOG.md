@@ -1,3 +1,10 @@
+# [1.0.0-alpha.5](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2021-02-25)
+
+
+### Bug Fixes
+
+* **build:** add webpack-dev-server as package dependency ([83b3265](https://github.com/trafilea/nx-shopify/commit/83b3265bd1f69114fad087d0ec2663405346386a))
+
 # [1.0.0-alpha.4](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2021-02-24)
 
 
