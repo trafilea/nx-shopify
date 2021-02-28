@@ -21,7 +21,7 @@ export default async function runExecutor(
   options: ServeExecutorSchema,
   context: ExecutorContext
 ) {
-  const { buildTarget, themekitEnv, skipFirstDeploy } = options;
+  const { buildTarget, themekitEnv, skipFirstDeploy, open } = options;
 
   const targetConfig = parseTargetString(buildTarget);
   const buildOptions: BuildBuilderOptions = getBuildOptions(options, context);
@@ -54,6 +54,7 @@ export default async function runExecutor(
       target: store,
       themeId,
       address: ipAddress,
+      openBrowser: open,
     });
 
     const assetServer = new LocalAssetServer({
