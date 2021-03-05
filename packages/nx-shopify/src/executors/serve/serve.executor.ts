@@ -1,6 +1,5 @@
 import {
   ExecutorContext,
-  logger,
   parseTargetString,
   readTargetOptions,
 } from '@nrwl/devkit';
@@ -11,6 +10,7 @@ import {
 } from '../../utils/local-server/network-utils';
 import { normalizeBuildOptions } from '../../utils/normalize-utils';
 import { getThemekitEnvironmentConfig } from '../../utils/themekit';
+import { isLiveTheme } from '../../utils/themekit/themekit-validation-utils';
 import { getSourceRoot } from '../../utils/workspace-utils';
 import { getShopifyWebpackConfig } from '../../webpack/configs/shopify.config';
 import { LocalAssetServer } from './local-assets-server';
@@ -21,7 +21,13 @@ export default async function runExecutor(
   options: ServeExecutorSchema,
   context: ExecutorContext
 ) {
-  const { buildTarget, themekitEnv, skipFirstDeploy, open } = options;
+  const {
+    buildTarget,
+    themekitEnv,
+    skipFirstDeploy,
+    open,
+    allowLive,
+  } = options;
 
   const targetConfig = parseTargetString(buildTarget);
   const buildOptions: BuildBuilderOptions = getBuildOptions(options, context);
@@ -33,12 +39,29 @@ export default async function runExecutor(
 
   const { themekitConfig } = normalizedBuildOptions;
 
-  logger.info('Serving theme...');
   const themekitEnvConfig = await getThemekitEnvironmentConfig(
     themekitEnv,
     themekitConfig,
     context
   );
+
+  // TODO Check if env config is valid, if not -> abort
+
+  const isServingToLiveTheme = await isLiveTheme(themekitEnvConfig);
+
+  if (isServingToLiveTheme) {
+    console.info(
+      `\nYou are serving changes to the store's live theme. This is not recommended.`
+    );
+
+    if (!allowLive) {
+      console.error(
+        `\nERROR: Pass the --allowLive option in order to serve changes to the live theme`
+      );
+      process.exit(1);
+    }
+    console.info(`(I hope you know what you are doing)`);
+  }
 
   try {
     const ports = await getAvailablePortSeries(3000, 3);
@@ -58,7 +81,7 @@ export default async function runExecutor(
     });
 
     const assetServer = new LocalAssetServer({
-      env: process.env.NODE_ENV,
+      allowLive,
       skipFirstDeploy,
       webpackConfig: getShopifyWebpackConfig(normalizedBuildOptions, true),
       port: assetsServerPort,
