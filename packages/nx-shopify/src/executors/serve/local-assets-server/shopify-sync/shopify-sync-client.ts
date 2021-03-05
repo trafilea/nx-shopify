@@ -27,7 +27,11 @@ export class ShopifySyncClient {
     this.filesPendingDeploy = [];
   }
 
-  async syncChangedFiles(changedFiles: string[], stats: WebpackStats) {
+  async syncChangedFiles(
+    changedFiles: string[],
+    stats: WebpackStats,
+    themekitFlags: ThemeKitFlags
+  ) {
     if (this.isDeploymentInProgress) {
       this.filesPendingDeploy = [
         ...new Set([...this.filesPendingDeploy, ...changedFiles]),
@@ -50,7 +54,7 @@ export class ShopifySyncClient {
         outputOptions: { path: outputPath },
       } = stats.compilation;
 
-      await this.deployPendingFiles(outputPath);
+      await this.deployPendingFiles(outputPath, themekitFlags);
       this.skipNextSync = false;
       this.hooks.syncDone.call(changedFiles, stats);
     }
@@ -60,8 +64,12 @@ export class ShopifySyncClient {
     this.skipNextSync = false;
   }
 
-  async deployPendingFiles(compiledOutputPath: string) {
+  async deployPendingFiles(
+    compiledOutputPath: string,
+    themekitFlags: ThemeKitFlags
+  ) {
     const flags: ThemeKitFlags = {
+      ...themekitFlags,
       files: this.filesPendingDeploy,
     };
 
