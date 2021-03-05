@@ -1,3 +1,12 @@
+# [1.0.0-alpha.6](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2021-03-05)
+
+
+### Bug Fixes
+
+* **serve:** --analyze flag open webpack analyzer in server mode ([7d5e6a9](https://github.com/trafilea/nx-shopify/commit/7d5e6a94719241947ee805a8f06696892eb153c0))
+* **serve:** add checks when serving to a store's live theme ([64941bc](https://github.com/trafilea/nx-shopify/commit/64941bcf6f4cc15724a51579ad841d4c68453ae0))
+* **serve:** open web browser with the --open (-o) option ([7e81b7d](https://github.com/trafilea/nx-shopify/commit/7e81b7da8848d69811cf9a1c5613fd70d3dc46a1)), closes [#31](https://github.com/trafilea/nx-shopify/issues/31)
+
 # [1.0.0-alpha.5](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2021-02-25)
 
 
