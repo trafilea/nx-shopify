@@ -4,51 +4,66 @@ import * as figures from 'figures';
 import { createServer } from 'https';
 import * as ora from 'ora';
 import * as webpack from 'webpack';
-import { Compiler as WebpackCompiler, Stats as WebpackStats } from 'webpack';
-import { ThemekitEnvironmentConfig } from '../../../utils/themekit';
+import {
+  Compiler as WebpackCompiler,
+  Configuration as WebpackConfiguration,
+  Stats as WebpackStats,
+} from 'webpack';
+import {
+  ThemekitEnvironmentConfig,
+  ThemeKitFlags,
+} from '../../../utils/themekit';
 import { isHotUpdateFile } from '../../../webpack/utils';
 import { LocalDevelopmentServer } from '../local-development-server';
-import { ShopifySyncClient } from './shopify-sync/shopify-sync-client';
 import {
   getSslKeyCert,
   SslKeyCert,
 } from '../local-development-server/ssl/server-ssl';
 import { ServeExecutorSchema } from '../schema';
 import { AssetsServerApp } from './assets-server-app';
+import { ShopifySyncClient } from './shopify-sync/shopify-sync-client';
 
 const spinner = ora(chalk.magenta(' Compiling...'));
+
+export interface LocalAssetServerConfig {
+  address: string;
+  allowLive: boolean;
+  devServer: LocalDevelopmentServer;
+  port: number;
+  themekitEnvConfig: ThemekitEnvironmentConfig;
+  skipFirstDeploy: boolean;
+  webpackConfig: WebpackConfiguration;
+}
 export class LocalAssetServer {
   assetHashes;
-  address: string;
-  options;
-  port: number;
+  config: LocalAssetServerConfig;
   webpackCompiler: WebpackCompiler;
   assetsServerApp: AssetsServerApp;
   shopifySyncClient: ShopifySyncClient;
   ssl: SslKeyCert;
   httpsServer;
-  firstSync: boolean;
+  isFirstSync: boolean;
   devServer: LocalDevelopmentServer;
-  themekitEnvConfig: ThemekitEnvironmentConfig;
+  themekitFlags: ThemeKitFlags;
 
-  constructor(options) {
-    const { devServer, address, port, themekitEnvConfig } = options;
+  constructor(config: LocalAssetServerConfig) {
+    const { devServer, address, port, webpackConfig, allowLive } = config;
 
-    options.webpackConfig.output.publicPath = `https://${address}:${port}/`;
+    config.webpackConfig.output.publicPath = `https://${address}:${port}/`;
+    this.config = config;
     this.assetHashes = {};
-    this.address = address;
-    this.options = options;
-    this.port = options.port;
-    this.themekitEnvConfig = themekitEnvConfig;
-    this.webpackCompiler = webpack(options.webpackConfig);
+    this.webpackCompiler = webpack(webpackConfig);
     this.assetsServerApp = new AssetsServerApp(this.webpackCompiler);
     this.shopifySyncClient = new ShopifySyncClient();
     this.shopifySyncClient.hooks.afterSync.tap(
       'HotMiddleWare',
       this.onAfterSync.bind(this)
     );
-    this.firstSync = true;
+    this.isFirstSync = true;
     this.devServer = devServer;
+    this.themekitFlags = {
+      allowLive,
+    };
   }
 
   start(options: ServeExecutorSchema) {
@@ -59,7 +74,7 @@ export class LocalAssetServer {
     this.webpackCompiler.hooks.done.tap('CLI', this.onCompilerDone.bind(this));
     this.shopifySyncClient.hooks.beforeSync.tapPromise(
       'CLI',
-      this.onClientBeforeSync(options).bind(this)
+      this.onClientBeforeSync().bind(this)
     );
     this.shopifySyncClient.hooks.syncSkipped.tap(
       'CLI',
@@ -85,7 +100,7 @@ export class LocalAssetServer {
       this.assetsServerApp.buildServer()
     );
 
-    this.httpsServer.listen(this.port);
+    this.httpsServer.listen(this.config.port);
   }
 
   set skipDeploy(value: boolean) {
@@ -94,7 +109,11 @@ export class LocalAssetServer {
 
   private onCompileDone(stats: WebpackStats) {
     const files = this._getAssetsToUpload(stats);
-    return this.shopifySyncClient.syncChangedFiles(files, stats);
+    return this.shopifySyncClient.syncChangedFiles(
+      files,
+      stats,
+      this.themekitFlags
+    );
   }
 
   private onAfterSync(files: string[]) {
@@ -187,11 +206,11 @@ export class LocalAssetServer {
     }
   }
 
-  onClientBeforeSync(options: ServeExecutorSchema) {
+  onClientBeforeSync() {
     return async (files: string[]) => {
       const themeID = 'getThemeIdValue()';
 
-      if (this.firstSync && options.skipFirstDeploy) {
+      if (this.isFirstSync && this.config.skipFirstDeploy) {
         this.skipDeploy = true;
 
         return;
@@ -225,7 +244,7 @@ export class LocalAssetServer {
 
   onClientSyncSkipped(options: ServeExecutorSchema) {
     return () => {
-      if (!(this.firstSync && options.skipFirstDeploy)) return;
+      if (!(this.isFirstSync && options.skipFirstDeploy)) return;
       console.log(
         `\n${chalk.blue(
           figures.info
@@ -246,8 +265,8 @@ export class LocalAssetServer {
   }
 
   async onClientAfterSync() {
-    if (this.firstSync) {
-      this.firstSync = false;
+    if (this.isFirstSync) {
+      this.isFirstSync = false;
       await this.devServer.start();
     }
 
@@ -257,10 +276,11 @@ export class LocalAssetServer {
       `${chalk.yellow(
         figures.star
       )}  You are editing files in theme ${chalk.green(
-        this.themekitEnvConfig.themeId
+        this.config.themekitEnvConfig.themeId
       )} on the following store:\n`
     );
 
+    const { address, port } = this.config;
     const { target, themeId } = this.devServer;
 
     const previewUrl = `${target}?preview_theme_id=${themeId}`;
@@ -282,16 +302,16 @@ export class LocalAssetServer {
     console.log(`   Assets are being served from:\n`);
 
     console.log(
-      `      ${chalk.cyan(`https://localhost:${this.port}`)} ${chalk.grey(
+      `      ${chalk.cyan(`https://localhost:${port}`)} ${chalk.grey(
         '(Local)'
       )}`
     );
 
-    if (this.address !== 'localhost') {
+    if (address !== 'localhost') {
       console.log(
-        `      ${chalk.cyan(
-          `https://${this.address}:${this.port}`
-        )} ${chalk.grey('(External)')}`
+        `      ${chalk.cyan(`https://${address}:${port}`)} ${chalk.grey(
+          '(External)'
+        )}`
       );
     }
 

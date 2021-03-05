@@ -12,6 +12,7 @@ export interface LocalDevelopmentServerOptions {
   address: string;
   port: number;
   uiPort: number;
+  openBrowser: boolean;
 }
 
 export class LocalDevelopmentServer {
@@ -23,17 +24,21 @@ export class LocalDevelopmentServer {
   proxyTarget: string;
   browserSyncInstance: BrowserSyncInstance;
   browserSyncServer: BrowserSyncInstance;
+  openBrowser: boolean;
 
   constructor(options: LocalDevelopmentServerOptions) {
+    const { target, themeId, port, address, uiPort, openBrowser } = options;
+
     this.browserSyncInstance = browserSync.create();
-    this.target = `https://${options.target}`;
-    this.themeId = options.themeId;
-    this.port = options.port;
-    this.address = options.address;
-    this.uiPort = options.uiPort;
+    this.target = `https://${target}`;
+    this.themeId = themeId;
+    this.port = port;
+    this.address = address;
+    this.uiPort = uiPort;
     this.proxyTarget =
       this.target +
       (this.themeId === 'live' ? '' : `?preview_theme_id=${this.themeId}`);
+    this.openBrowser = openBrowser;
   }
 
   start() {
@@ -68,7 +73,7 @@ export class LocalDevelopmentServer {
       ui: {
         port: this.uiPort,
       },
-      open: false,
+      open: this.openBrowser,
     };
 
     return new Promise((resolve) => {

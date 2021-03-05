@@ -30,20 +30,3 @@ export async function getSourceRoot(
     throw new Error(message);
   }
 }
-
-export async function getTargetOptions(
-  targetString: string,
-  context: ExecutorContext
-) {
-  const [project, targetName, config] = targetString.split(':');
-
-  const target = context.workspace.projects[project].targets[targetName];
-  return config
-    ? { ...target.options, ...target.configurations[config] }
-    : target.options;
-}
-
-export async function getProjectFromTarget(target: string) {
-  const [project] = target.split(':');
-  return project;
-}

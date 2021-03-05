@@ -1,15 +1,17 @@
-import { ExecutorContext, logger } from '@nrwl/devkit';
+import {
+  ExecutorContext,
+  parseTargetString,
+  readTargetOptions,
+} from '@nrwl/devkit';
+import { BuildBuilderOptions } from '../../builders/build/schema';
 import {
   getAvailablePortSeries,
   getIpAddress,
 } from '../../utils/local-server/network-utils';
 import { normalizeBuildOptions } from '../../utils/normalize-utils';
 import { getThemekitEnvironmentConfig } from '../../utils/themekit';
-import {
-  getProjectFromTarget,
-  getSourceRoot,
-  getTargetOptions,
-} from '../../utils/workspace-utils';
+import { isLiveTheme } from '../../utils/themekit/themekit-validation-utils';
+import { getSourceRoot } from '../../utils/workspace-utils';
 import { getShopifyWebpackConfig } from '../../webpack/configs/shopify.config';
 import { LocalAssetServer } from './local-assets-server';
 import { LocalDevelopmentServer } from './local-development-server';
@@ -19,23 +21,47 @@ export default async function runExecutor(
   options: ServeExecutorSchema,
   context: ExecutorContext
 ) {
-  const { buildTarget, themekitEnv, skipFirstDeploy } = options;
+  const {
+    buildTarget,
+    themekitEnv,
+    skipFirstDeploy,
+    open,
+    allowLive,
+  } = options;
 
-  const buildTargetOptions = await getTargetOptions(buildTarget, context);
+  const targetConfig = parseTargetString(buildTarget);
+  const buildOptions: BuildBuilderOptions = getBuildOptions(options, context);
   const normalizedBuildOptions = normalizeBuildOptions(
-    buildTargetOptions,
+    buildOptions,
     context.root,
-    await getSourceRoot(context, await getProjectFromTarget(buildTarget))
+    await getSourceRoot(context, targetConfig.project)
   );
 
   const { themekitConfig } = normalizedBuildOptions;
 
-  logger.info('Serving theme...');
   const themekitEnvConfig = await getThemekitEnvironmentConfig(
     themekitEnv,
     themekitConfig,
     context
   );
+
+  // TODO Check if env config is valid, if not -> abort
+
+  const isServingToLiveTheme = await isLiveTheme(themekitEnvConfig);
+
+  if (isServingToLiveTheme) {
+    console.info(
+      `\nYou are serving changes to the store's live theme. This is not recommended.`
+    );
+
+    if (!allowLive) {
+      console.error(
+        `\nERROR: Pass the --allowLive option in order to serve changes to the live theme`
+      );
+      process.exit(1);
+    }
+    console.info(`(I hope you know what you are doing)`);
+  }
 
   try {
     const ports = await getAvailablePortSeries(3000, 3);
@@ -51,10 +77,11 @@ export default async function runExecutor(
       target: store,
       themeId,
       address: ipAddress,
+      openBrowser: open,
     });
 
     const assetServer = new LocalAssetServer({
-      env: process.env.NODE_ENV,
+      allowLive,
       skipFirstDeploy,
       webpackConfig: getShopifyWebpackConfig(normalizedBuildOptions, true),
       port: assetsServerPort,
@@ -69,4 +96,26 @@ export default async function runExecutor(
     console.error(error);
     process.exit(1);
   }
+}
+
+function getBuildOptions(
+  options: ServeExecutorSchema,
+  context: ExecutorContext
+): BuildBuilderOptions {
+  const target = parseTargetString(options.buildTarget);
+  const overrides: Partial<BuildBuilderOptions> = {
+    watch: false,
+  };
+
+  const { analyze } = options;
+
+  if (analyze) {
+    overrides.analyze = analyze;
+  }
+  const buildOptions = readTargetOptions(target, context);
+
+  return {
+    ...buildOptions,
+    ...overrides,
+  };
 }
