@@ -13,6 +13,7 @@ jobs:
     env:
       NX_BRANCH: ${{ github.event.number }}
       NX_RUN_GROUP: ${{ github.run_id }}
+      NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
     strategy:
       matrix:
         node-version: [12.x, 14.x]
