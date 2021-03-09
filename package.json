@@ -78,6 +78,7 @@
     "@nrwl/cli": "11.4.0",
     "@nrwl/eslint-plugin-nx": "11.4.0",
     "@nrwl/jest": "11.4.0",
+    "@nrwl/nx-cloud": "^11.1.4",
     "@nrwl/nx-plugin": "11.4.0",
     "@nrwl/tao": "11.4.0",
     "@semantic-release/changelog": "^5.0.1",
