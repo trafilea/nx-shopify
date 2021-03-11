@@ -44,16 +44,6 @@
                 "input": "./packages/nx-shopify",
                 "glob": "executors.json",
                 "output": "."
-              },
-              {
-                "input": "./packages/nx-shopify",
-                "glob": "collection.json",
-                "output": "."
-              },
-              {
-                "input": "./packages/nx-shopify",
-                "glob": "builders.json",
-                "output": "."
               }
             ]
           },

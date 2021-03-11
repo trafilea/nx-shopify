@@ -1,19 +1,4 @@
-import { BuilderContext } from '@angular-devkit/architect';
 import { ExecutorContext, logger } from '@nrwl/devkit';
-
-export async function getSourceRootNg(
-  context: BuilderContext
-): Promise<string> {
-  const projectMeta = await context.getProjectMetadata(context.target.project);
-  if (projectMeta.sourceRoot) {
-    return projectMeta.sourceRoot as string;
-  } else {
-    context.reportStatus('Error');
-    const message = `${context.target.project} does not have a sourceRoot. Please define one.`;
-    context.logger.error(message);
-    throw new Error(message);
-  }
-}
 
 export async function getSourceRoot(
   context: ExecutorContext,

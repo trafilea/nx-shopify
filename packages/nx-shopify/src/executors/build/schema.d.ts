@@ -1,5 +1,3 @@
-import { JsonObject } from '@angular-devkit/core';
-
 export interface AssetObj {
   input: string;
   output: string;
@@ -15,7 +13,7 @@ export interface FileReplacement {
 }
 
 export type Asset = string | AssetObj;
-export interface BuildBuilderOptions extends JsonObject {
+export interface BuildExecutorSchema {
   outputPath: string;
   tsConfig: string;
   postcssConfig: string;

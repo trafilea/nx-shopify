@@ -1,16 +1,16 @@
 {
-  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "$schema": "http://json-schema.org/schema",
   "name": "nx-shopify",
   "version": "0.0.1",
   "generators": {
     "init": {
-      "factory": "./src/schematics/init/schematic",
-      "schema": "./src/schematics/init/schema.json",
+      "factory": "./src/generators/init/init.generator",
+      "schema": "./src/generators/init/schema.json",
       "description": "Initialize plugin"
     },
     "theme": {
-      "factory": "./src/schematics/theme/schematic",
-      "schema": "./src/schematics/theme/schema.json",
+      "factory": "./src/generators/theme/theme.generator",
+      "schema": "./src/generators/theme/schema.json",
       "description": "Generate new Shopify theme"
     }
   }
