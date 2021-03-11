@@ -1,8 +1,8 @@
 import { Stats } from 'webpack';
-import { BuildBuilderOptions } from '../builders/build/schema';
+import { BuildExecutorSchema } from '../executors/build/schema';
 
 export function getAliases(
-  options: BuildBuilderOptions
+  options: BuildExecutorSchema
 ): { [key: string]: string } {
   return options.fileReplacements
     ? options.fileReplacements.reduce(
@@ -16,7 +16,7 @@ export function getAliases(
 }
 
 export function getStatsConfig(
-  options: BuildBuilderOptions
+  options: BuildExecutorSchema
 ): Stats.ToStringOptions {
   return {
     hash: true,

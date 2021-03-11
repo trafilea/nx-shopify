@@ -32,8 +32,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/architect": "~0.1100.1",
-    "@angular-devkit/build-webpack": "~0.1100.1",
     "@nrwl/devkit": "11.4.0",
     "@nrwl/workspace": "11.4.0",
     "@shopify/themekit": "^1.1.7",
@@ -61,6 +59,7 @@
     "portscanner": "^2.2.0",
     "postcss": "^8.2.1",
     "postcss-loader": "^4.1.0",
+    "rxjs-for-await": "^0.0.2",
     "sass": "^1.27.0",
     "sass-loader": "^10.0.3",
     "tapable": "^2.0.0",

@@ -3,21 +3,23 @@ import {
   parseTargetString,
   readTargetOptions,
 } from '@nrwl/devkit';
-import { BuildBuilderOptions } from '../../builders/build/schema';
+import { BuildExecutorSchema } from '../../executors/build/schema';
 import {
   getAvailablePortSeries,
   getIpAddress,
 } from '../../utils/local-server/network-utils';
 import { normalizeBuildOptions } from '../../utils/normalize-utils';
-import { getThemekitEnvironmentConfig } from '../../utils/themekit';
-import { isLiveTheme } from '../../utils/themekit/themekit-validation-utils';
+import {
+  isLiveTheme,
+  getThemekitEnvironmentConfig,
+} from '../../utils/themekit';
 import { getSourceRoot } from '../../utils/workspace-utils';
 import { getShopifyWebpackConfig } from '../../webpack/configs/shopify.config';
 import { LocalAssetServer } from './local-assets-server';
 import { LocalDevelopmentServer } from './local-development-server';
 import { ServeExecutorSchema } from './schema';
 
-export default async function runExecutor(
+export async function serveExecutor(
   options: ServeExecutorSchema,
   context: ExecutorContext
 ) {
@@ -28,9 +30,9 @@ export default async function runExecutor(
     open,
     allowLive,
   } = options;
-
+  
   const targetConfig = parseTargetString(buildTarget);
-  const buildOptions: BuildBuilderOptions = getBuildOptions(options, context);
+  const buildOptions: BuildExecutorSchema = getBuildOptions(options, context);
   const normalizedBuildOptions = normalizeBuildOptions(
     buildOptions,
     context.root,
@@ -79,7 +81,7 @@ export default async function runExecutor(
       address: ipAddress,
       openBrowser: open,
     });
-
+    
     const assetServer = new LocalAssetServer({
       allowLive,
       skipFirstDeploy,
@@ -89,21 +91,21 @@ export default async function runExecutor(
       devServer,
       themekitEnvConfig,
     });
-
-    return new Promise(() => assetServer.start(options));
+    return { success: true };
+    return assetServer.start(options);
   } catch (error) {
     // console.error(chalk.red(`- ${error}`));
     console.error(error);
-    process.exit(1);
+    return { success: false };
   }
 }
 
-function getBuildOptions(
+export function getBuildOptions(
   options: ServeExecutorSchema,
   context: ExecutorContext
-): BuildBuilderOptions {
+): BuildExecutorSchema {
   const target = parseTargetString(options.buildTarget);
-  const overrides: Partial<BuildBuilderOptions> = {
+  const overrides: Partial<BuildExecutorSchema> = {
     watch: false,
   };
 
@@ -112,10 +114,12 @@ function getBuildOptions(
   if (analyze) {
     overrides.analyze = analyze;
   }
-  const buildOptions = readTargetOptions(target, context);
+  const buildOptions = readTargetOptions<BuildExecutorSchema>(target, context);
 
   return {
     ...buildOptions,
     ...overrides,
   };
 }
+
+export default serveExecutor;
