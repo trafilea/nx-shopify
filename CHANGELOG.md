@@ -1,3 +1,12 @@
+# [1.0.0-alpha.7](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2021-03-11)
+
+
+### Features
+
+* **core:** migrate to @nrwl/devkit ([9f33b70](https://github.com/trafilea/nx-shopify/commit/9f33b708f4ad8b4b1007c255027cfdf514befe7f))
+* **repo:** add nx cloud ci token ([5f499de](https://github.com/trafilea/nx-shopify/commit/5f499de412a4efff372a08126eb74a6237fe5e07))
+* **repo:** setup nx-cloud app ([3f06f67](https://github.com/trafilea/nx-shopify/commit/3f06f67a56dbc13558790324848e5fe872d73c0d))
+
 # [1.0.0-alpha.6](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2021-03-05)
 
 
