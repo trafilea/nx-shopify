@@ -49,7 +49,14 @@ export class LocalAssetServer {
   constructor(config: LocalAssetServerConfig) {
     const { devServer, address, port, webpackConfig, allowLive } = config;
 
-    config.webpackConfig.output.publicPath = `https://${address}:${port}/`;
+    config.webpackConfig = {
+      ...config.webpackConfig,
+      output: {
+        ...config.webpackConfig.output,
+        publicPath: `https://${address}:${port}/`,
+      },
+    };
+
     this.config = config;
     this.assetHashes = {};
     this.webpackCompiler = webpack(webpackConfig);

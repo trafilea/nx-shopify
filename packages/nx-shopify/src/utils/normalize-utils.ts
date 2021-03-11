@@ -1,12 +1,13 @@
-import { normalize } from '@angular-devkit/core';
+
+import { normalizePath } from '@nrwl/devkit';
 import { statSync } from 'fs';
-import { basename, dirname, relative, resolve } from 'path';
+import { basename, dirname, resolve } from 'path';
 import {
   Asset,
   AssetObj,
-  BuildBuilderOptions,
+  BuildExecutorSchema,
   FileReplacement,
-} from '../builders/build/schema';
+} from '../executors/build/schema';
 
 function normalizeAssets(
   assets: Asset[],
@@ -15,7 +16,9 @@ function normalizeAssets(
 ): AssetObj[] {
   return assets.map((asset) => {
     if (typeof asset === 'string') {
-      const assetPath = normalize(asset);
+      const assetPath = normalizePath(asset);
+      console.log('asset', asset);
+      console.log('assetPath', assetPath);
       const resolvedAssetPath = resolve(root, assetPath);
       const resolvedSourceRoot = resolve(root, sourceRoot);
 
@@ -43,7 +46,7 @@ function normalizeAssets(
         );
       }
 
-      const assetPath = normalize(asset.input);
+      const assetPath = normalizePath(asset.input);
       const resolvedAssetPath = resolve(root, assetPath);
       return {
         ...asset,
@@ -67,7 +70,7 @@ function normalizeFileReplacements(
     : [];
 }
 
-export function normalizeBuildOptions<T extends BuildBuilderOptions>(
+export function normalizeBuildOptions<T extends BuildExecutorSchema>(
   options: T,
   root: string,
   sourceRoot: string

@@ -1,23 +1,22 @@
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
-import * as glob from 'glob';
-import * as path from 'path';
-import { Configuration } from 'webpack';
-import * as webpackMerge from 'webpack-merge';
+import * as CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import * as HTMLWebpackPlugin from 'html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import * as CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import * as path from 'path';
 import * as TerserPlugin from 'terser-webpack-plugin';
-import { BuildBuilderOptions } from '../../builders/build/schema';
+import { Configuration } from 'webpack';
+import * as webpackMerge from 'webpack-merge';
+import { BuildExecutorSchema } from '../../executors/build/schema';
 import {
-  getTemplateEntryPoints,
-  getLayoutEntryPoints,
   getChunkName,
   getExtractedStyles,
+  getLayoutEntryPoints,
+  getTemplateEntryPoints,
 } from '../utils';
 import { getCommonWebpackPartialConfig } from './common.config';
 
 function getShopifyWebpackPartialConfig(
-  options: BuildBuilderOptions,
+  options: BuildExecutorSchema,
   isDevServer: boolean
 ) {
   const { sourceRoot, themekitConfig } = options;
@@ -129,7 +128,7 @@ function getShopifyWebpackPartialConfig(
 }
 
 export function getShopifyWebpackConfig(
-  options: BuildBuilderOptions,
+  options: BuildExecutorSchema,
   isDevServer: boolean
 ): Configuration {
   return webpackMerge.merge(

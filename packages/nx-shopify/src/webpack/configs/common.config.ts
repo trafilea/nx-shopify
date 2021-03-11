@@ -9,12 +9,12 @@ import TsConfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { ScriptTarget } from 'typescript';
 import { Configuration, Plugin, ProgressPlugin } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import { BuildBuilderOptions } from '../../builders/build/schema';
+import { BuildExecutorSchema } from '../../executors/build/schema';
 import { getAliases, getStatsConfig } from '../../utils/webpack-utils';
 
 import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-function getExtraPlugins(options: BuildBuilderOptions, isDevServer: boolean) {
+function getExtraPlugins(options: BuildExecutorSchema, isDevServer: boolean) {
   const extraPlugins: Plugin[] = [];
 
   const { mediaQueriesConfig, watch, analyze, statsJson } = options;
@@ -98,7 +98,7 @@ function getExtraPlugins(options: BuildBuilderOptions, isDevServer: boolean) {
 }
 
 export function getCommonWebpackPartialConfig(
-  options: BuildBuilderOptions,
+  options: BuildExecutorSchema,
   isDevServer: boolean
 ): Configuration {
   const {

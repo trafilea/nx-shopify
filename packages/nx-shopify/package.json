@@ -22,8 +22,6 @@
     "themekit"
   ],
   "main": "src/index.js",
-  "schematics": "./collection.json",
-  "builders": "./builders.json",
   "generators": "./generators.json",
   "executors": "./executors.json",
   "dependencies": {

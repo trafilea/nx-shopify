@@ -1,5 +1,5 @@
 {
-  "name": "nx-shopify-src-structure",
+  "name": "<%= fileName %>-theme",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
