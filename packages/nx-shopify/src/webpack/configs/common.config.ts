@@ -1,4 +1,4 @@
-import { readTsConfig } from '@nrwl/workspace';
+import { readTsConfig } from '@nrwl/workspace/src/utilities/typescript';
 import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';

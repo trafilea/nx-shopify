@@ -17,8 +17,6 @@ function normalizeAssets(
   return assets.map((asset) => {
     if (typeof asset === 'string') {
       const assetPath = normalizePath(asset);
-      console.log('asset', asset);
-      console.log('assetPath', assetPath);
       const resolvedAssetPath = resolve(root, assetPath);
       const resolvedSourceRoot = resolve(root, sourceRoot);
 
