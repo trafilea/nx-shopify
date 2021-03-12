@@ -133,7 +133,7 @@ export function getCommonWebpackPartialConfig(
       rules: [
         {
           test: /\.(j|t)sx?$/,
-          loader: `ts-loader`,
+          loader: require.resolve(`ts-loader`),
           exclude: /node_modules/,
           options: {
             configFile: tsConfig,
@@ -148,17 +148,18 @@ export function getCommonWebpackPartialConfig(
           sideEffects: true,
           use: [
             MiniCssExtractPlugin.loader,
-            'css-loader',
+            require.resolve('css-loader'),
             MediaQueryPlugin.loader,
             {
-              loader: 'postcss-loader',
+              loader: require.resolve('postcss-loader'),
               options: {
+                implementation: require('postcss'),
                 postcssOptions: {
                   config: postcssConfig,
                 },
               },
             },
-            'sass-loader',
+            require.resolve('sass-loader'),
           ],
         },
       ],
