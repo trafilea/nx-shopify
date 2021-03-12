@@ -35,5 +35,28 @@ module.exports = {
           '-v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
     ],
+    [
+      'semantic-release-slack-bot',
+      {
+        notifyOnSuccess: true,
+        notifyOnFail: true,
+        onSuccessTemplate: {
+          text: `@here\n\n
+                :tada: A new version of \`$package_name\`  has been released at <$repo_url|$repo_path>!\n\n
+                $npm_package_version\n\n
+                $release_notes\n\n
+                The release is available on:\n
+                - <https://github.com/trafilea/nx-shopify/releases/tag/$npm_package_version|GitHub release>\n
+                - <https://www.npmjs.com/package/@trafilea/nx-shopify/v/$npm_package_version|npm package>\n\n
+                Your <https://github.com/semantic-release/semantic-release|semantic-release> bot`,
+        },
+        branchesConfig: [
+          {
+            pattern: 'alpha',
+            notifyOnFail: false,
+          },
+        ],
+      },
+    ],
   ],
 };
