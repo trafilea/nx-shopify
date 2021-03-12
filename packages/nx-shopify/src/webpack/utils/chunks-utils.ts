@@ -1,4 +1,4 @@
-import * as crypto from 'crypto';
+import { createHash } from 'crypto';
 
 export function getChunkName(module, chunks, cacheGroup) {
   let containsLayout = false;
@@ -33,5 +33,5 @@ export function getChunkName(module, chunks, cacheGroup) {
 }
 
 function hashFilename(name) {
-  return crypto.createHash('md4').update(name).digest('hex').slice(0, 8);
+  return createHash('md4').update(name).digest('hex').slice(0, 8);
 }
