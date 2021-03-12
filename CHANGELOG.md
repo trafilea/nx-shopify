@@ -1,3 +1,10 @@
+# [1.0.0-alpha.10](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2021-03-12)
+
+
+### Bug Fixes
+
+* **misc:** update slack notification message ([c376af6](https://github.com/trafilea/nx-shopify/commit/c376af602d9df7e943d0215982424143c3220d58))
+
 # [1.0.0-alpha.9](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2021-03-12)
 
 
