@@ -1,3 +1,10 @@
+# [1.0.0-alpha.8](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2021-03-12)
+
+
+### Bug Fixes
+
+* **build:** remove dependecy on @angular-devkit/schematics ([424b4de](https://github.com/trafilea/nx-shopify/commit/424b4dee43679b056a2c93b17b082c8ea2c03ec7))
+
 # [1.0.0-alpha.7](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2021-03-11)
 
 
