@@ -1,3 +1,15 @@
+# [1.0.0-alpha.9](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2021-03-12)
+
+
+### Bug Fixes
+
+* **build:** resolve webpack loaders when using yarn or pnpm ([f40c4bf](https://github.com/trafilea/nx-shopify/commit/f40c4bf8894a9a7668a3bcee60fb64b4de19972e))
+
+
+### Features
+
+* **build:** add browserslist config support ([34e4371](https://github.com/trafilea/nx-shopify/commit/34e43715bcdb55a072166b705ef5f54264f3d4f7))
+
 # [1.0.0-alpha.8](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2021-03-12)
 
 
