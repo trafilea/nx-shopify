@@ -45,8 +45,8 @@ module.exports = {
             '<!here>\n\n:tada: A new version of `$package_name`  has been released at <$repo_url|$repo_path>!\n\n' +
             '$release_notes\n\n' +
             'The release is available on:\n' +
-            '- <https://github.com/trafilea/nx-shopify/releases/tag/v$npm_package_version|GitHub release>\n' +
-            '- <https://www.npmjs.com/package/@trafilea/nx-shopify/v/$npm_package_version|npm package>\n\n' +
+            '• <https://github.com/trafilea/nx-shopify/releases/tag/v$npm_package_version|GitHub release>\n' +
+            '• <https://www.npmjs.com/package/@trafilea/nx-shopify/v/$npm_package_version|npm package>\n\n' +
             'Your <https://github.com/semantic-release/semantic-release|semantic-release> bot',
         },
         markdownReleaseNotes: true,
