@@ -7,29 +7,39 @@ import * as TerserPlugin from 'terser-webpack-plugin';
 import { Configuration } from 'webpack';
 import * as webpackMerge from 'webpack-merge';
 import { BuildExecutorSchema } from '../../executors/build/schema';
-import {
-  getChunkName,
-  getExtractedStyles,
-  getLayoutEntryPoints,
-  getTemplateEntryPoints,
-} from '../utils';
 import { getCommonWebpackPartialConfig } from './common.config';
 
 function getShopifyWebpackPartialConfig(
   options: BuildExecutorSchema,
   isDevServer: boolean
 ) {
-  const { sourceRoot, themekitConfig } = options;
+  const { sourceRoot, outputPath, themekitConfig, main } = options;
+
+  const chunksBaseName = isDevServer
+    ? 'assets/[name]'
+    : 'assets/[name].[contenthash]';
+  const chunksOutputPath = `${outputPath}`;
 
   const webpackConfig: Configuration = {
     entry: {
-      ...getTemplateEntryPoints(sourceRoot),
-      ...getLayoutEntryPoints(sourceRoot),
+      // ...themeEntryPoints,
+      // ...Object.entries(themeEntryPoints).reduce(
+      //   (entriesObj, [entryName, entryValue]) => {
+      //     return {
+      //       ...entriesObj,
+      //       [entryName]: isDevServer
+      //         ? [path.join(__dirname, './hmr/hot-client.js')].concat(entryValue)
+      //         : entryValue,
+      //     };
+      //   },
+      //   {}
+      // ),
+      main,
     },
     output: {
-      path: options.outputPath,
+      path: chunksOutputPath,
       // chunkFilename: './assets/[name].bundle.js',
-      filename: 'assets/[name].js',
+      filename: `${chunksBaseName}.js`,
     },
     node: false,
     plugins: [
@@ -73,7 +83,7 @@ function getShopifyWebpackPartialConfig(
         ],
       }),
       new MiniCssExtractPlugin({
-        filename: 'assets/[name].css',
+        filename: `${chunksBaseName}.css`,
       }),
       new HTMLWebpackPlugin({
         excludeChunks: ['static'],
@@ -91,12 +101,14 @@ function getShopifyWebpackPartialConfig(
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'auto',
         isDevServer,
-        liquidTemplates: getTemplateEntryPoints(sourceRoot),
-        liquidLayouts: getLayoutEntryPoints(sourceRoot),
       }),
       new HTMLWebpackPlugin({
-        filename: `snippets/style-tags.liquid`,
-        template: path.resolve(__dirname, 'templates', 'style-tags.html'),
+        filename: `snippets/webpack-public-path.liquid`,
+        template: path.resolve(
+          __dirname,
+          'templates',
+          'webpack-public-path.html'
+        ),
         inject: false,
         minify: {
           removeComments: true,
@@ -106,20 +118,14 @@ function getShopifyWebpackPartialConfig(
           // more options:
           // https://github.com/kangax/html-minifier#options-quick-reference
         },
-        // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-        chunksSortMode: 'auto',
         isDevServer,
-        liquidTemplates: getTemplateEntryPoints(sourceRoot),
-        liquidLayouts: getLayoutEntryPoints(sourceRoot),
-        getExtractedStyles,
       }),
     ],
 
     optimization: {
       usedExports: true,
       splitChunks: {
-        chunks: 'initial',
-        name: getChunkName,
+        chunks: 'all',
       },
       minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
     },

@@ -3,7 +3,7 @@ import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import { LicenseWebpackPlugin } from 'license-webpack-plugin';
-import * as MediaQueryPlugin from 'media-query-plugin';
+import * as MediaQuerySplittingPlugin from 'media-query-splitting-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TsConfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { ScriptTarget } from 'typescript';
@@ -71,9 +71,9 @@ function getExtraPlugins(options: BuildExecutorSchema, isDevServer: boolean) {
 
     if (typeof mediaQueries === 'object' && mediaQueries !== null) {
       extraPlugins.push(
-        new MediaQueryPlugin({
-          include: /.*/,
-          queries: mediaQueries,
+        new MediaQuerySplittingPlugin({
+          media: mediaQueries,
+          minify: true,
         })
       );
     }
@@ -149,7 +149,6 @@ export function getCommonWebpackPartialConfig(
           use: [
             MiniCssExtractPlugin.loader,
             require.resolve('css-loader'),
-            MediaQueryPlugin.loader,
             {
               loader: require.resolve('postcss-loader'),
               options: {
