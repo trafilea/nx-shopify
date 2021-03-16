@@ -1,0 +1,8 @@
+import { ThemeOnReady } from '../life-cycle';
+import { ThemeModule } from '../theme-module';
+
+export function implementsOnReady(
+  arg: ThemeModule
+): arg is ThemeModule & ThemeOnReady {
+  return ((arg as unknown) as ThemeOnReady).onReady !== undefined;
+}

@@ -47,7 +47,7 @@ export class LocalAssetServer {
   themekitFlags: ThemeKitFlags;
 
   constructor(config: LocalAssetServerConfig) {
-    const { devServer, address, port, webpackConfig, allowLive } = config;
+    const { devServer, address, port, allowLive } = config;
 
     config.webpackConfig = {
       ...config.webpackConfig,
@@ -56,6 +56,8 @@ export class LocalAssetServer {
         publicPath: `https://${address}:${port}/`,
       },
     };
+
+    const { webpackConfig } = config;
 
     this.config = config;
     this.assetHashes = {};

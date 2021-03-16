@@ -1,0 +1,57 @@
+export const themeTemplates = {
+  '404': () => import('./404/404.template').then((m) => m.NotFound404Template),
+  article: () =>
+    import('./article/article.template').then((m) => m.ArticleTemplate),
+  blog: () => import('./blog/blog.template').then((m) => m.BlogTemplate),
+  collection: () =>
+    import('./collection/collection.template').then(
+      (m) => m.CollectionTemplate
+    ),
+  'collection-list': () =>
+    import('./collection-list/collection-list.template').then(
+      (m) => m.CollectionListTemplate
+    ),
+  'customers.account': () =>
+    import('./customers/account/customers.account.template').then(
+      (m) => m.CustomersAccountTemplate
+    ),
+  'customers.activate_account': () =>
+    import(
+      './customers/activate_account/customers.activate_account.template'
+    ).then((m) => m.CustomersActivateAccountTemplate),
+  'customers.addresses': () =>
+    import('./customers/addresses/customers.addresses.template').then(
+      (m) => m.CustomersAddressesTemplate
+    ),
+  'customers.login': () =>
+    import('./customers/login/customers.login.template').then(
+      (m) => m.CustomersLoginTemplate
+    ),
+  'customers.order': () =>
+    import('./customers/order/customers.order.template').then(
+      (m) => m.CustomersOrderTemplate
+    ),
+  'customers.register': () =>
+    import('./customers/register/customers.register.template').then(
+      (m) => m.CustomersRegisterTemplate
+    ),
+  'customers.reset_password': () =>
+    import('./customers/reset_password/customers.reset_password.template').then(
+      (m) => m.CustomersResetPasswordTemplate
+    ),
+  gift_card: () =>
+    import('./gift_card/gift_card.template').then((m) => m.GiftCardTemplate),
+  index: () => import('./index/index.template').then((m) => m.IndexTemplate),
+  'list-collections': () =>
+    import('./list-collections/list-collections.template').then(
+      (m) => m.ListCollectionsTemplate
+    ),
+  page: () => import('./page/page.template').then((m) => m.PageTemplate),
+  'page-contact': () =>
+    import('./page-contact/page-contact.template').then(
+      (m) => m.PageContactTemplate
+    ),
+  product: () =>
+    import('./product/product.template').then((m) => m.ProductTemplate),
+  search: () => import('./search/search.template').then((m) => m.Searchemplate),
+};

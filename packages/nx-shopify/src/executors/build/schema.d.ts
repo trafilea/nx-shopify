@@ -15,6 +15,7 @@ export interface FileReplacement {
 export type Asset = string | AssetObj;
 export interface BuildExecutorSchema {
   outputPath: string;
+  main: string;
   tsConfig: string;
   postcssConfig: string;
   mediaQueriesConfig: string;
