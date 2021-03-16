@@ -15,10 +15,11 @@ import { InitGeneratorSchema } from './schema';
 function updateDependencies(tree: Tree) {
   return addDependenciesToPackageJson(
     tree,
-    {},
+    {
+      'document-ready': documentReadyVersion,
+    },
     {
       autoprefixer: autoprefixerVersion,
-      'document-ready': documentReadyVersion,
       'postcss-combine-media-query': postcssCombineMediaQueryVersion,
     }
   );
