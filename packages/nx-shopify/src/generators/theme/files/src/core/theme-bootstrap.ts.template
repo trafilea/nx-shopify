@@ -1,0 +1,59 @@
+import { ThemeContext, ThemeModule } from '<%= importPath %>/core';
+import documentReady from 'document-ready';
+
+export interface ShopifyBootstrapOptions {
+  themeLayoutName: string;
+  themeTemplateName: string;
+  themeContext: ThemeContext;
+  loadGlobal: boolean;
+}
+
+/**
+ * This function gets added to the global window and then called
+ * on page load with the current template loaded and JS Context passed in
+ * @param pageType String
+ * @param contextJSON
+ * @returns {*}
+ */
+export function themeBootstrapFactory(
+  registeredLayouts,
+  registeredTemplates
+): (options: ShopifyBootstrapOptions) => void {
+  return (options: ShopifyBootstrapOptions) => {
+    const {
+      themeLayoutName,
+      themeTemplateName,
+      themeContext,
+      loadGlobal = true,
+    } = options;
+    const context = themeContext ?? {};
+
+    documentReady(() => {
+      // Load globals
+      if (loadGlobal) {
+        //   Global.load(context);
+      }
+
+      const importPromises: Array<Promise<any>> = [];
+
+      // Find the appropriate template loader based on themeTemplateName
+      const themeLayoutImporter = registeredLayouts[themeLayoutName];
+      if (typeof themeLayoutImporter === 'function') {
+        importPromises.push(themeLayoutImporter());
+      }
+
+      // See if there is a page class default for a custom template
+      const themeTemplateImporter = registeredTemplates[themeTemplateName];
+      if (typeof themeTemplateImporter === 'function') {
+        importPromises.push(themeTemplateImporter());
+      }
+
+      // Wait for imports to resolve, then call load() on them
+      Promise.all(importPromises).then((moduleImports) => {
+        moduleImports.forEach((module: typeof ThemeModule) => {
+          module.load(context);
+        });
+      });
+    });
+  };
+}

@@ -1,1 +1,17 @@
+import {
+  ThemeModule,
+  ThemeContext,
+  ThemeOnReady,
+} from '<%= importPath %>/core';
+
 import './gift_card.template.scss';
+
+export class GiftCardTemplate extends ThemeModule implements ThemeOnReady {
+  constructor(context: ThemeContext) {
+    super(context);
+  }
+
+  onReady() {
+    console.log('GiftCard Template: onReady() called');
+  }
+}

@@ -7,7 +7,7 @@
         {% endfor %}
     </div>
 </div>
-{% include 'message' %}
+{% render 'message' %}
 
 {% schema %}
 {

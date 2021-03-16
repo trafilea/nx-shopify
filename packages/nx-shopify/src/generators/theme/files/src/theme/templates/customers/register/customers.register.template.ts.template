@@ -1,1 +1,17 @@
+import {
+  ThemeModule,
+  ThemeContext,
+  ThemeOnReady,
+} from '<%= importPath %>/core';
+
 import './customers.register.template.scss';
+
+export class CustomersRegisterTemplate extends ThemeModule implements ThemeOnReady {
+  constructor(context: ThemeContext) {
+    super(context);
+  }
+
+  onReady() {
+    console.log('CustomersRegister Template: onReady() called');
+  }
+}

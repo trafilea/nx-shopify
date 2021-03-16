@@ -1,1 +1,17 @@
+import {
+  ThemeModule,
+  ThemeContext,
+  ThemeOnReady,
+} from '<%= importPath %>/core';
+
 import './list-collections.template.scss';
+
+export class ListCollectionsTemplate extends ThemeModule implements ThemeOnReady {
+  constructor(context: ThemeContext) {
+    super(context);
+  }
+
+  onReady() {
+    console.log('ListCollections Template: onReady() called');
+  }
+}

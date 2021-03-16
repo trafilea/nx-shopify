@@ -1,6 +1,8 @@
 {
   "current": "Default",
   "presets": {
-    "Default": {}
+    "Default": {
+      "favicon": ""
+    }
   }
 }

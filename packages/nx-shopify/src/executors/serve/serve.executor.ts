@@ -30,7 +30,7 @@ export async function serveExecutor(
     open,
     allowLive,
   } = options;
-  
+
   const targetConfig = parseTargetString(buildTarget);
   const buildOptions: BuildExecutorSchema = getBuildOptions(options, context);
   const normalizedBuildOptions = normalizeBuildOptions(
@@ -81,7 +81,7 @@ export async function serveExecutor(
       address: ipAddress,
       openBrowser: open,
     });
-    
+
     const assetServer = new LocalAssetServer({
       allowLive,
       skipFirstDeploy,
@@ -91,8 +91,9 @@ export async function serveExecutor(
       devServer,
       themekitEnvConfig,
     });
-    return { success: true };
-    return assetServer.start(options);
+    return new Promise(() => {
+      assetServer.start(options);
+    });
   } catch (error) {
     // console.error(chalk.red(`- ${error}`));
     console.error(error);

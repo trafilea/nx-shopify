@@ -1,3 +1,17 @@
+import {
+  ThemeModule,
+  ThemeContext,
+  ThemeOnReady,
+} from '<%= importPath %>/core';
+
 import './404.template.scss';
 
-console.log('We are in 404 template');
+export class NotFound404Template extends ThemeModule implements ThemeOnReady {
+  constructor(context: ThemeContext) {
+    super(context);
+  }
+
+  onReady() {
+    console.log('404 Template: onReady() called');
+  }
+}

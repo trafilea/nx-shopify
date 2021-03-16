@@ -52,7 +52,7 @@
     "ip": "^1.1.5",
     "js-yaml": "^4.0.0",
     "license-webpack-plugin": "^2.3.14",
-    "media-query-plugin": "1.4.0",
+    "media-query-splitting-plugin": "^2.0.8",
     "mini-css-extract-plugin": "^1.1.1",
     "ora": "^5.3.0",
     "portscanner": "^2.2.0",

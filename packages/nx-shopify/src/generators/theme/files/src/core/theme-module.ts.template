@@ -1,0 +1,17 @@
+import { ThemeContext } from '<%= importPath %>/core';
+import { implementsOnReady } from './utils';
+import documenReady from 'document-ready';
+
+export class ThemeModule {
+  constructor(public context: ThemeContext) {}
+
+  static load(context: ThemeContext) {
+    const themeModule = new this(context);
+
+    if (implementsOnReady(themeModule)) {
+      documenReady(() => {
+        themeModule.onReady();
+      });
+    }
+  }
+}

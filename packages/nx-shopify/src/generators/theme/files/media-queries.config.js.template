@@ -1,4 +1,14 @@
+// See https://github.com/mike-diamond/media-query-splitting-plugin for more about this config file.
+
 module.exports = {
-    'screen and (min-width: 768px)': 'tablet',
-    'screen and (min-width: 1024px)': 'desktop',
-}
+  mobile: '(max-width: 568px)',
+  tabletPortrait: {
+    query: '(min-width: 569px) and (max-width: 768px)',
+    withCommonStyles: false,
+  },
+  tabletLandscape: {
+    query: '(min-width: 769px) and (max-width: 1024px)',
+    withCommonStyles: false,
+  },
+  desktop: '(min-width: 1025px)',
+};

@@ -1,0 +1,3 @@
+export const themeLayouts = {
+  theme: () => import('./theme/theme.layout').then((m) => m.ThemeLayout),
+};
