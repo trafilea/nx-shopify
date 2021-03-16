@@ -1,3 +1,15 @@
+# [1.0.0-alpha.12](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.11...v1.0.0-alpha.12) (2021-03-16)
+
+
+### Bug Fixes
+
+* **serve:** init local server on serve ([7e4c859](https://github.com/trafilea/nx-shopify/commit/7e4c859c5b888d46cd6550775935c721041b3758))
+
+
+### Features
+
+* **core:** implement theme bootstrap process ([aa26ed8](https://github.com/trafilea/nx-shopify/commit/aa26ed89df23f2920bb63791a56e6de183664ba0))
+
 # [1.0.0-alpha.11](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2021-03-12)
 
 
