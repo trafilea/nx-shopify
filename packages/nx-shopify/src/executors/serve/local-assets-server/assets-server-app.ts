@@ -10,7 +10,7 @@ export class AssetsServerApp {
 
   constructor(compiler) {
     this.webpackDevMiddleware = webpackDevMiddleware(compiler, {
-      writeToDisk: (filePath) => {
+      writeToDisk: (filePath: string) => {
         return !isHotUpdateFile(filePath);
       },
     });
