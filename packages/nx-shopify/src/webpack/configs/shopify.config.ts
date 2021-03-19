@@ -1,15 +1,13 @@
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
-import * as CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import * as HTMLWebpackPlugin from 'html-webpack-plugin';
-import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as path from 'path';
-import * as TerserPlugin from 'terser-webpack-plugin';
 import { Configuration } from 'webpack';
 import * as webpackMerge from 'webpack-merge';
 import { BuildExecutorSchema } from '../../executors/build/schema';
-import { getCommonWebpackPartialConfig } from './common.config';
+import { getCoreWebpackPartialConfig } from './partials/core.config';
+import { getStylesWebpackPartialConfig } from './partials/styles.config';
 
-function getShopifyWebpackPartialConfig(
+export function getShopifyWebpackConfig(
   options: BuildExecutorSchema,
   isDevServer: boolean
 ) {
@@ -21,27 +19,14 @@ function getShopifyWebpackPartialConfig(
   const chunksOutputPath = `${outputPath}`;
 
   const webpackConfig: Configuration = {
-    entry: {
-      // ...themeEntryPoints,
-      // ...Object.entries(themeEntryPoints).reduce(
-      //   (entriesObj, [entryName, entryValue]) => {
-      //     return {
-      //       ...entriesObj,
-      //       [entryName]: isDevServer
-      //         ? [path.join(__dirname, './hmr/hot-client.js')].concat(entryValue)
-      //         : entryValue,
-      //     };
-      //   },
-      //   {}
-      // ),
-      main,
-    },
+    entry: isDevServer
+      ? [path.join(__dirname, './hmr/hot-client.js'), main]
+      : main,
     output: {
       path: chunksOutputPath,
-      // chunkFilename: './assets/[name].bundle.js',
       filename: `${chunksBaseName}.js`,
+      publicPath: '/assets',
     },
-    node: false,
     plugins: [
       new CopyWebpackPlugin({
         patterns: [
@@ -82,9 +67,6 @@ function getShopifyWebpackPartialConfig(
           },
         ],
       }),
-      new MiniCssExtractPlugin({
-        filename: `${chunksBaseName}.css`,
-      }),
       new HTMLWebpackPlugin({
         excludeChunks: ['static'],
         filename: `snippets/script-tags.liquid`,
@@ -121,24 +103,10 @@ function getShopifyWebpackPartialConfig(
         isDevServer,
       }),
     ],
-
-    optimization: {
-      usedExports: true,
-      splitChunks: {
-        chunks: 'all',
-      },
-      minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
-    },
   };
-  return webpackConfig;
-}
-
-export function getShopifyWebpackConfig(
-  options: BuildExecutorSchema,
-  isDevServer: boolean
-): Configuration {
   return webpackMerge.merge(
-    getCommonWebpackPartialConfig(options, isDevServer),
-    getShopifyWebpackPartialConfig(options, isDevServer)
+    getCoreWebpackPartialConfig(options, isDevServer),
+    getStylesWebpackPartialConfig(options, chunksBaseName),
+    webpackConfig
   );
 }
