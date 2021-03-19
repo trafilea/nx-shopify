@@ -2,28 +2,42 @@ import { readTsConfig } from '@nrwl/workspace/src/utilities/typescript';
 import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
+import * as CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import { LicenseWebpackPlugin } from 'license-webpack-plugin';
-import * as MediaQueryPlugin from 'media-query-plugin';
-import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import * as path from 'path';
+import * as TerserPlugin from 'terser-webpack-plugin';
 import TsConfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import { ScriptTarget } from 'typescript';
-import { Configuration, Plugin, ProgressPlugin } from 'webpack';
+import {
+  Configuration,
+  HotModuleReplacementPlugin,
+  optimize as WebpackOptimize,
+  Plugin,
+  ProgressPlugin,
+} from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import { BuildExecutorSchema } from '../../executors/build/schema';
-import { getAliases, getStatsConfig } from '../../utils/webpack-utils';
+import { BuildExecutorSchema } from '../../../executors/build/schema';
+import { getAliases, getStatsConfig } from '../../../utils/webpack-utils';
 
 import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 function getExtraPlugins(options: BuildExecutorSchema, isDevServer: boolean) {
   const extraPlugins: Plugin[] = [];
 
-  const { mediaQueriesConfig, watch, analyze, statsJson } = options;
+  const {
+    watch,
+    analyze,
+    statsJson,
+    showCircularDependencies,
+    progress,
+    extractLicenses,
+  } = options;
 
-  if (options.progress) {
+  if (progress) {
     extraPlugins.push(new ProgressPlugin());
   }
 
-  if (options.extractLicenses) {
+  if (extractLicenses) {
     extraPlugins.push(
       (new LicenseWebpackPlugin({
         stats: {
@@ -58,25 +72,12 @@ function getExtraPlugins(options: BuildExecutorSchema, isDevServer: boolean) {
     extraPlugins.push(copyWebpackPluginInstance);
   }
 
-  if (options.showCircularDependencies) {
+  if (showCircularDependencies) {
     extraPlugins.push(
       new CircularDependencyPlugin({
         exclude: /[\\/]node_modules[\\/]/,
       })
     );
-  }
-
-  if (mediaQueriesConfig) {
-    const mediaQueries = require(mediaQueriesConfig);
-
-    if (typeof mediaQueries === 'object' && mediaQueries !== null) {
-      extraPlugins.push(
-        new MediaQueryPlugin({
-          include: /.*/,
-          queries: mediaQueries,
-        })
-      );
-    }
   }
 
   if (analyze || statsJson) {
@@ -94,16 +95,20 @@ function getExtraPlugins(options: BuildExecutorSchema, isDevServer: boolean) {
     );
   }
 
+  if (isDevServer) {
+    extraPlugins.push(new WebpackOptimize.OccurrenceOrderPlugin(true));
+    extraPlugins.push(new HotModuleReplacementPlugin());
+  }
+
   return extraPlugins;
 }
 
-export function getCommonWebpackPartialConfig(
+export function getCoreWebpackPartialConfig(
   options: BuildExecutorSchema,
   isDevServer: boolean
 ): Configuration {
   const {
     tsConfig,
-    postcssConfig,
     sourceMap,
     optimization,
     memoryLimit,
@@ -133,34 +138,29 @@ export function getCommonWebpackPartialConfig(
       rules: [
         {
           test: /\.(j|t)sx?$/,
-          loader: require.resolve(`ts-loader`),
           exclude: /node_modules/,
-          options: {
-            configFile: tsConfig,
-            transpileOnly: true,
-            // https://github.com/TypeStrong/ts-loader/pull/685
-            experimentalWatchApi: true,
-          },
-        },
-        {
-          test: /\.s?css$/,
-          exclude: /node_modules/,
-          sideEffects: true,
-          use: [
-            MiniCssExtractPlugin.loader,
-            require.resolve('css-loader'),
-            MediaQueryPlugin.loader,
-            {
-              loader: require.resolve('postcss-loader'),
-              options: {
-                implementation: require('postcss'),
-                postcssOptions: {
-                  config: postcssConfig,
+          use: (isDevServer
+            ? [
+                {
+                  loader: path.resolve(__dirname, '../hmr/hmr-alamo-loader'),
+                  options: {
+                    configFile: tsConfig,
+                    transpileOnly: true,
+                    // https://github.com/TypeStrong/ts-loader/pull/685
+                    experimentalWatchApi: true,
+                  },
                 },
-              },
+              ]
+            : []
+          ).concat({
+            loader: require.resolve(`ts-loader`),
+            options: {
+              configFile: tsConfig,
+              transpileOnly: true,
+              // https://github.com/TypeStrong/ts-loader/pull/685
+              experimentalWatchApi: true,
             },
-            require.resolve('sass-loader'),
-          ],
+          }),
         },
       ],
     },
@@ -179,14 +179,33 @@ export function getCommonWebpackPartialConfig(
     performance: {
       hints: false,
     },
+    optimization: {
+      usedExports: true,
+      splitChunks: {
+        chunks: 'all',
+        automaticNameDelimiter: '--',
+      },
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              drop_console: true,
+            },
+          },
+        }),
+        new CssMinimizerPlugin(),
+      ],
+    },
     plugins: [
+      new CleanWebpackPlugin({
+        cleanStaleWebpackAssets: false,
+      }),
       new ForkTsCheckerWebpackPlugin({
         typescript: {
           configFile: tsConfig,
           memoryLimit: memoryLimit || 2048,
         },
       }),
-      new CleanWebpackPlugin(),
       ...getExtraPlugins(options, isDevServer),
     ],
     watch,

@@ -1,0 +1,8 @@
+export interface ThemeOnReady {
+  /**
+   * A callback method that waits after the DOM has loaded to be
+   * invoked or invoked immediately if DOM has already loaded.
+   * It is invoked only once when the module is instantiated.
+   */
+  onReady(): void;
+}

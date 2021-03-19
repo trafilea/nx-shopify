@@ -8,8 +8,11 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
 
-  {% include 'style-tags', layout: 'theme' %}
-  {% include 'script-tags', layout: 'theme' %}
+  {%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {%- endif -%}
+
+  {% render 'script-tags', layout: 'theme' %}
 
   {{ content_for_header }} <!-- Header hook for plugins -->
 </head>
@@ -46,5 +49,16 @@
   </main>
 
   {% section 'footer' %}
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      window.themeBootstrap({
+          themeLayoutName: 'theme',
+          themeTemplateName: '{{ template }}',
+          themeContext: {},
+          loadGlobal: true,
+      });
+    });
+  </script>
 </body>
 </html>

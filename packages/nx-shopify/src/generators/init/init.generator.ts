@@ -7,6 +7,7 @@ import {
 import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
 import {
   autoprefixerVersion,
+  documentReadyVersion,
   postcssCombineMediaQueryVersion,
 } from '../../utils/versions';
 import { InitGeneratorSchema } from './schema';
@@ -14,7 +15,9 @@ import { InitGeneratorSchema } from './schema';
 function updateDependencies(tree: Tree) {
   return addDependenciesToPackageJson(
     tree,
-    {},
+    {
+      'document-ready': documentReadyVersion,
+    },
     {
       autoprefixer: autoprefixerVersion,
       'postcss-combine-media-query': postcssCombineMediaQueryVersion,

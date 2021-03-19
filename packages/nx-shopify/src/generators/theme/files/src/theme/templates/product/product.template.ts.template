@@ -1,9 +1,17 @@
-import { HeaderSection } from '../../sections';
-import { MessageSnippet } from '../../snippets';
+import {
+  ThemeModule,
+  ThemeContext,
+  ThemeOnReady,
+} from '<%= importPath %>/core';
 
 import './product.template.scss';
 
-const header = new HeaderSection();
-new MessageSnippet();
+export class ProductTemplate extends ThemeModule implements ThemeOnReady {
+  constructor(context: ThemeContext) {
+    super(context);
+  }
 
-console.log('We are on product template');
+  onReady() {
+    console.log('Product Template: onReady() called');
+  }
+}

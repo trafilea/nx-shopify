@@ -1,0 +1,10 @@
+__webpack_public_path__ = window['__webpack_public_path__'];
+
+import { themeBootstrapFactory } from '<%= importPath %>/core/theme-bootstrap';
+import { themeLayouts } from '<%= importPath %>/theme/layout';
+import { themeTemplates } from '<%= importPath %>/theme/templates';
+
+window['themeBootstrap'] = themeBootstrapFactory(
+  themeLayouts,
+  themeTemplates
+);

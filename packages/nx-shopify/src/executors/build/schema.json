@@ -9,6 +9,10 @@
       "type": "string",
       "description": "The output path of the generated files"
     },
+    "main": {
+      "type": "string",
+      "description": "The main application file path"
+    },
     "tsConfig": {
       "type": "string",
       "description": "The path to the Typescript configuration file"

@@ -13,6 +13,7 @@ import {
   readWorkspaceConfiguration,
   TargetConfiguration,
   Tree,
+  updateJson,
   updateWorkspaceConfiguration,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
@@ -22,6 +23,8 @@ import nxShopifyInitGenerator from '../init/init.generator';
 import { ThemeGeneratorSchema } from './schema';
 
 interface NormalizedSchema extends ThemeGeneratorSchema {
+  importPath: string;
+  npmScope: string;
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
@@ -40,13 +43,16 @@ function normalizeOptions(
     : fileName;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
 
-  const { appsDir } = getWorkspaceLayout(tree);
+  const { appsDir, npmScope } = getWorkspaceLayout(tree);
 
   const projectRoot = `${appsDir}/${projectDirectory}`;
   const parsedTags = tags ? tags.split(',').map((s) => s.trim()) : [];
+  const importPath = `@${npmScope}/${projectDirectory}`;
 
   return {
     ...options,
+    importPath,
+    npmScope,
     projectName,
     projectRoot,
     projectDirectory,
@@ -55,13 +61,15 @@ function normalizeOptions(
 }
 
 function createApplicationFiles(tree: Tree, options: NormalizedSchema) {
-  const { projectRoot, name } = options;
+  const { projectRoot, name, npmScope, importPath } = options;
 
   generateFiles(tree, join(__dirname, './files'), projectRoot, {
     ...options,
     ...names(name),
     offsetFromRoot: offsetFromRoot(projectRoot),
     dot: '.',
+    npmScope,
+    importPath,
   });
 }
 
@@ -70,9 +78,11 @@ function addBuildTarget(
   options: NormalizedSchema
 ): ProjectConfiguration {
   const { projectRoot } = options;
+  const { sourceRoot } = project;
 
   const buildOptions: BuildExecutorSchema = {
     outputPath: joinPathFragments('dist', projectRoot),
+    main: joinPathFragments(sourceRoot, `main.ts`),
     tsConfig: joinPathFragments(projectRoot, `tsconfig.app.json`),
     postcssConfig: joinPathFragments(projectRoot, `postcss.config.js`),
     mediaQueriesConfig: joinPathFragments(
@@ -173,6 +183,28 @@ function addDeployTarget(
   };
 }
 
+function updateRootTsConfig(host: Tree, options: NormalizedSchema) {
+  updateJson(host, 'tsconfig.base.json', (json) => {
+    const { name, importPath, projectRoot } = options;
+
+    const compilerOptions = json.compilerOptions;
+    compilerOptions.paths = compilerOptions.paths || {};
+    delete compilerOptions.paths[name];
+
+    if (compilerOptions.paths[importPath]) {
+      throw new Error(
+        `You already have a library using the import path "${importPath}". Make sure to specify a unique one.`
+      );
+    }
+
+    compilerOptions.paths[`${importPath}/*`] = [
+      joinPathFragments(projectRoot, './src/*'),
+    ];
+
+    return json;
+  });
+}
+
 function addProject(tree: Tree, options: NormalizedSchema) {
   const { projectRoot, projectName } = options;
 
@@ -214,6 +246,7 @@ export async function themeGenerator(
   ];
 
   createApplicationFiles(tree, normalizedOptions);
+  updateRootTsConfig(tree, normalizedOptions);
   addProject(tree, normalizedOptions);
 
   if (!options.skipFormat) {
