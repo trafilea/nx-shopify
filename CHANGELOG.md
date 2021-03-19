@@ -1,3 +1,17 @@
+# [1.0.0-alpha.14](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2021-03-19)
+
+
+### Bug Fixes
+
+* **theme:** include prefetch media queries config ([2a0e948](https://github.com/trafilea/nx-shopify/commit/2a0e9486b1225f1eabace40fe561e632adf84e01))
+
+
+### Features
+
+* **serve:** add hot module replacement ([95bf619](https://github.com/trafilea/nx-shopify/commit/95bf619d6d2f2ff573bc559cbe6b6690fbf4b8df))
+* **serve:** update local server ssl certificate ([0870e4b](https://github.com/trafilea/nx-shopify/commit/0870e4b219c47bae2b90fa78a9e15fd240f3a2a5))
+* **theme:** include theme favicon if config exists ([540364a](https://github.com/trafilea/nx-shopify/commit/540364a952d68e868d02db5ad3a44c1e04bf2e66))
+
 # [1.0.0-alpha.13](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2021-03-16)
 
 
