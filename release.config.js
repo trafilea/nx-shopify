@@ -6,7 +6,7 @@ const srcRoot = `packages/${name}`;
 module.exports = {
   branches: [
     '+([0-9])?(.{+([0-9]),x}).x',
-    'latest',
+    'master',
     'next',
     'next-major',
     { name: 'rc', prerelease: true },
