@@ -1,3 +1,20 @@
+# [1.0.0-beta.2](https://github.com/trafilea/nx-shopify/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2021-03-19)
+
+
+### Bug Fixes
+
+* **init:** add document-ready as dependency ([2f2800d](https://github.com/trafilea/nx-shopify/commit/2f2800d220b28aff2922e587a9aff2f56ab7983b))
+* **serve:** init local server on serve ([7e4c859](https://github.com/trafilea/nx-shopify/commit/7e4c859c5b888d46cd6550775935c721041b3758))
+* **theme:** include prefetch media queries config ([2a0e948](https://github.com/trafilea/nx-shopify/commit/2a0e9486b1225f1eabace40fe561e632adf84e01))
+
+
+### Features
+
+* **core:** implement theme bootstrap process ([aa26ed8](https://github.com/trafilea/nx-shopify/commit/aa26ed89df23f2920bb63791a56e6de183664ba0))
+* **serve:** add hot module replacement ([95bf619](https://github.com/trafilea/nx-shopify/commit/95bf619d6d2f2ff573bc559cbe6b6690fbf4b8df))
+* **serve:** update local server ssl certificate ([0870e4b](https://github.com/trafilea/nx-shopify/commit/0870e4b219c47bae2b90fa78a9e15fd240f3a2a5))
+* **theme:** include theme favicon if config exists ([540364a](https://github.com/trafilea/nx-shopify/commit/540364a952d68e868d02db5ad3a44c1e04bf2e66))
+
 # 1.0.0-beta.1 (2021-03-12)
 
 
