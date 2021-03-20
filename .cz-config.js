@@ -15,11 +15,12 @@ module.exports = {
   ],
 
   scopes: [
-    { name: 'build', description: "anything 'build' builder specific" },
-    { name: 'deploy', description: "anything 'deploy' builder specific" },
-    { name: 'serve', description: "anything 'serve' builder specific" },
-    { name: 'init', description: "anything 'init' schematic specific" },
-    { name: 'theme', description: "anything 'theme' schematic specific" },
+    { name: 'build', description: "anything 'build' executor specific" },
+    { name: 'deploy', description: "anything 'deploy' executor specific" },
+    { name: 'serve', description: "anything 'serve' executor specific" },
+    { name: 'init', description: "anything 'init' generator specific" },
+    { name: 'theme', description: "anything 'theme' generator specific" },
+    { name: 'layout', description: "anything 'layout' generator specific" },
     { name: 'e2e', description: 'anything e2e tests specific' },
     { name: 'core', description: 'anything workspace specific' },
     { name: 'docs', description: 'anything related to docs infrastructure' },
