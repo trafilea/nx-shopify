@@ -1,12 +1,12 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration } from '@nrwl/devkit';
 
-import generator from './layout.generator';
-import { LayoutGeneratorSchema } from './schema';
+import generator from './template.generator';
+import { TemplateGeneratorSchema } from './schema';
 
-describe('layout generator', () => {
+describe('template generator', () => {
   let appTree: Tree;
-  const options: LayoutGeneratorSchema = { name: 'test' };
+  const options: TemplateGeneratorSchema = { name: 'test' };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();

@@ -1,0 +1,13 @@
+import { ThemeModule, ThemeContext, ThemeOnReady } from '<%= importPath %>/core';
+
+import './<%= fileName %>.template.scss';
+
+export class <%= className %>Template extends ThemeModule implements ThemeOnReady {
+  constructor(context: ThemeContext) {
+    super(context);
+  }
+
+  onReady() {
+    console.log('<%= className %> Template: onReady() called');
+  }
+}

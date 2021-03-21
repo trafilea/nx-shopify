@@ -11,12 +11,17 @@
     "theme": {
       "factory": "./src/generators/theme/theme.generator",
       "schema": "./src/generators/theme/schema.json",
-      "description": "Generate new Shopify theme"
+      "description": "Generate a new Shopify theme"
     },
     "layout": {
       "factory": "./src/generators/layout/layout.generator",
       "schema": "./src/generators/layout/schema.json",
       "description": "Generate a theme layout"
+    },
+    "template": {
+      "factory": "./src/generators/template/template.generator",
+      "schema": "./src/generators/template/schema.json",
+      "description": "Generate a theme template"
     }
   }
 }
