@@ -1,0 +1,12 @@
+export GIT_EMAIL=value
+export GIT_USERNAME=value
+export GIT_USER=value
+export GIT_PASS=value
+export GIT_AUTHOR_NAME=value
+export GIT_AUTHOR_EMAIL=value
+export GIT_COMMITTER_NAME=value
+export GIT_COMMITTER_EMAIL=value
+export GH_TOKEN=value
+export NPM_TOKEN=value
+export SLACK_WEBHOOK=value
+export SEMANTIC_RELEASE_PACKAGE=value
