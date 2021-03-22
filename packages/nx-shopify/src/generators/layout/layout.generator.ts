@@ -9,7 +9,7 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { assertValidGeneratorNameOption } from '../../utils/themekit';
+import { assertValidGeneratorNameOption } from '../../utils/generator-utils';
 import { LayoutGeneratorSchema } from './schema';
 
 async function getLayoutDirectory(options: LayoutGeneratorSchema) {

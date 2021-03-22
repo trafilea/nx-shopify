@@ -22,6 +22,7 @@ module.exports = {
     { name: 'theme', description: "anything 'theme' generator specific" },
     { name: 'layout', description: "anything 'layout' generator specific" },
     { name: 'template', description: "anything 'template' generator specific" },
+    { name: 'snippet', description: "anything 'snippet' generator specific" },
     { name: 'e2e', description: 'anything e2e tests specific' },
     { name: 'core', description: 'anything workspace specific' },
     { name: 'docs', description: 'anything related to docs infrastructure' },

@@ -10,31 +10,31 @@ import {
 } from '@nrwl/devkit';
 import * as path from 'path';
 import { assertValidGeneratorNameOption } from '../../utils/generator-utils';
-import { TemplateGeneratorSchema } from './schema';
+import { SnippetGeneratorSchema } from './schema';
 
-async function getTemplatesDirectory(options: TemplateGeneratorSchema) {
+async function getSnippetsDirectory(options: SnippetGeneratorSchema) {
   const fileName = names(options.name).fileName;
-  let baseDir = joinPathFragments('theme', 'templates');
+  let baseDir = joinPathFragments('theme', 'snippets');
   if (options.directory) {
     baseDir = joinPathFragments(baseDir, options.directory);
   }
   return options.flat ? baseDir : joinPathFragments(baseDir, fileName);
 }
 
-interface NormalizedSchema extends TemplateGeneratorSchema {
+interface NormalizedSchema extends SnippetGeneratorSchema {
   projectName: string;
   projectSourceRoot: string;
   importPath: string;
-  templatesDirectory: string;
+  snippetsDirectory: string;
 }
 
 async function normalizeOptions(
   host: Tree,
-  options: TemplateGeneratorSchema
+  options: SnippetGeneratorSchema
 ): Promise<NormalizedSchema> {
   const { name, directory, project: projectName } = options;
 
-  assertValidGeneratorNameOption(name, directory, 'template');
+  assertValidGeneratorNameOption(name, directory, 'snippet');
 
   const project = getProjects(host).get(projectName);
 
@@ -52,23 +52,23 @@ async function normalizeOptions(
     .slice(1)
     .join('/')}`;
 
-  const templatesDirectory = await getTemplatesDirectory(options);
+  const snippetsDirectory = await getSnippetsDirectory(options);
   return {
     ...options,
     projectName,
     projectSourceRoot,
     importPath,
-    templatesDirectory: templatesDirectory,
+    snippetsDirectory,
   };
 }
 
-function createTemplateFiles(host: Tree, options: NormalizedSchema) {
-  const templatesDir = joinPathFragments(
+function createSnippetFiles(host: Tree, options: NormalizedSchema) {
+  const snippetsDir = joinPathFragments(
     options.projectSourceRoot,
-    options.templatesDirectory
+    options.snippetsDirectory
   );
 
-  const templateOptions = {
+  const snippetOptions = {
     ...options,
     ...names(options.name),
     template: '',
@@ -76,19 +76,19 @@ function createTemplateFiles(host: Tree, options: NormalizedSchema) {
   generateFiles(
     host,
     path.join(__dirname, 'files'),
-    templatesDir,
-    templateOptions
+    snippetsDir,
+    snippetOptions
   );
 }
 
-export async function templateGenerator(
+export async function snippetGenerator(
   host: Tree,
-  options: TemplateGeneratorSchema
+  options: SnippetGeneratorSchema
 ) {
   const normalizedOptions = await normalizeOptions(host, options);
-  createTemplateFiles(host, normalizedOptions);
+  createSnippetFiles(host, normalizedOptions);
 
   await formatFiles(host);
 }
 
-export default templateGenerator;
+export default snippetGenerator;

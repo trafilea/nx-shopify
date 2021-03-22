@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
-  "id": "Template",
+  "id": "NxShopifyTemplate",
   "title": "",
   "type": "object",
   "properties": {
