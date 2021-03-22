@@ -1,3 +1,14 @@
+# [1.0.0-beta.3](https://github.com/trafilea/nx-shopify/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2021-03-22)
+
+
+### Features
+
+* **core:** assert unique name generated theme blocks liquid files ([7a83be9](https://github.com/trafilea/nx-shopify/commit/7a83be947ffc212f763e665b80474102fdaf414d))
+* **layout:** add layout generator ([f7cc891](https://github.com/trafilea/nx-shopify/commit/f7cc89169a46a34990aa3410bf995f5bfa7a0b41))
+* **section:** add section generator ([cc9e94d](https://github.com/trafilea/nx-shopify/commit/cc9e94da7c63be9e93249b71e7d3da64ba694015))
+* **snippet:** add snippet generator ([4933766](https://github.com/trafilea/nx-shopify/commit/493376624abbf8fdaa93d3f83cb26066f4e38fbd))
+* **template:** add template generator ([29608d1](https://github.com/trafilea/nx-shopify/commit/29608d1900df654efd5c1a4ebbc93cf94ca49618))
+
 # [1.0.0-beta.2](https://github.com/trafilea/nx-shopify/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2021-03-19)
 
 
