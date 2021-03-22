@@ -27,6 +27,11 @@
       "factory": "./src/generators/snippet/snippet.generator",
       "schema": "./src/generators/snippet/schema.json",
       "description": "Generate a theme snippet"
+    },
+    "section": {
+      "factory": "./src/generators/section/section.generator",
+      "schema": "./src/generators/section/schema.json",
+      "description": "Generate a theme section"
     }
   }
 }

@@ -1,0 +1,4 @@
+import './<%= fileName %>.section.scss';
+
+export class <%= className %>Section {
+}
