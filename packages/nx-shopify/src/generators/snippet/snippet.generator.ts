@@ -9,7 +9,11 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { assertValidGeneratorNameOption } from '../../utils/generator-utils';
+import {
+  assertUniqueLiquidFileNameOption,
+  assertValidGeneratorNameOption,
+} from '../../utils/generator-utils';
+import { LiquidFileType } from '../../utils/shopify';
 import { SnippetGeneratorSchema } from './schema';
 
 async function getSnippetsDirectory(options: SnippetGeneratorSchema) {
@@ -63,8 +67,10 @@ async function normalizeOptions(
 }
 
 function createSnippetFiles(host: Tree, options: NormalizedSchema) {
+  const { projectSourceRoot } = options;
+
   const snippetsDir = joinPathFragments(
-    options.projectSourceRoot,
+    projectSourceRoot,
     options.snippetsDirectory
   );
 
@@ -73,6 +79,13 @@ function createSnippetFiles(host: Tree, options: NormalizedSchema) {
     ...names(options.name),
     template: '',
   };
+
+  assertUniqueLiquidFileNameOption(
+    snippetOptions.fileName,
+    LiquidFileType.SNIPPET,
+    joinPathFragments(projectSourceRoot, 'theme')
+  );
+
   generateFiles(
     host,
     path.join(__dirname, 'files'),

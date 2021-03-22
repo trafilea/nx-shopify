@@ -9,7 +9,11 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { assertValidGeneratorNameOption } from '../../utils/generator-utils';
+import {
+  assertUniqueLiquidFileNameOption,
+  assertValidGeneratorNameOption,
+} from '../../utils/generator-utils';
+import { LiquidFileType } from '../../utils/shopify';
 import { TemplateGeneratorSchema } from './schema';
 
 async function getTemplatesDirectory(options: TemplateGeneratorSchema) {
@@ -63,8 +67,10 @@ async function normalizeOptions(
 }
 
 function createTemplateFiles(host: Tree, options: NormalizedSchema) {
+  const { projectSourceRoot } = options;
+
   const templatesDir = joinPathFragments(
-    options.projectSourceRoot,
+    projectSourceRoot,
     options.templatesDirectory
   );
 
@@ -73,6 +79,13 @@ function createTemplateFiles(host: Tree, options: NormalizedSchema) {
     ...names(options.name),
     template: '',
   };
+
+  assertUniqueLiquidFileNameOption(
+    templateOptions.fileName,
+    LiquidFileType.TEMPLATE,
+    joinPathFragments(projectSourceRoot, 'theme')
+  );
+
   generateFiles(
     host,
     path.join(__dirname, 'files'),

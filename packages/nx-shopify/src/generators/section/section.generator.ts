@@ -9,7 +9,11 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { assertValidGeneratorNameOption } from '../../utils/generator-utils';
+import {
+  assertUniqueLiquidFileNameOption,
+  assertValidGeneratorNameOption,
+} from '../../utils/generator-utils';
+import { LiquidFileType } from '../../utils/shopify';
 import { SectionGeneratorSchema } from './schema';
 
 async function getSectionsDirectory(options: SectionGeneratorSchema) {
@@ -63,8 +67,10 @@ async function normalizeOptions(
 }
 
 function createSectionFiles(host: Tree, options: NormalizedSchema) {
+  const { projectSourceRoot } = options;
+
   const sectionsDir = joinPathFragments(
-    options.projectSourceRoot,
+    projectSourceRoot,
     options.sectionsDirectory
   );
 
@@ -73,6 +79,13 @@ function createSectionFiles(host: Tree, options: NormalizedSchema) {
     ...names(options.name),
     template: '',
   };
+
+  assertUniqueLiquidFileNameOption(
+    sectionOptions.fileName,
+    LiquidFileType.SECTION,
+    joinPathFragments(projectSourceRoot, 'theme')
+  );
+
   generateFiles(
     host,
     path.join(__dirname, 'files'),
@@ -86,8 +99,8 @@ export async function sectionGenerator(
   options: SectionGeneratorSchema
 ) {
   const normalizedOptions = await normalizeOptions(host, options);
-  createSectionFiles(host, normalizedOptions);
 
+  createSectionFiles(host, normalizedOptions);
   await formatFiles(host);
 }
 

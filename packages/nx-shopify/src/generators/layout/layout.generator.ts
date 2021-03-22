@@ -9,7 +9,11 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { assertValidGeneratorNameOption } from '../../utils/generator-utils';
+import {
+  assertUniqueLiquidFileNameOption,
+  assertValidGeneratorNameOption,
+} from '../../utils/generator-utils';
+import { LiquidFileType } from '../../utils/shopify';
 import { LayoutGeneratorSchema } from './schema';
 
 async function getLayoutDirectory(options: LayoutGeneratorSchema) {
@@ -63,8 +67,10 @@ async function normalizeOptions(
 }
 
 function createLayoutFiles(host: Tree, options: NormalizedSchema) {
+  const { projectSourceRoot } = options;
+
   const layoutDir = joinPathFragments(
-    options.projectSourceRoot,
+    projectSourceRoot,
     options.layoutDirectory
   );
 
@@ -73,6 +79,13 @@ function createLayoutFiles(host: Tree, options: NormalizedSchema) {
     ...names(options.name),
     template: '',
   };
+
+  assertUniqueLiquidFileNameOption(
+    templateOptions.fileName,
+    LiquidFileType.LAYOUT,
+    joinPathFragments(projectSourceRoot, 'theme')
+  );
+
   generateFiles(
     host,
     path.join(__dirname, 'files'),
