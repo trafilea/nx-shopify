@@ -1,0 +1,49 @@
+<div class="<%= fileName %>__container">
+    <div class="<%= fileName %>__block">
+        {% for block in section.blocks %}
+            <div class="<%= fileName %>__message">
+                <span class="">{{ block.settings.footer | escape }}</span>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "<%= className %>",
+	"max_blocks": 3,
+  "settings": [
+    {
+      "id": "text-box",
+      "type": "text",
+      "label": "<%= className %> Heading",
+      "default": "Title"
+    },
+    {
+      "id": "text",
+      "type": "richtext",
+      "label": "Add custom text below",
+      "default": "<p>Add your text here</p>"
+    }
+  ],
+	"blocks": [
+	  {
+		  "type": "message",
+		  "name": "Bottom message",
+		  "settings": [
+        {
+          "type": "text",
+          "id": "footer",
+          "label": "<%= className %> Footer"
+        }
+		  ]
+	  }
+	]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
