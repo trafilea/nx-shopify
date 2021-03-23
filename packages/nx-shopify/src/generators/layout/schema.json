@@ -2,12 +2,12 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "id": "NxShopifyLayout",
-  "title": "",
+  "title": "Create a Shopify Theme layout for Nx",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "",
+      "description": "The name of the new theme layout",
       "$default": {
         "$source": "argv",
         "index": 0

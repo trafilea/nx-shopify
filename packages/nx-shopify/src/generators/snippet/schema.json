@@ -2,12 +2,12 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "id": "NxShopifySnippet",
-  "title": "",
+  "title": "Create a Shopify Theme snippet for Nx",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "",
+      "description": "The name of the new theme snippet",
       "$default": {
         "$source": "argv",
         "index": 0
