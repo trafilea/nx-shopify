@@ -9,7 +9,7 @@
 
 > 🔎 **A [Nx](https://nx.dev) plugin for developing performance-first Shopify themes 🚀**
 
-Be it you need to build a custom Shopify store theme, develop a generic theme or even maintain multiple stores/themes with code shared across them, this Nx plugin helps you power-up your development experience
+Be it you need to build a custom Shopify store theme, develop a generic theme or even maintain multiple stores/themes with shared code across them, this Nx plugin helps you power-up your development experience
 
 <hr />
 
@@ -21,6 +21,7 @@ Be it you need to build a custom Shopify store theme, develop a generic theme or
 ![npm (scoped)](https://img.shields.io/npm/v/@trafilea/nx-shopify)
 ![npm](https://img.shields.io/npm/dt/@trafilea/nx-shopify)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -44,7 +45,7 @@ $ yarn add --global nx
 $ pnpm install --global nx
 ```
 
-Create and empty Nx workspace (or use an existing one)
+Create an empty Nx workspace (or use an existing one)
 
 ```
 $ npx create-nx-workspace my-org --preset=empty
@@ -70,7 +71,16 @@ Generate a Shopify theme using the Nx CLI
 $ nx generate @trafilea/nx-shopify:theme my-theme
 ```
 
-Read the full documentation on how to develop Shopify themes with Nx-Shopify on the [docs site 👀](https://trafilea.github.io/nx-shopify)
+Check the generators and executors provided by the plugin
+
+```
+$ nx list @trafilea/nx-shopify
+```
+
+## Documentation
+
+- 🤓 Read the full documentation on the [docs site](https://trafilea.github.io/nx-shopify)
+- 👀 Checkout the [examples workspace](https://github.com/trafilea/nx-shopify-examples)
 
 ## Contributors
 
