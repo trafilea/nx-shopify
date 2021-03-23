@@ -1,5 +1,3 @@
-⚠️ This project is under development ⚠️
-
 <p align="center">
 
 <img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" height="100">
@@ -9,7 +7,9 @@
   Nx-Shopify
 </h1>
 
-🔎 **A [Nx](https://nx.dev) plugin for developing performance-first Shopify themes 🚀**
+> 🔎 **A [Nx](https://nx.dev) plugin for developing performance-first Shopify themes 🚀**
+
+Be it you need to build a custom Shopify store theme, develop a generic theme or even maintain multiple stores/themes with code shared across them, this Nx plugin helps you power-up your development experience
 
 <hr />
 
@@ -31,31 +31,46 @@
 
 ## Getting Started
 
-Learn about how to develop Shopify themes with Nx-Shopify on the [docs site](https://trafilea.github.io/nx-shopify/) 👀
+Install the Nx CLI globally
 
-## Features
+```
+# npm
+$ npm install --global nx
 
-Nx-Shopify comes packed with a set of features that aim to provide the best development experience and build Shopify themes with performance in mind 🚀
+# yarn
+$ yarn add --global nx
 
-- 👉 Code generators for theme, layouts, templates, snippets & sections
-- 👉 Component based project structure
-- 👉 Organize theme assets in subfolders
-- 👉 TypeScript
-- 👉 Multiple entrypoints for layouts & templates
-  - Load minimum required code for a given layout + template location
-- 👉 Split vendor and theme code
-- 👉 Source mappings
-- 👉 Production builds
-  - Optimized and minified code
-  - Tree shaking
-  - Extract CSS media queries as separate bundles
-- 👉 Code formating + linting (ESLint + Prettier)
-- 👉 Scripts & Styles resources prefetching
-- 👉 SCSS & PostCSS + Autoprefixer
-- 👉 Bundles analysis
-- 👉 Extensible webpack configuration
-- 👉 Easy code sharing
-- 👉 Computation caching + all benefits of [Nx workspaces](https://nx.dev/latest/angular/getting-started/resources)
+# pnpm
+$ pnpm install --global nx
+```
+
+Create and empty Nx workspace (or use an existing one)
+
+```
+$ npx create-nx-workspace my-org --preset=empty
+$ cd ./my-org
+```
+
+Install the Nx-Shopify plugin as a devDependency
+
+```
+# npm
+$ npm install --save-dev @trafilea/nx-shopify
+
+# yarn
+$ yarn add --save-dev @trafilea/nx-shopify
+
+# pnpm
+$ pnpm install --save-dev @trafilea/nx-shopify
+```
+
+Generate a Shopify theme using the Nx CLI
+
+```
+$ nx generate @trafilea/nx-shopify:theme my-theme
+```
+
+Read the full documentation on how to develop Shopify themes with Nx-Shopify on the [docs site 👀](https://trafilea.github.io/nx-shopify)
 
 ## Contributors
 
