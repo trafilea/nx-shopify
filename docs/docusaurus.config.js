@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Nx-Shopify',
-  tagline: 'Nx plugin for developing performance-first Shopify themes',
+  tagline: 'Nx plugin for developing performance-first Shopify themes 🚀',
   url: 'https://trafilea.github.io',
   baseUrl: '/nx-shopify/',
   onBrokenLinks: 'throw',
@@ -22,11 +22,17 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        { to: 'blog', label: 'Blog', position: 'left' },
+        {
+          href: 'https://github.com/trafilea/nx-shopify-examples',
+          label: 'Examples',
+          position: 'left',
+          className: 'header-playground-link',
+        },
         {
           href: 'https://github.com/trafilea/nx-shopify',
-          label: 'GitHub',
+          label: ' ',
           position: 'right',
+          className: 'header-icon-link header-github-link',
         },
       ],
     },
@@ -51,15 +57,7 @@ module.exports = {
           items: [
             {
               label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              href: 'https://stackoverflow.com/questions/tagged/nx-shopify',
             },
           ],
         },
@@ -67,12 +65,12 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: 'blog',
+              label: 'GitHub',
+              href: 'https://github.com/trafilea',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/trafilea/nx-shopify',
+              label: 'Work with us',
+              href: 'https://trafilea.com/careers',
             },
           ],
         },
@@ -87,14 +85,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+          editUrl: 'https://github.com/trafilea/nx-shopify/edit/master/docs/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
