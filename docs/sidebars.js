@@ -38,6 +38,7 @@ module.exports = {
       items: [
         'guides/setup-theme-config',
         'guides/multiple-environments',
+        'guides/liquid-to-ts-context',
         'guides/liquid-in-styles',
       ],
     },
