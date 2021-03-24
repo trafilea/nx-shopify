@@ -1,9 +1,34 @@
 ---
-id: doc1
-title: Style Guide
-sidebar_label: Style Guide
+title: Introduction
 slug: /
 ---
+
+<p align="center">
+
+<img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" height="100"/>
+
+</p>
+<h1 align="center">
+  Nx-Shopify
+</h1>
+
+> 🔎 **A [Nx](https://nx.dev) plugin for developing performance-first Shopify themes 🚀**
+
+Be it you need to build a custom Shopify store theme, develop a generic theme or even maintain multiple stores/themes with shared code across them, this Nx plugin helps you power-up your development experience
+
+<hr />
+
+<div align="center">
+
+[![e2e](https://github.com/trafilea/nx-shopify/actions/workflows/e2e.yml/badge.svg)](https://github.com/trafilea/nx-shopify/actions/workflows/e2e.yml)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![License](https://img.shields.io/github/license/trafilea/nx-shopify)](https://github.com/trafilea/nx-shopify/blob/master/LICENSE)
+![npm (scoped)](https://img.shields.io/npm/v/@trafilea/nx-shopify)
+![npm](https://img.shields.io/npm/dt/@trafilea/nx-shopify)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
+</div>
 
 You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).
 
