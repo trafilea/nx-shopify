@@ -10,6 +10,10 @@ module.exports = {
     },
     {
       type: 'doc',
+      id: 'creating-a-theme',
+    },
+    {
+      type: 'doc',
       id: 'theme-structure',
     },
     {
@@ -20,7 +24,6 @@ module.exports = {
       type: 'category',
       label: 'Code Generators',
       items: [
-        'generators/theme',
         'generators/layout',
         'generators/template',
         'generators/section',
