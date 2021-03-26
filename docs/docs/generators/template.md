@@ -87,7 +87,7 @@ Alias(es): p
 
 Type: `string`
 
-The name of the project.
+The name of the project where the template will be generated.
 
 ### --directory
 

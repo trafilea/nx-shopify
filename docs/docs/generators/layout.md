@@ -82,7 +82,7 @@ Alias(es): p
 
 Type: `string`
 
-The name of the project.
+The name of the project where the layout will be generated.
 
 ### --directory
 

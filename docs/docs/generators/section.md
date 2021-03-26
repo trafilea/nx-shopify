@@ -69,7 +69,7 @@ Alias(es): p
 
 Type: `string`
 
-The name of the project where the section will be generated in.
+The name of the project where the section will be generated.
 
 ### --directory
 

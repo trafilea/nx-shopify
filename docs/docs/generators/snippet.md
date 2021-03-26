@@ -69,7 +69,7 @@ Alias(es): p
 
 Type: `string`
 
-The name of the project where the snippet will be generated in.
+The name of the project where the snippet will be generated.
 
 ### --directory
 
