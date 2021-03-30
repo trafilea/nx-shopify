@@ -2,199 +2,216 @@
 title: Build Command
 ---
 
-You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).
+Builds a theme to be uploaded to Shopify
 
-## Markdown Syntax
+## Usage
 
-To serve as an example page when styling markdown based Docusaurus sites.
-
-## Headers
-
-# H1 - Create the best documentation
-
-## H2 - Create the best documentation
-
-### H3 - Create the best documentation
-
-#### H4 - Create the best documentation
-
-##### H5 - Create the best documentation
-
-###### H6 - Create the best documentation
-
----
-
-## Emphasis
-
-Emphasis, aka italics, with _asterisks_ or _underscores_.
-
-Strong emphasis, aka bold, with **asterisks** or **underscores**.
-
-Combined emphasis with **asterisks and _underscores_**.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
-
----
-
-## Lists
-
-1. First ordered list item
-1. Another item
-   - Unordered sub-list.
-1. Actual numbers don't matter, just that it's a number
-   1. Ordered sub-list
-1. And another item.
-
-- Unordered list can use asterisks
-
-* Or minuses
-
-- Or pluses
-
----
-
-## Links
-
-[I'm an inline-style link](https://www.google.com/)
-
-[I'm an inline-style link with title](https://www.google.com/ "Google's Homepage")
-
-[I'm a reference-style link][arbitrary case-insensitive reference text]
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links. http://www.example.com/ or <http://www.example.com/> and sometimes example.com (but not on GitHub, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org/
-[1]: http://slashdot.org/
-[link text itself]: http://www.reddit.com/
-
----
-
-## Images
-
-Here's our logo (hover to see the title text):
-
-Inline-style: ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 1')
-
-Reference-style: ![alt text][logo]
-
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 2'
-
-Images from any folder can be used by providing path to file. Path should be relative to markdown file.
-
-![img](../../static/img/logo.svg)
-
----
-
-## Code
-
-```javascript
-var s = 'JavaScript syntax highlighting';
-alert(s);
+```bash
+$ nx build <theme-name> [options,...]
 ```
 
-```python
-s = "Python syntax highlighting"
-print(s)
-```
+## Configuration
 
-```
-No language indicated, so no syntax highlighting.
-But let's throw in a <b>tag</b>.
-```
+The `build` command is configured as a project target in the `workspace.json` file at your workspace root. By default, the target configuration should look similar to this:
 
-```js {2}
-function highlightMe() {
-  console.log('This line can be highlighted!');
+```json
+{
+  "projects": {
+    "my-theme": {
+      "targets": {
+        "build": {
+          "executor": "@trafilea/nx-shopify:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/my-theme",
+            "main": "apps/my-theme/src/main.ts",
+            "tsConfig": "apps/my-theme/tsconfig.app.json",
+            "postcssConfig": "apps/my-theme/postcss.config.js",
+            "themekitConfig": "apps/my-theme/config.yml",
+            "sourceMap": true,
+            "assets": ["apps/my-theme/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "sourceMap": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/my-theme/src/environments/environment.ts",
+                  "with": "apps/my-theme/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
 }
 ```
 
----
+The build target comes with a default `production` configuration that can be executed with:
 
-## Tables
+```bash
+nx build <theme-name> --configuration=production
+nx build <theme-name> --c=production # same
+nx build <theme-name> --prod # same, only works for the 'production' named config
+```
 
-Colons can be used to align columns.
-
-| Tables        |      Are      |   Cool |
-| ------------- | :-----------: | -----: |
-| col 3 is      | right-aligned | \$1600 |
-| col 2 is      |   centered    |   \$12 |
-| zebra stripes |   are neat    |    \$1 |
-
-There must be at least 3 dashes separating each header cell. The outer pipes (|) are optional, and you don't need to make the raw Markdown line up prettily. You can also use inline Markdown.
-
-| Markdown | Less      | Pretty     |
-| -------- | --------- | ---------- |
-| _Still_  | `renders` | **nicely** |
-| 1        | 2         | 3          |
-
----
-
-## Blockquotes
-
-> Blockquotes are very handy in email to emulate reply text. This line is part of the same quote.
-
-Quote break.
-
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
-
----
-
-## Inline HTML
-
-<dl>
-  <dt>Definition list</dt>
-  <dd>Is something people use sometimes.</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
-
----
-
-## Line Breaks
-
-Here's a line for us to start with.
-
-This line is separated from the one above by two newlines, so it will be a _separate paragraph_.
-
-This line is also a separate paragraph, but... This line is only separated by a single newline, so it's a separate line in the _same paragraph_.
-
----
-
-## Admonitions
-
-:::note
-
-This is a note
-
-:::
+You can add additional configurations that define new options or override the ones defined in the default options object.
 
 :::tip
 
-This is a tip
+Learn more about Nx targets configurations at the [Nx website](https://nx.dev)
 
 :::
 
-:::important
+You can also override/define options passing them as CLI arguments, these will take precedence over the `workspace.json` configurations.
 
-This is important
+Example:
 
-:::
+```bash
+nx build <theme-name> --prod --optimization false
+```
 
-:::caution
+## Options
 
-This is a caution
+### --outputPath
 
-:::
+Type: `string`
 
-:::warning
+The output path of the generated files
 
-This is a warning
+### --main
 
-:::
+Type: `string`
+
+The main application file path
+
+### --tsConfig
+
+Type: `string`
+
+The path to the Typescript configuration file
+
+### --themekitConfig
+
+Type: `string`
+
+The path to the themekit config.yml configuration file
+
+### --postcssConfig
+
+Type: `string`
+
+The path to the PostCSS configuration file
+
+### --watch
+
+Type: `boolean`
+
+Run build when files change
+
+### --poll
+
+Type: `number`
+
+Frequency of file watcher in ms
+
+### --sourceMap
+
+Type: `boolean`
+
+Produce source maps (default: true)
+
+### --progress
+
+Type: `boolean`
+
+Log progress to the console while building
+
+### --assets
+
+Type: `Array<string or AssetPattern>`
+
+List of static theme assets (default: [])
+
+```typescript title="AssetPattern"
+interface AssetPattern {
+  // The pattern to match.
+  glob: string;
+
+  //The input directory path in which to apply 'glob'. Defaults to the project root.
+  input: string;
+
+  // An array of globs to ignore.
+  ignore: Array<string>;
+
+  //Absolute path within the output.
+  output: string;
+}
+```
+
+### --analyze
+
+Type: `boolean`
+
+Analyze the generated bundle and open webpack-bundle-analyzer in the browser
+
+### --statsJson
+
+Type: `boolean`
+
+Generates a 'stats.json' file which can be analyzed using tools such as: #webpack-bundle-analyzer' or https://webpack.github.io/analyse
+
+### --verbose
+
+Type: `boolean`
+
+Emits verbose output
+
+### --extractLicenses
+
+Type: `boolean`
+
+Extract all licenses in a separate file, in the case of production builds only.
+
+### --optimization
+
+Type: `boolean`
+
+Defines the optimization level of the build.
+
+### --showCircularDependencies
+
+Type: `boolean`
+
+Show circular dependency warnings on builds. (default: true)
+
+### --memoryLimit
+
+Type: `number`
+
+Memory limit for type checking service process in MB. (defaults to 2048)
+
+### --fileReplacements
+
+Type: `Array<FileReplacementPattern>`
+
+Replace files with other files in the build. (default: [])
+
+```typescript title="FileReplacementPattern"
+interface FileReplacementPattern {
+  // File to replace its content.
+  replace: string;
+
+  // File with the new content
+  with: string;
+}
+```
+
+### --webpackConfig
+
+Type: `string`
+
+Path to a function which takes a webpack config, context and returns the resulting webpack config. See [Extend Webpack Configuration](../guides/extend-webpack) to learn more.
