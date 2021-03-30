@@ -1,5 +1,5 @@
 ---
-title: Make liquid data available in TypeScript
+title: Liquid to TypeScript
 ---
 
 You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).

@@ -1,5 +1,5 @@
 ---
-title: Setting up your theme config.yml file
+title: Maraakdown Reference
 ---
 
 You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).
@@ -87,7 +87,7 @@ Reference-style: ![alt text][logo]
 
 Images from any folder can be used by providing path to file. Path should be relative to markdown file.
 
-![img](../../static/img/logo.svg)
+![img](../static/img/logo.svg)
 
 ---
 

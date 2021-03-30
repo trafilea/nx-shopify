@@ -32,15 +32,14 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Project Executors',
+      label: 'Theme Commands',
       items: ['executors/build', 'executors/serve', 'executors/deploy'],
     },
     {
       type: 'category',
       label: 'Guides',
       items: [
-        'guides/setup-theme-config',
-        'guides/multiple-environments',
+        'guides/environments',
         'guides/liquid-to-ts-context',
         'guides/liquid-in-styles',
       ],

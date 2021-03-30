@@ -43,12 +43,20 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Style Guide',
+              label: 'Introduction',
               to: 'docs/',
             },
             {
-              label: 'Second Doc',
-              to: 'docs/doc2/',
+              label: 'Installation',
+              to: 'docs/installation',
+            },
+            {
+              label: 'Code Generators',
+              to: 'docs/generators/layout',
+            },
+            {
+              label: 'Theme Commands',
+              to: 'docs/executors/build',
             },
           ],
         },
