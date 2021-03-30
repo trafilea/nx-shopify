@@ -55,7 +55,7 @@ apps
 
 Then you should add the generated template to the `apps/my-theme/src/theme/templates/theme-templates.ts` exported `themeTemplates` object so the new template is loaded in the bootstrap process:
 
-```diff
+```diff title="theme-templates.ts"
 export const themeTemplates = {
   ...,
   '404': () => import('./404/404.template').then((m) => m.NotFound404Template),

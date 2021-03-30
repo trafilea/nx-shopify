@@ -55,7 +55,7 @@ apps
 
 Then you should add the generated layout to the `apps/my-theme/src/theme/layout/theme-layouts.ts` exported `themeLayouts` object so the new layout is loaded in the bootstrap process:
 
-```diff
+```diff title="theme-layouts.ts"
 export const themeLayouts = {
   theme: () => import('./theme/theme.layout').then((m) => m.ThemeLayout),
 + 'my-layout': () => import('./my-layout/my-layout.layout').then((m) => m.MyLayoutLayout),
