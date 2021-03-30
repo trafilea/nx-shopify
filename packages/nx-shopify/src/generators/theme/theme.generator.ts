@@ -154,12 +154,11 @@ function addDeployTarget(
   project: ProjectConfiguration,
   options: NormalizedSchema
 ) {
-  const { projectRoot, projectName } = options;
+  const { projectName } = options;
 
   const deployTarget: TargetConfiguration = {
     executor: '@trafilea/nx-shopify:deploy',
     options: {
-      outputPath: joinPathFragments('dist', projectRoot),
       buildTarget: `${projectName}:build`,
     },
     configurations: {
