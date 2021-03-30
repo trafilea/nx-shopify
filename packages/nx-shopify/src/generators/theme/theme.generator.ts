@@ -85,10 +85,6 @@ function addBuildTarget(
     main: joinPathFragments(sourceRoot, `main.ts`),
     tsConfig: joinPathFragments(projectRoot, `tsconfig.app.json`),
     postcssConfig: joinPathFragments(projectRoot, `postcss.config.js`),
-    mediaQueriesConfig: joinPathFragments(
-      projectRoot,
-      `media-queries.config.js`
-    ),
     themekitConfig: joinPathFragments(projectRoot, `config.yml`),
     sourceMap: true,
     assets: [joinPathFragments(projectRoot, `src/assets`)],
