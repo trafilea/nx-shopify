@@ -257,4 +257,4 @@ export async function themeGenerator(
 }
 
 export default themeGenerator;
-export const themeSchematic = convertNxGenerator(themeGenerator);
+export const nxShopifyThemeSchematic = convertNxGenerator(themeGenerator);

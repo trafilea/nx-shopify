@@ -10,8 +10,8 @@ import {
 } from '../../utils/local-server/network-utils';
 import { normalizeBuildOptions } from '../../utils/normalize-utils';
 import {
-  isLiveTheme,
   getThemekitEnvironmentConfig,
+  isLiveTheme,
 } from '../../utils/themekit';
 import { getSourceRoot } from '../../utils/workspace-utils';
 import { getShopifyWebpackConfig } from '../../webpack/configs/shopify.config';
@@ -91,7 +91,7 @@ export async function serveExecutor(
       devServer,
       themekitEnvConfig,
     });
-    return new Promise(() => {
+    return new Promise<{ success: boolean }>(() => {
       assetServer.start(options);
     });
   } catch (error) {
