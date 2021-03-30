@@ -1,0 +1,15 @@
+import {
+  ThemeModule,
+  ThemeContext,
+  ThemeOnReady,
+} from '<%= importPath %>/core';
+
+export class ThemeGlobalModule extends ThemeModule implements ThemeOnReady {
+  constructor(context: ThemeContext) {
+    super(context);
+  }
+
+  onReady() {
+    console.log('Theme Global Module: onReady() called');
+  }
+}
