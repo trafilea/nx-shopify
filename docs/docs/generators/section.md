@@ -7,11 +7,11 @@ Create a theme section
 ## Usage
 
 ```bash
-$ nx generate section ...
+$ nx generate section [options,...]
 ```
 
 ```bash
-$ nx g sec ... # same
+$ nx g sec [options,...] # same
 ```
 
 By default, Nx will search for the `section` generator in the default collection provisioned in `workspace.json`.
@@ -19,13 +19,13 @@ By default, Nx will search for the `section` generator in the default collection
 You can specify the collection explicitly as follows:
 
 ```bash
-$ nx g @trafilea/nx-shopify:section ...
+$ nx g @trafilea/nx-shopify:section [options,...]
 ```
 
 Show what will be generated without writing to disk:
 
 ```bash
-$ nx g section ... --dry-run
+$ nx g section [options,...] --dry-run
 ```
 
 ### Examples

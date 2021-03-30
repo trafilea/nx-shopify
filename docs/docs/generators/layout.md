@@ -7,11 +7,11 @@ Create a theme layout
 ## Usage
 
 ```bash
-$ nx generate layout ...
+$ nx generate layout [options,...]
 ```
 
 ```bash
-$ nx g l ... # same
+$ nx g l [options,...] # same
 ```
 
 By default, Nx will search for the `layout` generator in the default collection provisioned in `workspace.json`.
@@ -19,13 +19,13 @@ By default, Nx will search for the `layout` generator in the default collection 
 You can specify the collection explicitly as follows:
 
 ```bash
-$ nx g @trafilea/nx-shopify:layout ...
+$ nx g @trafilea/nx-shopify:layout [options,...]
 ```
 
 Show what will be generated without writing to disk:
 
 ```bash
-$ nx g layout ... --dry-run
+$ nx g layout [options,...] --dry-run
 ```
 
 ### Examples

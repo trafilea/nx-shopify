@@ -7,11 +7,11 @@ Create a theme snippet
 ## Usage
 
 ```bash
-$ nx generate snippet ...
+$ nx generate snippet [options,...]
 ```
 
 ```bash
-$ nx g snip ... # same
+$ nx g snip [options,...] # same
 ```
 
 By default, Nx will search for the `snippet` generator in the default collection provisioned in `workspace.json`.
@@ -19,13 +19,13 @@ By default, Nx will search for the `snippet` generator in the default collection
 You can specify the collection explicitly as follows:
 
 ```bash
-$ nx g @trafilea/nx-shopify:snippet ...
+$ nx g @trafilea/nx-shopify:snippet [options,...]
 ```
 
 Show what will be generated without writing to disk:
 
 ```bash
-$ nx g snippet ... --dry-run
+$ nx g snippet [options,...] --dry-run
 ```
 
 ### Examples

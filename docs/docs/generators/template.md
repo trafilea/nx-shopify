@@ -7,11 +7,11 @@ Create a theme template
 ## Usage
 
 ```bash
-$ nx generate template ...
+$ nx generate template [options,...]
 ```
 
 ```bash
-$ nx g t ... # same
+$ nx g t [options,...] # same
 ```
 
 By default, Nx will search for the `template` generator in the default collection provisioned in `workspace.json`.
@@ -19,13 +19,13 @@ By default, Nx will search for the `template` generator in the default collectio
 You can specify the collection explicitly as follows:
 
 ```bash
-$ nx g @trafilea/nx-shopify:template ...
+$ nx g @trafilea/nx-shopify:template [options,...]
 ```
 
 Show what will be generated without writing to disk:
 
 ```bash
-$ nx g template ... --dry-run
+$ nx g template [options,...] --dry-run
 ```
 
 ### Examples
