@@ -2,6 +2,12 @@
 title: Creating a Theme
 ---
 
+:::important
+
+If this is your first experience developing Shopify themes, we recommend you to start by reading the basics of Shopify themes development at the [Shopify's Themekit documentation](https://shopify.dev/tools/theme-kit).
+
+:::
+
 ## Generating Themes
 
 Generating new themes can be done with the following:
@@ -47,7 +53,7 @@ apps
 
 The main.ts content should look similar to this:
 
-```typescript
+```typescript title="src/main.ts"
 __webpack_public_path__ = window['__webpack_public_path__'];
 
 import { themeBootstrapFactory } from '@my-org/my-theme/core/theme-bootstrap';
@@ -56,6 +62,10 @@ import { themeTemplates } from '@my-org/my-theme/theme/templates';
 
 window['themeBootstrap'] = themeBootstrapFactory(themeLayouts, themeTemplates);
 ```
+
+Note that the `@my-org/my-theme` in the import paths are an alias to the `apps/my-theme/src` path configured in your workspace root `tsconfig.base.json` file.
+
+## Theme Configuration
 
 After generating your theme, the next step is to configure the themekit's `apps/my-theme/config.yml` file.
 
