@@ -2,199 +2,373 @@
 title: Environments
 ---
 
-You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).
+When working with `Nx-Shopify` themes, we can think of two kind of environemnts: `Build environments` and `Shopify Themekit environments`.
 
-## Markdown Syntax
+This guide will explain how to configure and work with each of these environments.
 
-To serve as an example page when styling markdown based Docusaurus sites.
+## Build environments
 
-## Headers
+You can define different named build configurations for your theme's `build` target in the `workspace.json` file, such as stage and production, with different default options.
 
-# H1 - Create the best documentation
+Among the options available for the `@trafilea/nx-shopify:build` executor, the `fileReplacements` option is used to work with multiple environments.
 
-## H2 - Create the best documentation
+The default generated `build` target contains a **production** configuration that replaces the `environment.ts` content with the one inside `environment.prod.ts`.
 
-### H3 - Create the best documentation
-
-#### H4 - Create the best documentation
-
-##### H5 - Create the best documentation
-
-###### H6 - Create the best documentation
-
----
-
-## Emphasis
-
-Emphasis, aka italics, with _asterisks_ or _underscores_.
-
-Strong emphasis, aka bold, with **asterisks** or **underscores**.
-
-Combined emphasis with **asterisks and _underscores_**.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
-
----
-
-## Lists
-
-1. First ordered list item
-1. Another item
-   - Unordered sub-list.
-1. Actual numbers don't matter, just that it's a number
-   1. Ordered sub-list
-1. And another item.
-
-- Unordered list can use asterisks
-
-* Or minuses
-
-- Or pluses
-
----
-
-## Links
-
-[I'm an inline-style link](https://www.google.com/)
-
-[I'm an inline-style link with title](https://www.google.com/ "Google's Homepage")
-
-[I'm a reference-style link][arbitrary case-insensitive reference text]
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links. http://www.example.com/ or <http://www.example.com/> and sometimes example.com (but not on GitHub, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org/
-[1]: http://slashdot.org/
-[link text itself]: http://www.reddit.com/
-
----
-
-## Images
-
-Here's our logo (hover to see the title text):
-
-Inline-style: ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 1')
-
-Reference-style: ![alt text][logo]
-
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 2'
-
-Images from any folder can be used by providing path to file. Path should be relative to markdown file.
-
-![img](../../static/img/logo.svg)
-
----
-
-## Code
-
-```javascript
-var s = 'JavaScript syntax highlighting';
-alert(s);
-```
-
-```python
-s = "Python syntax highlighting"
-print(s)
-```
-
-```
-No language indicated, so no syntax highlighting.
-But let's throw in a <b>tag</b>.
-```
-
-```js {2}
-function highlightMe() {
-  console.log('This line can be highlighted!');
+```json {21-26} title="workspace.json"
+{
+  "projects": {
+    "my-theme": {
+      "targets": {
+        "build": {
+          "executor": "@trafilea/nx-shopify:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/my-theme",
+            "main": "apps/my-theme/src/main.ts",
+            "tsConfig": "apps/my-theme/tsconfig.app.json",
+            "postcssConfig": "apps/my-theme/postcss.config.js",
+            "themekitConfig": "apps/my-theme/config.yml",
+            "sourceMap": true,
+            "assets": ["apps/my-theme/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "sourceMap": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/my-theme/src/environments/environment.ts",
+                  "with": "apps/my-theme/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
 }
 ```
 
----
+And the project files look like this:
 
-## Tables
+```treeview
+apps/my-theme/src/environments
+├── environment.prod.ts
+├── environment-schema.ts
+└── environment.ts
+```
 
-Colons can be used to align columns.
+```typescript title="environment-schema.ts"
+export interface EnvironmentSchema {
+  production: boolean;
+}
+```
 
-| Tables        |      Are      |   Cool |
-| ------------- | :-----------: | -----: |
-| col 3 is      | right-aligned | \$1600 |
-| col 2 is      |   centered    |   \$12 |
-| zebra stripes |   are neat    |    \$1 |
+```typescript title="environment.ts"
+import { EnvironmentSchema } from './environment-schema';
 
-There must be at least 3 dashes separating each header cell. The outer pipes (|) are optional, and you don't need to make the raw Markdown line up prettily. You can also use inline Markdown.
+export const environment: EnvironmentSchema = {
+  production: false,
+};
+```
 
-| Markdown | Less      | Pretty     |
-| -------- | --------- | ---------- |
-| _Still_  | `renders` | **nicely** |
-| 1        | 2         | 3          |
+```typescript title="environment.prod.ts"
+import { EnvironmentSchema } from './environment-schema';
 
----
+export const environment: EnvironmentSchema = {
+  production: true,
+};
+```
 
-## Blockquotes
+That way, you should only import the `environment.ts` file and let the build process select the respective environemnt values.
 
-> Blockquotes are very handy in email to emulate reply text. This line is part of the same quote.
+You can use this file to place any content specific to the environment the theme is being executed in. For example an API url, an analytics service identifier, implement a simple feature flagging system, etc.
 
-Quote break.
+## Shopify Themekit environments
 
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
+The theme's `serve` and `deploy` targets both receive a `themekitEnv` option with the name of the environment where files are going to be deployed to.
 
----
-
-## Inline HTML
-
-<dl>
-  <dt>Definition list</dt>
-  <dd>Is something people use sometimes.</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
-
----
-
-## Line Breaks
-
-Here's a line for us to start with.
-
-This line is separated from the one above by two newlines, so it will be a _separate paragraph_.
-
-This line is also a separate paragraph, but... This line is only separated by a single newline, so it's a separate line in the _same paragraph_.
-
----
-
-## Admonitions
-
-:::note
-
-This is a note
-
-:::
-
-:::tip
-
-This is a tip
-
-:::
+These themekit environments are configured in the theme's `config.yml` file (Learn more about how to configure this file [here](https://shopify.dev/tools/theme-kit/configuration-reference#config-file)).
 
 :::important
 
-This is important
+If no value is passed to the `themekitEnv` option, the default `development` environment will be used.
 
 :::
 
-:::caution
+By default, the `config.example.yml` file (reference configuration) has an additional **production** environment.
 
-This is a caution
+```yml title="config.example.yml"
+# See https://shopify.github.io/themekit/configuration/ for more about this config file.
+
+development:
+  password: <your_password>
+  theme_id: '<your_theme_id>'
+  store: <you_store_name>.myshopify.com
+
+production:
+  password: <your_password>
+  theme_id: '<your_theme_id>'
+  store: <you_store_name>.myshopify.com
+```
+
+That **production** environment is used by the **production** configurations of the theme's `serve` and `deploy` targets.
+
+```json {11,23} title="workspace.json"
+{
+  "projects": {
+    "my-theme": {
+      "targets": {
+        "serve": {
+          "executor": "@trafilea/nx-shopify:serve",
+          "options": { "buildTarget": "my-theme:build" },
+          "configurations": {
+            "production": {
+              "buildTarget": "my-theme:build:production",
+              "themekitEnv": "production"
+            }
+          }
+        },
+        "deploy": {
+          "executor": "@trafilea/nx-shopify:deploy",
+          "options": {
+            "buildTarget": "my-theme:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "my-theme:build:production",
+              "themekitEnv": "production"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+You can run these configurations using the nx cli:
+
+```bash
+$ nx serve my-theme -c=production
+$ nx serve my-theme --prod #same
+```
+
+Or you can override the `themekitEnv` by passing it as a cli option:
+
+```bash
+$ nx serve my-theme --themekitEnv anotherenv
+$ nx serve my-theme --prod --themekitEnv development
+```
+
+## Example
+
+Let's configure our theme project for a given situation where we have three different environments and we communicate to a different API data source for each environment.
+
+The environments are:
+
+- `development` (default)
+- `staging`
+- `production`
+
+This is our default `environment.ts` file (used for the default `development` environment).
+
+```typescript title="environment.ts"
+import { EnvironmentSchema } from './environment-schema';
+
+export const environment: EnvironmentSchema = {
+  production: false,
+  apiUrl: 'https://dev.example.com',
+};
+```
+
+We will need to create a copy of the `environment.ts` for the `staging` and `production` environments.
+
+```typescript title="environment.staging.ts"
+import { EnvironmentSchema } from './environment-schema';
+
+export const environment: EnvironmentSchema = {
+  production: false,
+  apiUrl: 'https://staging.example.com',
+};
+```
+
+```typescript title="environment.prod.ts"
+import { EnvironmentSchema } from './environment-schema';
+
+export const environment: EnvironmentSchema = {
+  production: true,
+  apiUrl: 'https://production.example.com',
+};
+```
+
+Here is how our environments directory would look like:
+
+```treeview
+apps/my-theme/src/environments
+├── environment-schema.ts
+├── environment.prod.ts
+├── environment.staging.ts
+└── environment.ts
+```
+
+Now we just need to import the `environment.ts` file in our code, for example:
+
+```typescript {2,13-19} title="index.template.ts"
+import { ThemeModule, ThemeContext, ThemeOnReady } from '@proj/my-theme/core';
+import { environment } from '@proj/my-theme/environments/environment';
+
+import './index.template.scss';
+
+export class IndexTemplate extends ThemeModule implements ThemeOnReady {
+  constructor(context: ThemeContext) {
+    super(context);
+  }
+
+  onReady() {
+    const { production, apiUrl } = environment;
+
+    if (production) {
+      console.log('Hello from production env :)');
+    }
+
+    console.log(`apiUrl is: ${apiUrl}`);
+  }
+}
+```
+
+:::important
+
+Remember to always import the deafult `environment.ts` file, contents from other environments will be automatically replaced.
 
 :::
 
-:::warning
+Then, we will need to add each environment to the `config.yml` file:
 
-This is a warning
+```yml title="config.example.yml"
+# See https://shopify.github.io/themekit/configuration/ for more about this config file.
+
+development:
+  password: mydevpass
+  theme_id: '123456'
+  store: dev-store.myshopify.com
+
+staging:
+  password: mystagingpass
+  theme_id: '456123'
+  store: staging-store.myshopify.com
+
+production:
+  password: myprodpass
+  theme_id: '654321'
+  store: prod-store.myshopify.com
+```
+
+:::note
+
+You could configure all themekit envs using the same store but different theme IDs. This depends on your specific case.
 
 :::
+
+Finally, we need to configure our `workspace.json` to use the environments.
+
+```json {18,21-26,28,31-36,44-51,60-67} title="workspace.json"
+{
+  "projects": {
+    "my-theme": {
+      "targets": {
+        "build": {
+          "executor": "@trafilea/nx-shopify:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/my-theme",
+            "main": "apps/my-theme/src/main.ts",
+            "tsConfig": "apps/my-theme/tsconfig.app.json",
+            "postcssConfig": "apps/my-theme/postcss.config.js",
+            "themekitConfig": "apps/my-theme/config.yml",
+            "sourceMap": true,
+            "assets": ["apps/my-theme/src/assets"]
+          },
+          "configurations": {
+            "staging": {
+              "optimization": true,
+              "sourceMap": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/my-theme/src/environments/environment.ts",
+                  "with": "apps/my-theme/src/environments/environment.staging.ts"
+                }
+              ]
+            },
+            "production": {
+              "optimization": true,
+              "sourceMap": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/my-theme/src/environments/environment.ts",
+                  "with": "apps/my-theme/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@trafilea/nx-shopify:serve",
+          "options": { "buildTarget": "my-theme:build" },
+          "configurations": {
+            "staging": {
+              "buildTarget": "my-theme:build:staging",
+              "themekitEnv": "staging"
+            },
+            "production": {
+              "buildTarget": "my-theme:build:production",
+              "themekitEnv": "production"
+            }
+          }
+        },
+        "deploy": {
+          "executor": "@trafilea/nx-shopify:deploy",
+          "options": {
+            "buildTarget": "my-theme:build"
+          },
+          "configurations": {
+            "staging": {
+              "buildTarget": "my-theme:build:staging",
+              "themekitEnv": "staging"
+            },
+            "production": {
+              "buildTarget": "my-theme:build:production",
+              "themekitEnv": "production"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+To make use of our environments we can simple run:
+
+```bash
+# development
+
+$ nx build my-theme
+$ nx serve my-theme
+$ nx deploy my-theme
+
+# staging
+
+$ nx build my-theme -c=staging
+$ nx serve my-theme --configuration=staging
+$ nx deploy my-theme -c=staging
+
+# production
+
+$ nx build my-theme --configuration=production
+$ nx serve my-theme -c=production
+$ nx deploy my-theme --prod # this alias only works for 'production' named configurations
+```
+
+You are ready to make the most out of environments! 🙂
