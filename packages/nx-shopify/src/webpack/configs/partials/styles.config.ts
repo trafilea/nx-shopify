@@ -1,26 +1,9 @@
-import * as MediaQuerySplittingPlugin from 'media-query-splitting-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { Configuration, Plugin } from 'webpack';
 import { BuildExecutorSchema } from '../../../executors/build/schema';
 
 function getExtraPlugins(options: BuildExecutorSchema) {
   const extraPlugins: Plugin[] = [];
-
-  const { mediaQueriesConfig } = options;
-
-  if (mediaQueriesConfig) {
-    const mediaQueries = require(mediaQueriesConfig);
-
-    if (typeof mediaQueries === 'object' && mediaQueries !== null) {
-      extraPlugins
-        .push
-        // new MediaQuerySplittingPlugin({
-        //   media: mediaQueries,
-        //   minify: true,
-        // })
-        ();
-    }
-  }
   return extraPlugins;
 }
 

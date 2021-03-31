@@ -1,4 +1,5 @@
 import { ThemeContext, ThemeModule } from '<%= importPath %>/core';
+import { ThemeGlobalModule } from '<%= importPath %>/global';
 import documentReady from 'document-ready';
 
 export interface ShopifyBootstrapOptions {
@@ -26,12 +27,12 @@ export function themeBootstrapFactory(
       themeContext,
       loadGlobal = true,
     } = options;
-    const context = themeContext ?? {};
+    const context = themeContext ?? null;
 
     documentReady(() => {
       // Load globals
       if (loadGlobal) {
-        //   Global.load(context);
+        ThemeGlobalModule.load(context);
       }
 
       const importPromises: Array<Promise<any>> = [];

@@ -18,7 +18,6 @@ export interface BuildExecutorSchema {
   main: string;
   tsConfig: string;
   postcssConfig: string;
-  mediaQueriesConfig: string;
   themekitConfig: string;
 
   watch?: boolean;

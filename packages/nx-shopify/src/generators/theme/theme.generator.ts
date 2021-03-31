@@ -85,10 +85,6 @@ function addBuildTarget(
     main: joinPathFragments(sourceRoot, `main.ts`),
     tsConfig: joinPathFragments(projectRoot, `tsconfig.app.json`),
     postcssConfig: joinPathFragments(projectRoot, `postcss.config.js`),
-    mediaQueriesConfig: joinPathFragments(
-      projectRoot,
-      `media-queries.config.js`
-    ),
     themekitConfig: joinPathFragments(projectRoot, `config.yml`),
     sourceMap: true,
     assets: [joinPathFragments(projectRoot, `src/assets`)],
@@ -158,12 +154,11 @@ function addDeployTarget(
   project: ProjectConfiguration,
   options: NormalizedSchema
 ) {
-  const { projectRoot, projectName } = options;
+  const { projectName } = options;
 
   const deployTarget: TargetConfiguration = {
     executor: '@trafilea/nx-shopify:deploy',
     options: {
-      outputPath: joinPathFragments('dist', projectRoot),
       buildTarget: `${projectName}:build`,
     },
     configurations: {
@@ -257,4 +252,4 @@ export async function themeGenerator(
 }
 
 export default themeGenerator;
-export const themeSchematic = convertNxGenerator(themeGenerator);
+export const nxShopifyThemeSchematic = convertNxGenerator(themeGenerator);

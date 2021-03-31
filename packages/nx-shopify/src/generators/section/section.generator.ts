@@ -1,4 +1,5 @@
 import {
+  convertNxGenerator,
   formatFiles,
   generateFiles,
   getProjects,
@@ -105,3 +106,4 @@ export async function sectionGenerator(
 }
 
 export default sectionGenerator;
+export const nxShopifySectionSchematic = convertNxGenerator(sectionGenerator);

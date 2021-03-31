@@ -6,35 +6,36 @@ import Helmet from 'react-helmet';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
+import CodeBlock from '@theme/CodeBlock';
 
 const features = [
   {
-    title: 'Easy to Use',
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    title: 'Improved Dev Ergonomics',
+    imageUrl: 'img/undraw_online_party.svg',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Get the most out of working with Nx workspaces and type-safe development
+        using TypeScript. You also get BrowserSync!
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
+    title: 'Local Development Server',
+    imageUrl: 'img/undraw_dev_productivity.svg',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Nx-Shopify runs a local development server so you don't need to upload
+        JS and CSS assets to Shopify during development.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    title: 'Code Generators',
+    imageUrl: 'img/undraw_code_typing.svg',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Nx-Shopify comes with themes, layouts, templates, snippets and sections
+        generators. You don't have to write that boilerplate code anymore!
       </>
     ),
   },
@@ -55,6 +56,11 @@ function Feature({ imageUrl, title, description }) {
   );
 }
 
+const gettingStartedCode = `$ npx create-nx-workspace my-org --preset=empty
+$ cd ./my-org
+$ npm i -D @trafilea/nx-shopify
+$ nx g @trafilea/nx-shopify:theme my-theme`;
+
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
@@ -72,33 +78,41 @@ function Home() {
       </Helmet>
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <div className="hero__blocks">
+            <div className="hero__intro">
+              <h1 className="hero__title">{siteConfig.title}</h1>
+              <p className="hero__subtitle">{siteConfig.tagline}</p>
+            </div>
+            <CodeBlock className={'start-code'}>{gettingStartedCode}</CodeBlock>
+          </div>
           <div className={styles.buttons}>
             <Link
               className={clsx(
-                'button button--outline button--secondary button--lg',
+                'button button--outline button--primary button--lg',
                 styles.getStarted
               )}
               to={useBaseUrl('docs/')}
             >
               Get Started
             </Link>
+            <iframe src="https://ghbtns.com/github-btn.html?user=trafilea&repo=nx-shopify&type=star&count=true&size=large"></iframe>
           </div>
         </div>
       </header>
       <main>
-        {features && features.length > 0 && (
-          <section className={styles.features}>
-            <div className="container">
-              <div className="row">
-                {features.map((props, idx) => (
-                  <Feature key={idx} {...props} />
-                ))}
+        <section>
+          {features && features.length > 0 && (
+            <section className={styles.features}>
+              <div className="container">
+                <div className="row">
+                  {features.map((props, idx) => (
+                    <Feature key={idx} {...props} />
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-        )}
+            </section>
+          )}
+        </section>
       </main>
     </Layout>
   );
