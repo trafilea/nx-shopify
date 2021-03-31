@@ -1,3 +1,25 @@
+# [1.0.0-alpha.16](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2021-03-31)
+
+
+### Bug Fixes
+
+* **build:** remove not working media queries splitting ([72351e1](https://github.com/trafilea/nx-shopify/commit/72351e1d5f4543fa56202905b788b3f5bb2fe0a0))
+* **docs:** fix broken link to guide ([260684b](https://github.com/trafilea/nx-shopify/commit/260684b98a4029ad41aa91f603aca1213047398d))
+* **docs:** fix footer message ([4d59da2](https://github.com/trafilea/nx-shopify/commit/4d59da2d841d3188cd3f6f4c928424ae11c874a1))
+* **docs:** include extend webpack guide in sidebar ([e80abae](https://github.com/trafilea/nx-shopify/commit/e80abaedfb3256f51fe8e7d6c1aa909cc83b0804))
+* **serve:** local assets path ([0d34990](https://github.com/trafilea/nx-shopify/commit/0d3499097f4107c6ea9d9be9dbdecf0f0f6371d4))
+* **theme:** include theme-context for generated layouts ([8d20ac4](https://github.com/trafilea/nx-shopify/commit/8d20ac4f02da8f1bd16898e5d2e7f02c4a6fe5d0))
+
+
+### Features
+
+* **core:** add angular workspaces compatibility ([b875d01](https://github.com/trafilea/nx-shopify/commit/b875d01557477ed0bd132b08871361e54cb6080d))
+* **deploy:** build theme on deploy command ([e358c3b](https://github.com/trafilea/nx-shopify/commit/e358c3b416bcfd1c363a83df29b1b2655d84995d))
+* **docs:** add liquid in styles doc ([e7b17d0](https://github.com/trafilea/nx-shopify/commit/e7b17d0756c8684ac590cce466ef9be23784e3c9))
+* **docs:** add liquid to ts context guide ([7937008](https://github.com/trafilea/nx-shopify/commit/7937008f027498e7789a14ab2be2834d2d20b1d8))
+* **theme:** add bootstrap global module ([ac50ffa](https://github.com/trafilea/nx-shopify/commit/ac50ffa96cc8dfe71a6c62bb3031be88a300e44e))
+* **theme:** add environment schema definition ([8bfc9dd](https://github.com/trafilea/nx-shopify/commit/8bfc9ddd7e1fd017d177dab3c41357e81a862c38))
+
 # [1.0.0-alpha.15](https://github.com/trafilea/nx-shopify/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2021-03-22)
 
 
