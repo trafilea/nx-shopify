@@ -1,3 +1,5 @@
-export const environment = {
+import { EnvironmentSchema } from './environment-schema';
+
+export const environment: EnvironmentSchema = {
   production: false,
 };

@@ -1,0 +1,25 @@
+# <%= name %> Theme
+
+This project was generated using [Nx-Shopify](https://github.com/trafilea/nx-shopify), read the documentation at https://trafilea.github.io/nx-shopify.
+
+## Configuration
+
+Configure the themekit's config.yml file according to the [Shopify's Themekit documentation](https://shopify.dev/tools/theme-kit)
+
+## Build
+
+```bash
+nx build <%= projectName %> [options,...]
+```
+
+## Serve
+
+```bash
+nx serve <%= projectName %> [options,...]
+```
+
+## Deploy
+
+```bash
+nx deploy <%= projectName %> [options,...]
+```

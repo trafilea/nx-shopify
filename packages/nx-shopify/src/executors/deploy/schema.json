@@ -5,10 +5,6 @@
   "description": "Shopify theme deploy target options",
   "type": "object",
   "properties": {
-    "outputPath": {
-      "type": "string",
-      "description": "Path where output will be placed."
-    },
     "buildTarget": {
       "type": "string",
       "description": "Name of the target to be used in the theme build process."
@@ -31,5 +27,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["outputPath", "buildTarget"]
+  "required": ["buildTarget"]
 }

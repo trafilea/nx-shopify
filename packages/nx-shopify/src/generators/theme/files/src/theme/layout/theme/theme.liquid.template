@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
   {%- endif -%}
 
-  {% render 'script-tags', layout: 'theme' %}
+  {% render 'script-tags' %}
 
   {{ content_for_header }} <!-- Header hook for plugins -->
 </head>
@@ -52,13 +52,13 @@
 
   <script>
     window.addEventListener('DOMContentLoaded', function() {
-      window.themeBootstrap({
-          themeLayoutName: 'theme',
-          themeTemplateName: '{{ template }}',
-          themeContext: {},
-          loadGlobal: true,
+        window.themeBootstrap({
+            themeLayoutName: 'theme',
+            themeTemplateName: '{{ template }}',
+            themeContext: {% render 'theme-context' %},
+            loadGlobal: true,
+        });
       });
-    });
   </script>
 </body>
 </html>

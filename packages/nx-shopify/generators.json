@@ -6,7 +6,8 @@
     "init": {
       "factory": "./src/generators/init/init.generator",
       "schema": "./src/generators/init/schema.json",
-      "description": "Initialize plugin"
+      "description": "Initialize @trafilea/nx-shopify plugin",
+      "aliases": ["ng-add"]
     },
     "theme": {
       "factory": "./src/generators/theme/theme.generator",
@@ -16,22 +17,63 @@
     "layout": {
       "factory": "./src/generators/layout/layout.generator",
       "schema": "./src/generators/layout/schema.json",
-      "description": "Generate a theme layout"
+      "description": "Generate a theme layout",
+      "aliases": ["l"]
     },
     "template": {
       "factory": "./src/generators/template/template.generator",
       "schema": "./src/generators/template/schema.json",
-      "description": "Generate a theme template"
+      "description": "Generate a theme template",
+      "aliases": ["t"]
     },
     "snippet": {
       "factory": "./src/generators/snippet/snippet.generator",
       "schema": "./src/generators/snippet/schema.json",
-      "description": "Generate a theme snippet"
+      "description": "Generate a theme snippet",
+      "aliases": ["snip"]
     },
     "section": {
       "factory": "./src/generators/section/section.generator",
       "schema": "./src/generators/section/schema.json",
-      "description": "Generate a theme section"
+      "description": "Generate a theme section",
+      "aliases": ["sec"]
+    }
+  },
+  "schematics": {
+    "init": {
+      "factory": "./src/generators/init/init.generator#nxShopifyInitSchematic",
+      "schema": "./src/generators/init/schema.json",
+      "description": "Initialize @trafilea/nx-shopify plugin",
+      "aliases": ["ng-add"]
+    },
+    "theme": {
+      "factory": "./src/generators/theme/theme.generator#nxShopifyThemeSchematic",
+      "schema": "./src/generators/theme/schema.json",
+      "description": "Generate a new Shopify theme"
+    },
+    "layout": {
+      "factory": "./src/generators/layout/layout.generator#nxShopifyLayoutSchematic",
+      "schema": "./src/generators/layout/schema.json",
+      "description": "Generate a theme layout",
+      "aliases": ["l"]
+    },
+    "template": {
+      "factory": "./src/generators/template/template.generator#nxShopifyTemplateSchematic",
+      "schema": "./src/generators/template/schema.json",
+      "description": "Generate a theme template",
+      "aliases": ["t"]
+    },
+    "snippet": {
+      "factory": "./src/generators/snippet/snippet.generator#nxShopifySnippetSchematic",
+      "schema": "./src/generators/snippet/schema.json",
+      "description": "Generate a theme snippet",
+      "aliases": ["snip"]
+    },
+    "section": {
+      "factory": "./src/generators/section/section.generator#nxShopifySectionSchematic",
+      "schema": "./src/generators/section/schema.json",
+      "description": "Generate a theme section",
+      "aliases": ["sec"]
     }
   }
 }

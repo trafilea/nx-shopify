@@ -1,4 +1,3 @@
-
 import { normalizePath } from '@nrwl/devkit';
 import { statSync } from 'fs';
 import { basename, dirname, resolve } from 'path';
@@ -79,7 +78,6 @@ export function normalizeBuildOptions<T extends BuildExecutorSchema>(
     sourceRoot: sourceRoot,
     outputPath: resolve(root, options.outputPath),
     tsConfig: resolve(root, options.tsConfig),
-    mediaQueriesConfig: resolve(root, options.mediaQueriesConfig),
     fileReplacements: normalizeFileReplacements(root, options.fileReplacements),
     assets: options.assets
       ? normalizeAssets(options.assets, root, sourceRoot)

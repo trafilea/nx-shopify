@@ -1,4 +1,5 @@
 import {
+  convertNxGenerator,
   formatFiles,
   generateFiles,
   getProjects,
@@ -105,3 +106,4 @@ export async function templateGenerator(
 }
 
 export default templateGenerator;
+export const nxShopifyTemplateSchematic = convertNxGenerator(templateGenerator);

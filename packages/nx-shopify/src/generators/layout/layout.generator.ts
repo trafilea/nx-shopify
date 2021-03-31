@@ -1,4 +1,5 @@
 import {
+  convertNxGenerator,
   formatFiles,
   generateFiles,
   getProjects,
@@ -105,3 +106,4 @@ export async function layoutGenerator(
 }
 
 export default layoutGenerator;
+export const nxShopifyLayoutSchematic = convertNxGenerator(layoutGenerator);

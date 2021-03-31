@@ -3,6 +3,7 @@ import {
   logger,
   parseTargetString,
   readTargetOptions,
+  runExecutor,
 } from '@nrwl/devkit';
 import { BuildExecutorSchema } from '../../executors/build/schema';
 import { runThemekitCommand } from '../../utils/themekit';
@@ -13,9 +14,22 @@ export async function deployExecutor(
   context: ExecutorContext
 ) {
   const projectName = context.projectName ?? 'your';
-  const { open, themekitEnv: env = 'development', allowLive = false } = options;
+  const {
+    open,
+    themekitEnv: env = 'development',
+    allowLive = false,
+    buildTarget,
+  } = options;
   const buildOptions: BuildExecutorSchema = getBuildOptions(options, context);
   const { outputPath } = buildOptions;
+
+  await runExecutor(parseTargetString(buildTarget), {}, context);
+
+  for await (const output of await runExecutor<{
+    success: boolean;
+  }>(parseTargetString(buildTarget), {}, context)) {
+    if (!output.success) throw new Error('Could not compile application files');
+  }
 
   try {
     await runThemekitCommand('version');
