@@ -83,7 +83,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Trafilea, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Trafilea. Built with Docusaurus.`,
     },
   },
   presets: [
