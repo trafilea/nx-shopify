@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/trafilea/nx-shopify/compare/v1.0.0...v1.0.1) (2021-04-09)
+
+
+### Bug Fixes
+
+* **theme:** remove circular dependecy warning for default themes ([0295797](https://github.com/trafilea/nx-shopify/commit/029579731eb6d111d9c9bc3078c80c69c1cd9cbd))
+* **theme:** remove unused media query config ([1e90c2a](https://github.com/trafilea/nx-shopify/commit/1e90c2ad12d5f54d00af9304419f3db17848aa07))
+
 # 1.0.0 (2021-03-31)
 
 
