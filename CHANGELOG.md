@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/trafilea/nx-shopify/compare/v1.0.1...v1.0.2) (2021-04-16)
+
+
+### Bug Fixes
+
+* **build:** include non-lazy loaded styles in style-tags ([aea3983](https://github.com/trafilea/nx-shopify/commit/aea39831dc5553e0e8f2d4e70e050fdc7531b9e3))
+
 ## [1.0.1](https://github.com/trafilea/nx-shopify/compare/v1.0.0...v1.0.1) (2021-04-09)
 
 
