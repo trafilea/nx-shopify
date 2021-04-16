@@ -69,6 +69,23 @@ export function getShopifyWebpackConfig(
       }),
       new HTMLWebpackPlugin({
         excludeChunks: ['static'],
+        filename: `snippets/style-tags.liquid`,
+        template: path.resolve(__dirname, 'templates', 'style-tags.html'),
+        inject: false,
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeAttributeQuotes: false,
+          preserveLineBreaks: true,
+          // more options:
+          // https://github.com/kangax/html-minifier#options-quick-reference
+        },
+        // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+        chunksSortMode: 'auto',
+        isDevServer,
+      }),
+      new HTMLWebpackPlugin({
+        excludeChunks: ['static'],
         filename: `snippets/script-tags.liquid`,
         template: path.resolve(__dirname, 'templates', 'script-tags.html'),
         inject: false,
@@ -106,7 +123,7 @@ export function getShopifyWebpackConfig(
   };
   return webpackMerge.merge(
     getCoreWebpackPartialConfig(options, isDevServer),
-    getStylesWebpackPartialConfig(options, chunksBaseName),
+    getStylesWebpackPartialConfig(options, chunksBaseName, isDevServer),
     webpackConfig
   );
 }

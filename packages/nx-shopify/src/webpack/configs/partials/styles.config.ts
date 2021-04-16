@@ -9,7 +9,8 @@ function getExtraPlugins(options: BuildExecutorSchema) {
 
 export function getStylesWebpackPartialConfig(
   options: BuildExecutorSchema,
-  chunksBaseName: string
+  chunksBaseName: string,
+  isDevServer: boolean
 ): Configuration {
   const { postcssConfig } = options;
 
@@ -21,7 +22,9 @@ export function getStylesWebpackPartialConfig(
           exclude: /node_modules/,
           sideEffects: true,
           use: [
-            MiniCssExtractPlugin.loader,
+            isDevServer
+              ? require.resolve('style-loader')
+              : MiniCssExtractPlugin.loader,
             require.resolve('css-loader'),
             {
               loader: require.resolve('postcss-loader'),

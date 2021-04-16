@@ -1,0 +1,9 @@
+<% for (var cssFile of htmlWebpackPlugin.files.css) { %>
+    <% var fileName = cssFile.split('/').pop(); %>
+    <% var src = `{{ '${fileName}' | asset_url }}` %>
+    <% if (htmlWebpackPlugin.options.isDevServer) { %>
+      <% src = cssFile %>
+    <% } %>
+    <link rel="stylesheet" type="text/css" href="<%= src %>">
+  <% } %>
+  

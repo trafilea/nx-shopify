@@ -13,6 +13,7 @@
   {%- endif -%}
 
   {% render 'script-tags' %}
+  {% render 'style-tags' %}
 
   {{ content_for_header }} <!-- Header hook for plugins -->
 </head>
