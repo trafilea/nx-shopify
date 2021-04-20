@@ -29,26 +29,14 @@ export function buildExecutor(
       map((sourceRoot) =>
         normalizeBuildOptions(options, context.root, sourceRoot)
       ),
-      map((normalizedOptions) => {
-        let webpackConfig = getShopifyWebpackConfig(normalizedOptions, false);
-        if (normalizedOptions.webpackConfig) {
-          webpackConfig = require(normalizedOptions.webpackConfig)(
-            webpackConfig,
-            {
-              options: normalizedOptions,
-              configuration: context.configurationName,
-            }
-          );
-        }
-        return webpackConfig;
-      }),
-      concatMap((webpackConfig) =>
-        runWebpack(webpackConfig).pipe(
+      concatMap((normalizedOptions) => {
+        const webpackConfig = getShopifyWebpackConfig(normalizedOptions, false);
+        return runWebpack(webpackConfig).pipe(
           tap((stats) => {
             logger.info(stats.toString(webpackConfig.stats));
           })
-        )
-      ),
+        );
+      }),
       map((webpackStats) => {
         return {
           success: webpackStats && !webpackStats.hasErrors(),

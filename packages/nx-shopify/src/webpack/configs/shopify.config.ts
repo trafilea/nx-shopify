@@ -18,7 +18,7 @@ export function getShopifyWebpackConfig(
     : 'assets/[name].[contenthash]';
   const chunksOutputPath = `${outputPath}`;
 
-  const webpackConfig: Configuration = {
+  let webpackConfig: Configuration = {
     entry: isDevServer
       ? [path.join(__dirname, './hmr/hot-client.js'), main]
       : main,
@@ -121,9 +121,19 @@ export function getShopifyWebpackConfig(
       }),
     ],
   };
-  return webpackMerge.merge(
+
+  webpackConfig = webpackMerge.merge(
     getCoreWebpackPartialConfig(options, isDevServer),
     getStylesWebpackPartialConfig(options, chunksBaseName, isDevServer),
     webpackConfig
   );
+
+  if (options.webpackConfig) {
+    webpackConfig = require(options.webpackConfig)(webpackConfig, {
+      options,
+      configuration: null, // context.configurationName,
+    });
+  }
+
+  return webpackConfig;
 }
