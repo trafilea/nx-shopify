@@ -3,6 +3,7 @@ import {
   getEmittedFiles,
   runWebpack,
 } from '@nrwl/workspace/src/utilities/run-webpack';
+import * as webpack from 'webpack';
 import { from } from 'rxjs';
 import { eachValueFrom } from 'rxjs-for-await';
 import { concatMap, map, tap } from 'rxjs/operators';
@@ -31,7 +32,7 @@ export function buildExecutor(
       ),
       concatMap((normalizedOptions) => {
         const webpackConfig = getShopifyWebpackConfig(normalizedOptions, false);
-        return runWebpack(webpackConfig).pipe(
+        return runWebpack(webpackConfig, webpack).pipe(
           tap((stats) => {
             logger.info(stats.toString(webpackConfig.stats));
           })
