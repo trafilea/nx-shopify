@@ -39,6 +39,12 @@
       "description": "Produce source maps",
       "default": true
     },
+    "outputHashing": {
+      "type": "string",
+      "description": "Define the output filename cache-busting hashing mode.",
+      "default": "none",
+      "enum": ["none", "all", "media", "bundles"]
+    },
     "progress": {
       "type": "boolean",
       "description": "Log progress to the console while building",

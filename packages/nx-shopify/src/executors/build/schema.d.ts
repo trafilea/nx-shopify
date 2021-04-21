@@ -22,6 +22,7 @@ export interface BuildExecutorSchema {
 
   watch?: boolean;
   sourceMap?: boolean | SourceMapOptions;
+  outputHashing?: string;
   optimization?: boolean | OptimizationOptions;
   showCircularDependencies?: boolean;
   memoryLimit?: number;

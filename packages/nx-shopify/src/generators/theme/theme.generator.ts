@@ -92,6 +92,7 @@ function addBuildTarget(
   const productionBuildOptions: Partial<BuildExecutorSchema> = {
     optimization: true,
     sourceMap: false,
+    outputHashing: 'all',
     fileReplacements: [
       {
         replace: joinPathFragments(

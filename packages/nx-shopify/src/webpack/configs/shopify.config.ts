@@ -4,6 +4,7 @@ import * as path from 'path';
 import { Configuration } from 'webpack';
 import * as webpackMerge from 'webpack-merge';
 import { BuildExecutorSchema } from '../../executors/build/schema';
+import { getOutputHashFormat } from '../utils';
 import { getCoreWebpackPartialConfig } from './partials/core.config';
 import { getStylesWebpackPartialConfig } from './partials/styles.config';
 
@@ -11,11 +12,24 @@ export function getShopifyWebpackConfig(
   options: BuildExecutorSchema,
   isDevServer: boolean
 ) {
-  const { sourceRoot, outputPath, themekitConfig, main } = options;
+  const {
+    sourceRoot,
+    outputPath,
+    themekitConfig,
+    main,
+    optimization,
+  } = options;
 
-  const chunksBaseName = isDevServer
-    ? 'assets/[name]'
-    : 'assets/[name].[contenthash]';
+  const hashFormat = getOutputHashFormat(options.outputHashing);
+
+  const filename = optimization
+    ? `assets/[name]${hashFormat.script}.js`
+    : 'assets/[name].js';
+
+  const chunkFilename = optimization
+    ? `assets/[name]${hashFormat.chunk}.js`
+    : 'assets/[name].js';
+
   const chunksOutputPath = `${outputPath}`;
 
   let webpackConfig: Configuration = {
@@ -24,8 +38,8 @@ export function getShopifyWebpackConfig(
       : main,
     output: {
       path: chunksOutputPath,
-      filename: `${chunksBaseName}.js`,
-      publicPath: '/assets',
+      filename,
+      chunkFilename,
     },
     plugins: [
       new CopyWebpackPlugin({
@@ -124,7 +138,7 @@ export function getShopifyWebpackConfig(
 
   webpackConfig = webpackMerge.merge(
     getCoreWebpackPartialConfig(options, isDevServer),
-    getStylesWebpackPartialConfig(options, chunksBaseName, isDevServer),
+    getStylesWebpackPartialConfig(options, chunkFilename, isDevServer),
     webpackConfig
   );
 

@@ -124,6 +124,19 @@ Type: `boolean`
 
 Produce source maps (default: true)
 
+### --outputHashing
+
+Type: `string`
+
+Configure webpack output hashing (default: none)
+
+| option  | chunk | extract | file | script |
+| :------ | :---: | :-----: | :--: | :----: |
+| none    |  ❌   |   ❌    |  ❌  |   ❌   |
+| media   |  ❌   |   ❌    |  ✅  |   ❌   |
+| bundles |  ✅   |   ✅    |  ❌  |   ✅   |
+| all     |  ✅   |   ✅    |  ✅  |   ✅   |
+
 ### --progress
 
 Type: `boolean`

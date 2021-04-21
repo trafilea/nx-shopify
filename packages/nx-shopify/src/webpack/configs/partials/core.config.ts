@@ -18,6 +18,7 @@ import {
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { BuildExecutorSchema } from '../../../executors/build/schema';
 import { getAliases, getStatsConfig } from '../../../utils/webpack-utils';
+import { getOutputHashFormat } from '../../utils';
 
 import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
@@ -126,6 +127,8 @@ export function getCoreWebpackPartialConfig(
   const mainFields = [...(supportsEs2015 ? ['es2015'] : []), 'module', 'main'];
   const extensions = ['.ts', '.tsx', '.js', '.jsx'];
 
+  const hashFormat = getOutputHashFormat(options.outputHashing);
+
   const webpackConfig: Configuration = {
     devtool:
       sourceMap && typeof sourceMap === 'boolean'
@@ -140,7 +143,7 @@ export function getCoreWebpackPartialConfig(
           test: /\.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)$/,
           loader: require.resolve('file-loader'),
           options: {
-            name: `assets/[name].[hash:20].[ext]`,
+            name: `assets/[name]${hashFormat.file}.[ext]`,
           },
         },
         {
