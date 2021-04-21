@@ -76,7 +76,7 @@
     },
     "nx-shopify-docs": {
       "projectType": "application",
-      "root": "e2e/nx-shopify-e2e",
+      "root": "docs",
       "targets": {
         "setup": {
           "executor": "@nrwl/workspace:run-commands",
