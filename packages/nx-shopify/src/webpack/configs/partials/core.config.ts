@@ -137,6 +137,13 @@ export function getCoreWebpackPartialConfig(
     module: {
       rules: [
         {
+          test: /\.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)$/,
+          loader: require.resolve('file-loader'),
+          options: {
+            name: `assets/[name].[hash:20].[ext]`,
+          },
+        },
+        {
           test: /\.(j|t)sx?$/,
           exclude: /node_modules/,
           use: (isDevServer
