@@ -190,10 +190,31 @@ export function getCoreWebpackPartialConfig(
       hints: false,
     },
     optimization: {
+      runtimeChunk: options.runtimeChunk ? 'single' : false,
       usedExports: true,
       splitChunks: {
-        chunks: 'all',
         automaticNameDelimiter: '--',
+        cacheGroups: {
+          default: !!options.commonChunk && {
+            chunks: 'async',
+            minChunks: 2,
+            priority: 10,
+          },
+          common: !!options.commonChunk && {
+            name: 'common',
+            chunks: 'async',
+            minChunks: 2,
+            enforce: true,
+            priority: 5,
+          },
+          vendors: false,
+          defaultVendors: !!options.vendorChunk && {
+            name: 'vendors',
+            chunks: (chunk) => chunk.name === 'main',
+            enforce: true,
+            test: /[\\/]node_modules[\\/]/,
+          },
+        },
       },
       minimizer: [
         new TerserPlugin({

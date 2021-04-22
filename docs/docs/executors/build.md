@@ -116,7 +116,23 @@ Run build when files change
 
 Type: `number`
 
-Frequency of file watcher in ms
+### --vendorChunk
+
+Type: `boolean`
+
+Use a separate bundle containing only vendor libraries. (default: true)
+
+### --commonChunk
+
+Type: `boolean`
+
+Use a separate bundle containing code used across multiple bundles. (default: true)
+
+### --runtimeChunk
+
+Type: `boolean`
+
+Use a separate bundle containing the runtime. (default: true)
 
 ### --sourceMap
 

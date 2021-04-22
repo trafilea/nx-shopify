@@ -21,6 +21,9 @@ export interface BuildExecutorSchema {
   themekitConfig: string;
 
   watch?: boolean;
+  vendorChunk?: boolean;
+  commonChunk?: boolean;
+  runtimeChunk?: boolean;
   sourceMap?: boolean | SourceMapOptions;
   outputHashing?: string;
   optimization?: boolean | OptimizationOptions;
