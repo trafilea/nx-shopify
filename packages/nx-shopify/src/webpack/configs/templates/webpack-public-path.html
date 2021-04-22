@@ -2,7 +2,7 @@
 htmlWebpackPlugin.files.js[0]; %>
 <script>
   window.__webpack_public_path__ =
-    '<%= anEntry.split('/').slice(0, -2).join('/') + '/' %>';
+    "<%= anEntry.split('/').slice(0, -2).join('/') + '/' %>";
 </script>
 <% } else { %> {% assign randomFile = 'randomFile.js' | asset_url %} {% assign
 cdnPath = randomFile | split: 'assets/randomFile.js' | first %}
