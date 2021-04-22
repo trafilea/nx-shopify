@@ -30,14 +30,12 @@ export function getShopifyWebpackConfig(
     ? `assets/[name]${hashFormat.chunk}.js`
     : 'assets/[name].js';
 
-  const chunksOutputPath = `${outputPath}`;
-
   let webpackConfig: Configuration = {
     entry: isDevServer
       ? [path.join(__dirname, './hmr/hot-client.js'), main]
       : main,
     output: {
-      path: chunksOutputPath,
+      path: outputPath,
       filename,
       chunkFilename,
     },

@@ -1,6 +1,7 @@
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { Configuration, Plugin } from 'webpack';
 import { BuildExecutorSchema } from '../../../executors/build/schema';
+import { getOutputHashFormat } from '../../utils';
 
 function getExtraPlugins(options: BuildExecutorSchema) {
   const extraPlugins: Plugin[] = [];
@@ -12,7 +13,9 @@ export function getStylesWebpackPartialConfig(
   chunksBaseName: string,
   isDevServer: boolean
 ): Configuration {
-  const { postcssConfig } = options;
+  const { postcssConfig, outputHashing } = options;
+
+  const hashFormat = getOutputHashFormat(outputHashing);
 
   const webpackConfig: Configuration = {
     module: {
@@ -42,7 +45,8 @@ export function getStylesWebpackPartialConfig(
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: `${chunksBaseName}.css`,
+        filename: `assets/[name]${hashFormat.script}.css`,
+        chunkFilename: `assets/[name]${hashFormat.chunk}.css`,
       }),
       ...getExtraPlugins(options),
     ],
