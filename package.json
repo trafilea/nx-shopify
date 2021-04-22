@@ -49,6 +49,7 @@
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^6.1.1",
     "html-webpack-plugin": "^4.5.0",
+    "http-proxy-middleware": "^1.2.0",
     "https": "^1.0.0",
     "ip": "^1.1.5",
     "js-yaml": "^4.0.0",

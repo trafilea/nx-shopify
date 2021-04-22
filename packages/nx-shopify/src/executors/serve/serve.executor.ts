@@ -4,6 +4,7 @@ import {
   readTargetOptions,
 } from '@nrwl/devkit';
 import { BuildExecutorSchema } from '../../executors/build/schema';
+import { getProxyConfig } from '../../utils/config-utils';
 import {
   getAvailablePortSeries,
   getIpAddress,
@@ -73,6 +74,8 @@ export async function serveExecutor(
 
     const ipAddress = getIpAddress(options.devServerIpAddress);
 
+    const proxyConfig = getProxyConfig(context.root, options.proxyConfig);
+
     const devServer = new LocalDevelopmentServer({
       port: devServerPort,
       uiPort: devServerUIPort,
@@ -80,6 +83,7 @@ export async function serveExecutor(
       themeId,
       address: ipAddress,
       openBrowser: open,
+      proxyConfig,
     });
 
     const assetServer = new LocalAssetServer({

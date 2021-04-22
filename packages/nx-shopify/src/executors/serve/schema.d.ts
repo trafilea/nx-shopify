@@ -6,4 +6,5 @@ export interface ServeExecutorSchema {
   analyze?: boolean;
   skipFirstDeploy: boolean;
   devServerIpAddress: string;
+  proxyConfig?: string;
 }

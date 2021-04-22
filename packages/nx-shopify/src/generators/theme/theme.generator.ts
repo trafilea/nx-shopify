@@ -127,12 +127,13 @@ function addServeTarget(
   project: ProjectConfiguration,
   options: NormalizedSchema
 ) {
-  const { projectName } = options;
+  const { projectRoot, projectName } = options;
 
   const serveTarget: TargetConfiguration = {
     executor: '@trafilea/nx-shopify:serve',
     options: {
       buildTarget: `${projectName}:build`,
+      proxyConfig: `${projectRoot}/proxy.conf.json`,
     },
     configurations: {
       production: {

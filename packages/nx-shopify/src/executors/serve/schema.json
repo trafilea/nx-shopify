@@ -39,6 +39,10 @@
       "type": "string",
       "description": "Set the local web server ip address. Valid values are: private (default), public, <interface name>, <ip v4/6 address>",
       "default": "private"
+    },
+    "proxyConfig": {
+      "type": "string",
+      "description": "Path to the proxy configuration file to be used"
     }
   },
   "additionalProperties": false,
