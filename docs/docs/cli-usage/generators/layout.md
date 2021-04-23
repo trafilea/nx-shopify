@@ -64,7 +64,7 @@ export const themeLayouts = {
 
 :::tip
 
-If want to know more about how the `theme-layouts.ts` file works, head to the [Theme Boostrap Process](../theme-bootstrap) doc
+If want to know more about how the `theme-layouts.ts` file works, head to the [Theme Boostrap Process](../../fundamentals/theme-bootstrap) doc
 
 :::
 

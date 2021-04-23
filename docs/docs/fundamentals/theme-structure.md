@@ -111,7 +111,7 @@ All the TypeScript environment files will be placed in this directory.
 
 :::tip
 
-Learn more about working with environments in the [Environments Guide](guides/environments).
+Learn more about working with environments in the [Environments Guide](../guides/environments).
 
 :::
 
@@ -185,7 +185,7 @@ apps/my-theme/src/theme/snippets
         └── sidebar-cart.snippet.ts
 ```
 
-You can leverage from our built-in [Code Generators](generators/layout) to scaffold the theme structure you desire. The code generators will take care of verifying that no duplicated blocks will be created even if you try to do it in different subfolders.
+You can leverage from our built-in [Code Generators](../cli-usage/generators/layout) to scaffold the theme structure you desire. The code generators will take care of verifying that no duplicated blocks will be created even if you try to do it in different subfolders.
 
 :::important
 
