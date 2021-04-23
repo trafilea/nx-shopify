@@ -2,7 +2,7 @@
 title: Extend Webpack Configuration
 ---
 
-With extensibility in mind, the [Build Command](../executors/build) accepts a `--webpackConfig` option containing a path to a function which takes a webpack config, context and returns the resulting webpack config
+With extensibility in mind, the [Build Command](../cli-usage/executors/build) accepts a `--webpackConfig` option containing a path to a function which takes a webpack config, context and returns the resulting webpack config
 
 Here you have an example of a file containing such a function:
 

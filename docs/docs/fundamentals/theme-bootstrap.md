@@ -153,7 +153,7 @@ Notice that the `ShopifyBootstrapOptions` argument is passed and it contains:
 
 :::tip
 
-Learn more about the `ThemeContext` object at the [Liquid To TypeScript Context](guides/liquid-to-ts-context) guide
+Learn more about the `ThemeContext` object at the [Liquid To TypeScript Context](../guides/liquid-to-ts-context) guide
 
 :::
 

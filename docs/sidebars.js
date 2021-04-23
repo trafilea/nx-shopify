@@ -9,31 +9,38 @@ module.exports = {
       id: 'installation',
     },
     {
-      type: 'doc',
-      id: 'creating-a-theme',
-    },
-    {
-      type: 'doc',
-      id: 'theme-structure',
-    },
-    {
-      type: 'doc',
-      id: 'theme-bootstrap',
-    },
-    {
       type: 'category',
-      label: 'Code Generators',
+      label: 'Fundamentals',
       items: [
-        'generators/layout',
-        'generators/template',
-        'generators/section',
-        'generators/snippet',
+        'fundamentals/creating-a-theme',
+        'fundamentals/theme-structure',
+        'fundamentals/theme-bootstrap',
       ],
     },
     {
       type: 'category',
-      label: 'Theme Commands',
-      items: ['executors/build', 'executors/serve', 'executors/deploy'],
+      label: 'CLI Usage',
+      items: [
+        {
+          type: 'category',
+          label: 'Code Generators',
+          items: [
+            'cli-usage/generators/layout',
+            'cli-usage/generators/template',
+            'cli-usage/generators/section',
+            'cli-usage/generators/snippet',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Theme Commands',
+          items: [
+            'cli-usage/executors/build',
+            'cli-usage/executors/serve',
+            'cli-usage/executors/deploy',
+          ],
+        },
+      ],
     },
     {
       type: 'category',

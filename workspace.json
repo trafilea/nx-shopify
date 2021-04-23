@@ -85,6 +85,13 @@
             "cwd": "docs"
           }
         },
+        "build": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "yarn build",
+            "cwd": "docs"
+          }
+        },
         "serve": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
