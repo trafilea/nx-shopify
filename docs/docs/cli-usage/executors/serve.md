@@ -102,3 +102,9 @@ Tell if the first deploy should be skipped.
 Type: `string`
 
 Set the local web server ip address. Valid values are: private (default), public, "interface name", "ip v4/6 address" (default: private)
+
+### --proxyConfig
+
+Type: `string`
+
+Path to the proxy configuration file to be used

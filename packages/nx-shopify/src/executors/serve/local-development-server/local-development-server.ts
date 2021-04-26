@@ -3,6 +3,11 @@ import {
   BrowserSyncInstance,
   Options as BrowserSyncOptions,
 } from 'browser-sync';
+import {
+  createProxyMiddleware,
+  Options as ProxyOptions,
+} from 'http-proxy-middleware';
+import { getProxyConfig } from 'packages/nx-shopify/src/utils/config-utils';
 
 import { getSSLKeyPath, getSSLCertPath } from './ssl/server-ssl';
 
@@ -13,6 +18,7 @@ export interface LocalDevelopmentServerOptions {
   port: number;
   uiPort: number;
   openBrowser: boolean;
+  proxyConfig: { [key: string]: ProxyOptions };
 }
 
 export class LocalDevelopmentServer {
@@ -25,9 +31,18 @@ export class LocalDevelopmentServer {
   browserSyncInstance: BrowserSyncInstance;
   browserSyncServer: BrowserSyncInstance;
   openBrowser: boolean;
+  proxyConfig: { [key: string]: ProxyOptions };
 
   constructor(options: LocalDevelopmentServerOptions) {
-    const { target, themeId, port, address, uiPort, openBrowser } = options;
+    const {
+      target,
+      themeId,
+      port,
+      address,
+      uiPort,
+      openBrowser,
+      proxyConfig,
+    } = options;
 
     this.browserSyncInstance = browserSync.create();
     this.target = `https://${target}`;
@@ -39,6 +54,7 @@ export class LocalDevelopmentServer {
       this.target +
       (this.themeId === 'live' ? '' : `?preview_theme_id=${this.themeId}`);
     this.openBrowser = openBrowser;
+    this.proxyConfig = proxyConfig;
   }
 
   start() {
@@ -57,6 +73,7 @@ export class LocalDevelopmentServer {
           next();
         },
       },
+      middleware: [...this.getProxyMiddlewares()],
       snippetOptions: {
         rule: {
           match: /<\/body>/i,
@@ -79,5 +96,11 @@ export class LocalDevelopmentServer {
     return new Promise((resolve) => {
       this.browserSyncServer = this.browserSyncInstance.init(bsConfig, resolve);
     });
+  }
+
+  getProxyMiddlewares() {
+    return Object.entries(this.proxyConfig).map(([key, config]) =>
+      createProxyMiddleware(key, config)
+    );
   }
 }
