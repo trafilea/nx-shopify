@@ -52,11 +52,11 @@ module.exports = {
             },
             {
               label: 'Code Generators',
-              to: 'docs/generators/layout',
+              to: 'docs/cli-usage/generators/layout',
             },
             {
               label: 'Theme Commands',
-              to: 'docs/executors/build',
+              to: 'docs/cli-usage/executors/build',
             },
           ],
         },

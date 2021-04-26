@@ -1,3 +1,24 @@
+## [1.1.1](https://github.com/trafilea/nx-shopify/compare/v1.1.0...v1.1.1) (2021-04-26)
+
+
+### Bug Fixes
+
+* **build:** webpack public path for files ([1e08519](https://github.com/trafilea/nx-shopify/commit/1e085196a764d9262f209801b8bf01bf1677f2d8))
+
+# [1.1.0](https://github.com/trafilea/nx-shopify/compare/v1.0.2...v1.1.0) (2021-04-23)
+
+
+### Bug Fixes
+
+* **build:** add imported files processing ([feb155d](https://github.com/trafilea/nx-shopify/commit/feb155deeb2bedd5ba9e358a84d534df3faa284b))
+* **build:** include custom webpack config for serve executor ([8c50098](https://github.com/trafilea/nx-shopify/commit/8c500984f99d7fa45f51a2e20efbdc417f85214a))
+
+
+### Features
+
+* **build:** add split built chunks options ([e3c0475](https://github.com/trafilea/nx-shopify/commit/e3c0475ffaa096e59dceae79062da5b6092d5ecd))
+* **build:** add webpack output hashing option ([339b230](https://github.com/trafilea/nx-shopify/commit/339b230935d27227c59d8d0c9b4d27e3ce98bb79))
+
 ## [1.0.2](https://github.com/trafilea/nx-shopify/compare/v1.0.1...v1.0.2) (2021-04-16)
 
 

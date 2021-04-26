@@ -69,7 +69,7 @@ export const themeTemplates = {
 
 :::tip
 
-If want to know more about how the `theme-templates.ts` file works, head to the [Theme Boostrap Process](../theme-bootstrap) doc
+If want to know more about how the `theme-templates.ts` file works, head to the [Theme Boostrap Process](../../fundamentals/theme-bootstrap) doc
 
 :::
 

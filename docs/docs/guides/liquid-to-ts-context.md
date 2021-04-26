@@ -2,7 +2,7 @@
 title: Liquid To TypeScript Context
 ---
 
-The `ThemeContext` object is one of the `ShopifyBootstrapOptions` object properties used in the [Theme Bootstrap Process](../theme-bootstrap). The purpose of this object is to make data from Liquid available in the TypeScript context.
+The `ThemeContext` object is one of the `ShopifyBootstrapOptions` object properties used in the [Theme Bootstrap Process](../fundamentals/theme-bootstrap). The purpose of this object is to make data from Liquid available in the TypeScript context.
 
 ## Creation of the ThemeContext
 

@@ -102,7 +102,7 @@ $ nx build <theme-name> --prod
 
 :::info
 
-Learn more about the build command at the [Build Executor](./executors/build) doc.
+Learn more about the build command at the [Build Executor](../cli-usage/executors/build) doc.
 
 :::
 
@@ -120,7 +120,7 @@ Different build configurations can be used when serving a theme, they can be con
 
 :::info
 
-Learn more about the serve command at the [Serve Executor](./executors/serve) doc.
+Learn more about the serve command at the [Serve Executor](../cli-usage/executors/serve) doc.
 
 :::
 
@@ -134,6 +134,6 @@ Deploys the theme's last build to the themekit environment configured in the `ap
 
 :::info
 
-Learn more about the deploy command at the [Deploy Executor](./executors/deploy) doc.
+Learn more about the deploy command at the [Deploy Executor](../cli-usage/executors/deploy) doc.
 
 :::

@@ -243,4 +243,4 @@ interface FileReplacementPattern {
 
 Type: `string`
 
-Path to a function which takes a webpack config, context and returns the resulting webpack config. See [Extend Webpack Configuration](../guides/extend-webpack) to learn more.
+Path to a function which takes a webpack config, context and returns the resulting webpack config. See [Extend Webpack Configuration](../../guides/extend-webpack) to learn more.
