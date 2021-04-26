@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/trafilea/nx-shopify/compare/v1.1.0...v1.1.1) (2021-04-26)
+
+
+### Bug Fixes
+
+* **build:** webpack public path for files ([1e08519](https://github.com/trafilea/nx-shopify/commit/1e085196a764d9262f209801b8bf01bf1677f2d8))
+
 # [1.1.0](https://github.com/trafilea/nx-shopify/compare/v1.0.2...v1.1.0) (2021-04-23)
 
 
