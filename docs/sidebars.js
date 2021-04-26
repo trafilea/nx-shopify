@@ -49,6 +49,7 @@ module.exports = {
         'guides/environments',
         'guides/liquid-to-ts-context',
         'guides/liquid-in-styles',
+        'guides/using-react',
         'guides/extend-webpack',
       ],
     },
