@@ -143,7 +143,11 @@ export function getCoreWebpackPartialConfig(
           test: /\.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)$/,
           loader: require.resolve('file-loader'),
           options: {
-            name: `assets/[name]${hashFormat.file}.[ext]`,
+            name: `[name]${hashFormat.file}.[ext]`,
+            outputPath: 'assets',
+            publicPath: '/',
+            postTransformPublicPath: (path) =>
+              `__webpack_public_path__ + ${path.replace('/', isDevServer ? 'assets/' : '')}`,
           },
         },
         {
