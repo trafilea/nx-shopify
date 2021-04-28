@@ -1,0 +1,10 @@
+import { FooterSection } from './footer.section';
+
+describe('FooterSection', () => {
+
+  it('should initiate successfully', () => {
+    const footerSection = new FooterSection();
+
+    expect(footerSection).toBeTruthy();
+  });
+});

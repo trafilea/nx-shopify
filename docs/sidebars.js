@@ -37,6 +37,7 @@ module.exports = {
           items: [
             'cli-usage/executors/build',
             'cli-usage/executors/serve',
+            'cli-usage/executors/test',
             'cli-usage/executors/deploy',
           ],
         },

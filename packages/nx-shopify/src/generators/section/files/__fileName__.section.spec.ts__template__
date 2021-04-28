@@ -1,0 +1,10 @@
+import { <%= className %>Section } from './<%= fileName %>.section';
+
+describe('<%= className %>Section', () => {
+
+  it('should initiate successfully', () => {
+    const <%= propertyName %>Section = new <%= className %>Section();
+
+    expect(<%= propertyName %>Section).toBeTruthy();
+  });
+});

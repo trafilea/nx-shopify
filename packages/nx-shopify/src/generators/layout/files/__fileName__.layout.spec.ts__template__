@@ -1,0 +1,19 @@
+import { <%= className %>Layout } from './<%= fileName %>.layout';
+
+describe('<%= className %>Layout', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let <%= propertyName %>Layout: <%= className %>Layout;
+
+  beforeEach(() => {
+      <%= propertyName %>Layout = new <%= className %>Layout(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(<%= propertyName %>Layout).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(<%= propertyName %>Layout.context).toMatchObject(mockThemeContext);
+  });
+});

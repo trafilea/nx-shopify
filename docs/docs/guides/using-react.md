@@ -4,7 +4,7 @@ title: Using React Components
 
 <p align="center">
 
-<img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" height="250"/>
+<img src="/nx-shopify/img/react-logo.png" height="250"/>
 
 </p>
 
@@ -120,6 +120,44 @@ Finally, add the `@nrwl/nx/react` eslint plugin to the theme's `.eslintrc.json` 
     }
   ]
 }
+```
+
+---
+
+If you are planning to have react components within your theme project (more info about this below) then create a `.babelrc` file with the following content:
+
+```json title="apps/my-theme/.babelrc"
+{
+  "presets": [
+    [
+      "@nrwl/react/babel",
+      {
+        "runtime": "automatic"
+      }
+    ]
+  ]
+}
+```
+
+:::info
+
+Depending on your choosen styling option you may need add one (or many) additional plugins to your `.babelrc`.
+
+:::
+
+Next modify your `apps/my-theme/jest.config.js` like the following:
+
+```javascript {5-6} title="apps/my-theme/jest.config.js"
+module.exports = {
+  displayName: 'my-theme',
+  preset: '../../jest.preset.js',
+  transform: {
+    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nrwl/react/plugins/jest',
+    '^.+\\.[tj]sx?$': 'babel-jest',
+  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  coverageDirectory: '../../coverage/apps/my-theme',
+};
 ```
 
 ## Creating your React components

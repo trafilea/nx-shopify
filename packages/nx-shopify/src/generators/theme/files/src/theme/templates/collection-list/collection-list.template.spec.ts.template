@@ -1,0 +1,19 @@
+import { CollectionListTemplate } from './collection-list.template';
+
+describe('CollectionListTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let collectionListTemplate: CollectionListTemplate;
+
+  beforeEach(() => {
+      collectionListTemplate = new CollectionListTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(collectionListTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(collectionListTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

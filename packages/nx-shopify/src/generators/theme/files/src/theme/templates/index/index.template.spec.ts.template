@@ -1,0 +1,19 @@
+import { IndexTemplate } from './index.template';
+
+describe('IndexTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let indexTemplate: IndexTemplate;
+
+  beforeEach(() => {
+      indexTemplate = new IndexTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(indexTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(indexTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

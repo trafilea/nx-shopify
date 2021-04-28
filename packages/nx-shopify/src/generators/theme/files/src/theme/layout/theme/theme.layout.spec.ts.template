@@ -1,0 +1,19 @@
+import { ThemeLayout } from './theme.layout';
+
+describe('ThemeLayout', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let themeLayout: ThemeLayout;
+
+  beforeEach(() => {
+      themeLayout = new ThemeLayout(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(themeLayout).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(themeLayout.context).toMatchObject(mockThemeContext);
+  });
+});

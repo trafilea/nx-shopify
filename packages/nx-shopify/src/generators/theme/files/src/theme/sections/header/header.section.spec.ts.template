@@ -1,0 +1,10 @@
+import { HeaderSection } from './header.section';
+
+describe('HeaderSection', () => {
+
+  it('should initiate successfully', () => {
+    const headerSection = new HeaderSection();
+
+    expect(headerSection).toBeTruthy();
+  });
+});

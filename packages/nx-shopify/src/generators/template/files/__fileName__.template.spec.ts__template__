@@ -1,0 +1,19 @@
+import { <%= className %>Template } from './<%= fileName %>.template';
+
+describe('<%= className %>Template', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let <%= propertyName %>Template: <%= className %>Template;
+
+  beforeEach(() => {
+      <%= propertyName %>Template = new <%= className %>Template(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(<%= propertyName %>Template).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(<%= propertyName %>Template.context).toMatchObject(mockThemeContext);
+  });
+});

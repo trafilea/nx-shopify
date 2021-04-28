@@ -2,6 +2,8 @@ import { ThemeModule } from '<%= importPath %>/core/theme-module';
 import { ThemeContext } from '<%= importPath %>/core/theme-context';
 import { ThemeOnReady } from '<%= importPath %>/core/life-cycle';
 
+import './theme-global-module.scss';
+
 export class ThemeGlobalModule extends ThemeModule implements ThemeOnReady {
   constructor(context: ThemeContext) {
     super(context);

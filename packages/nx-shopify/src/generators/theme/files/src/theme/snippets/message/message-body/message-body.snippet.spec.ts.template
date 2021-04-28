@@ -1,0 +1,10 @@
+import { MessageBodySnippet } from './message-body.snippet';
+
+describe('MessageBodySnippet', () => {
+
+  it('should initiate successfully', () => {
+    const messageSnippet = new MessageBodySnippet();
+
+    expect(messageSnippet).toBeTruthy();
+  });
+});

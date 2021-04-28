@@ -6,7 +6,7 @@ import {
 
 import './search.template.scss';
 
-export class Searchemplate extends ThemeModule implements ThemeOnReady {
+export class SearchTemplate extends ThemeModule implements ThemeOnReady {
   constructor(context: ThemeContext) {
     super(context);
   }

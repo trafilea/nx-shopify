@@ -1,0 +1,19 @@
+import { CustomersAddressesTemplate } from './customers.addresses.template';
+
+describe('CustomersAddressesTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let customersAddressesTemplate: CustomersAddressesTemplate;
+
+  beforeEach(() => {
+      customersAddressesTemplate = new CustomersAddressesTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(customersAddressesTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(customersAddressesTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

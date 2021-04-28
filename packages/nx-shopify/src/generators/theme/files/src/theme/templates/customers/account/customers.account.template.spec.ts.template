@@ -1,0 +1,19 @@
+import { CustomersAccountTemplate } from './customers.account.template';
+
+describe('CustomersAccountTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let customersAccountTemplate: CustomersAccountTemplate;
+
+  beforeEach(() => {
+      customersAccountTemplate = new CustomersAccountTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(customersAccountTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(customersAccountTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

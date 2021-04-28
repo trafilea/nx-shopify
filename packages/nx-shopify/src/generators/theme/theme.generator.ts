@@ -20,16 +20,8 @@ import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-ser
 import { join } from 'path';
 import { BuildExecutorSchema } from '../../executors/build/schema';
 import nxShopifyInitGenerator from '../init/init.generator';
-import { ThemeGeneratorSchema } from './schema';
-
-interface NormalizedSchema extends ThemeGeneratorSchema {
-  importPath: string;
-  npmScope: string;
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[];
-}
+import { addJest } from './lib/add-jest';
+import { NormalizedSchema, ThemeGeneratorSchema } from './schema';
 
 function normalizeOptions(
   tree: Tree,
@@ -60,10 +52,10 @@ function normalizeOptions(
   };
 }
 
-function createApplicationFiles(tree: Tree, options: NormalizedSchema) {
+function createApplicationFiles(host: Tree, options: NormalizedSchema) {
   const { projectRoot, name, npmScope, importPath } = options;
 
-  generateFiles(tree, join(__dirname, './files'), projectRoot, {
+  generateFiles(host, join(__dirname, './files'), projectRoot, {
     ...options,
     ...names(name),
     offsetFromRoot: offsetFromRoot(projectRoot),
@@ -71,6 +63,18 @@ function createApplicationFiles(tree: Tree, options: NormalizedSchema) {
     npmScope,
     importPath,
   });
+
+  for (const c of host.listChanges()) {
+    let deleteFile = false;
+
+    if (options.skipTests && /.*.spec.ts/.test(c.path)) {
+      deleteFile = true;
+    }
+
+    if (deleteFile) {
+      host.delete(c.path);
+    }
+  }
 }
 
 function addBuildTarget(
@@ -235,16 +239,17 @@ export async function themeGenerator(
 ) {
   const normalizedOptions = normalizeOptions(tree, options);
 
+  createApplicationFiles(tree, normalizedOptions);
+  updateRootTsConfig(tree, normalizedOptions);
+  addProject(tree, normalizedOptions);
+
   const tasks: GeneratorCallback[] = [
     await nxShopifyInitGenerator(tree, {
       ...options,
       skipFormat: true,
     }),
+    await addJest(tree, normalizedOptions),
   ];
-
-  createApplicationFiles(tree, normalizedOptions);
-  updateRootTsConfig(tree, normalizedOptions);
-  addProject(tree, normalizedOptions);
 
   if (!options.skipFormat) {
     await formatFiles(tree);
