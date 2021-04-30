@@ -19,6 +19,7 @@ import {
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { join } from 'path';
 import { BuildExecutorSchema } from '../../executors/build/schema';
+import { assertValidGeneratorNameOption } from '../../utils/generator-utils';
 import nxShopifyInitGenerator from '../init/init.generator';
 import { addJest } from './lib/add-jest';
 import { NormalizedSchema, ThemeGeneratorSchema } from './schema';
@@ -28,6 +29,8 @@ function normalizeOptions(
   options: ThemeGeneratorSchema
 ): NormalizedSchema {
   const { name, directory, tags } = options;
+
+  assertValidGeneratorNameOption(name, directory, 'theme');
 
   const { fileName } = names(name);
   const projectDirectory = directory
