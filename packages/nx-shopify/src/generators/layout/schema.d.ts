@@ -5,4 +5,5 @@ export interface LayoutGeneratorSchema {
   tags?: string;
   directory?: string;
   flat?: boolean;
+  skipTests?: boolean;
 }

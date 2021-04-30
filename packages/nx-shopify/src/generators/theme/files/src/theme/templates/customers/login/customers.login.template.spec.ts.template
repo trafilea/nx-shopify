@@ -1,0 +1,19 @@
+import { CustomersLoginTemplate } from './customers.login.template';
+
+describe('CustomersLoginTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let customersLoginTemplate: CustomersLoginTemplate;
+
+  beforeEach(() => {
+      customersLoginTemplate = new CustomersLoginTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(customersLoginTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(customersLoginTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

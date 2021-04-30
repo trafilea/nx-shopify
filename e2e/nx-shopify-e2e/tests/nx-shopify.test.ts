@@ -10,7 +10,7 @@ describe('nx-shopify e2e', () => {
     ensureNxProject('@trafilea/nx-shopify', 'dist/packages/nx-shopify');
   });
 
-  it('should create nx-shopify', async (done) => {
+  it('should create a theme', async (done) => {
     const plugin = uniq('nx-shopify');
     await runNxCommandAsync(`generate @trafilea/nx-shopify:theme ${plugin}`);
     const result = await runNxCommandAsync(`build ${plugin}`);
@@ -43,4 +43,13 @@ describe('nx-shopify e2e', () => {
       done();
     }, 120000);
   });
+
+  it('should pass unit tests', async (done) => {
+    const themeName = uniq('nx-shopify');
+    await runNxCommandAsync(`generate @trafilea/nx-shopify:theme ${themeName}`);
+    const result = runNxCommandAsync(`test ${themeName}`);
+    expect(result).resolves.toBeTruthy();
+
+    done();
+  }, 250000);
 });

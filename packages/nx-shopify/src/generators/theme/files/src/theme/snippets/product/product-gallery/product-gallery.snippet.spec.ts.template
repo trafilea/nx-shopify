@@ -1,0 +1,10 @@
+import { ProductGallerySnippet } from './product-gallery.snippet';
+
+describe('ProductGallerySnippet', () => {
+
+  it('should initiate successfully', () => {
+    const productGallerySnippet = new ProductGallerySnippet();
+
+    expect(productGallerySnippet).toBeTruthy();
+  });
+});

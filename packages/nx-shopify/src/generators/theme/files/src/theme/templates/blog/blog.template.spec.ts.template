@@ -1,0 +1,19 @@
+import { BlogTemplate } from './blog.template';
+
+describe('BlogTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let blogTemplate: BlogTemplate;
+
+  beforeEach(() => {
+      blogTemplate = new BlogTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(blogTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(blogTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

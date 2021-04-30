@@ -1,0 +1,19 @@
+import { PageTemplate } from './page.template';
+
+describe('PageTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let pageTemplate: PageTemplate;
+
+  beforeEach(() => {
+      pageTemplate = new PageTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(pageTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(pageTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

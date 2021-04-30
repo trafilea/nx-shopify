@@ -1,0 +1,10 @@
+import { MessageSnippet } from './message.snippet';
+
+describe('MessageSnippet', () => {
+
+  it('should initiate successfully', () => {
+    const messageSnippet = new MessageSnippet();
+
+    expect(messageSnippet).toBeTruthy();
+  });
+});

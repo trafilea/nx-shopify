@@ -9,6 +9,10 @@ export interface ShopifyBootstrapOptions {
   loadGlobal: boolean;
 }
 
+export interface ThemeModuleMapping {
+  [key: string]: () => Promise<typeof ThemeModule>;
+}
+
 /**
  * This function gets added to the global window and then called
  * on page load with the current template loaded and JS Context passed in
@@ -17,44 +21,46 @@ export interface ShopifyBootstrapOptions {
  * @returns {*}
  */
 export function themeBootstrapFactory(
-  registeredLayouts,
-  registeredTemplates
-): (options: ShopifyBootstrapOptions) => void {
-  return (options: ShopifyBootstrapOptions) => {
-    const {
-      themeLayoutName,
-      themeTemplateName,
-      themeContext,
-      loadGlobal = true,
-    } = options;
-    const context = themeContext ?? null;
+  registeredLayouts: ThemeModuleMapping,
+  registeredTemplates: ThemeModuleMapping
+): (options: ShopifyBootstrapOptions) => Promise<void> {
+  return (options: ShopifyBootstrapOptions) =>
+    new Promise((resolve) => {
+      const {
+        themeLayoutName,
+        themeTemplateName,
+        themeContext,
+        loadGlobal = true,
+      } = options;
+      const context = themeContext ?? null;
 
-    documentReady(() => {
-      // Load globals
-      if (loadGlobal) {
-        ThemeGlobalModule.load(context);
-      }
+      documentReady(() => {
+        // Load globals
+        if (loadGlobal) {
+          ThemeGlobalModule.load(context);
+        }
 
-      const importPromises: Array<Promise<any>> = [];
+        const importPromises: Array<Promise<any>> = [];
 
-      // Find the appropriate template loader based on themeTemplateName
-      const themeLayoutImporter = registeredLayouts[themeLayoutName];
-      if (typeof themeLayoutImporter === 'function') {
-        importPromises.push(themeLayoutImporter());
-      }
+        // Find the appropriate template loader based on themeTemplateName
+        const themeLayoutImporter = registeredLayouts[themeLayoutName];
+        if (typeof themeLayoutImporter === 'function') {
+          importPromises.push(themeLayoutImporter());
+        }
 
-      // See if there is a page class default for a custom template
-      const themeTemplateImporter = registeredTemplates[themeTemplateName];
-      if (typeof themeTemplateImporter === 'function') {
-        importPromises.push(themeTemplateImporter());
-      }
+        // See if there is a page class default for a custom template
+        const themeTemplateImporter = registeredTemplates[themeTemplateName];
+        if (typeof themeTemplateImporter === 'function') {
+          importPromises.push(themeTemplateImporter());
+        }
 
-      // Wait for imports to resolve, then call load() on them
-      Promise.all(importPromises).then((moduleImports) => {
-        moduleImports.forEach((module: typeof ThemeModule) => {
-          module.load(context);
+        // Wait for imports to resolve, then call load() on them
+        Promise.all(importPromises).then((moduleImports) => {
+          moduleImports.forEach((module: typeof ThemeModule) => {
+            module.load(context);
+          });
+          resolve();
         });
       });
     });
-  };
 }

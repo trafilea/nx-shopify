@@ -1,0 +1,19 @@
+import { CustomersOrderTemplate } from './customers.order.template';
+
+describe('CustomersOrderTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let customersOrderTemplate: CustomersOrderTemplate;
+
+  beforeEach(() => {
+      customersOrderTemplate = new CustomersOrderTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(customersOrderTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(customersOrderTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

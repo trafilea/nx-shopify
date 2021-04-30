@@ -10,7 +10,7 @@ export class ThemeModule {
 
     if (implementsOnReady(themeModule)) {
       documenReady(() => {
-        themeModule.onReady();
+        themeModule.onReady.bind(themeModule)();
       });
     }
   }

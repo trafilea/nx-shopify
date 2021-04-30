@@ -1,0 +1,19 @@
+import { CustomersRegisterTemplate } from './customers.register.template';
+
+describe('CustomersRegisterTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let customersRegisterTemplate: CustomersRegisterTemplate;
+
+  beforeEach(() => {
+      customersRegisterTemplate = new CustomersRegisterTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(customersRegisterTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(customersRegisterTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

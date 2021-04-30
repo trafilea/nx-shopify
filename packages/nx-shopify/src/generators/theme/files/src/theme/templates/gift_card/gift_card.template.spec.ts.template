@@ -1,0 +1,19 @@
+import { GiftCardTemplate } from './gift_card.template';
+
+describe('GiftCardTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let giftCardTemplate: GiftCardTemplate;
+
+  beforeEach(() => {
+      giftCardTemplate = new GiftCardTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(giftCardTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(giftCardTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

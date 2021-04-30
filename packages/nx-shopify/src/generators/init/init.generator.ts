@@ -2,8 +2,11 @@ import {
   addDependenciesToPackageJson,
   convertNxGenerator,
   formatFiles,
+  GeneratorCallback,
   Tree,
 } from '@nrwl/devkit';
+import { jestInitGenerator } from '@nrwl/jest';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
 import {
   autoprefixerVersion,
@@ -26,15 +29,25 @@ function updateDependencies(tree: Tree) {
 }
 
 export async function nxShopifyInitGenerator(
-  tree: Tree,
+  host: Tree,
   schema: InitGeneratorSchema
 ) {
-  setDefaultCollection(tree, '@trafilea/nx-shopify');
+  setDefaultCollection(host, '@trafilea/nx-shopify');
+
+  const tasks: GeneratorCallback[] = [];
+
+  if (!schema.unitTestRunner || schema.unitTestRunner === 'jest') {
+    const jestTask = jestInitGenerator(host, {});
+    tasks.push(jestTask);
+  }
+
+  const updateDepsTask = updateDependencies(host);
+  tasks.push(updateDepsTask);
 
   if (!schema.skipFormat) {
-    await formatFiles(tree);
+    await formatFiles(host);
   }
-  return updateDependencies(tree);
+  return runTasksInSerial(...tasks);
 }
 
 export default nxShopifyInitGenerator;

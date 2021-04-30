@@ -1,0 +1,10 @@
+import { ProductRecommendationsSnippet } from './product-recommendations.snippet';
+
+describe('ProductRecommendationsSnippet', () => {
+
+  it('should initiate successfully', () => {
+    const productRecommendationsSnippet = new ProductRecommendationsSnippet();
+
+    expect(productRecommendationsSnippet).toBeTruthy();
+  });
+});

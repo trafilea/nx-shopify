@@ -1,0 +1,19 @@
+import { ArticleTemplate } from './article.template';
+
+describe('ArticleTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let articleTemplate: ArticleTemplate;
+
+  beforeEach(() => {
+      articleTemplate = new ArticleTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(articleTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(articleTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

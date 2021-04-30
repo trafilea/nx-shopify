@@ -1,0 +1,10 @@
+import { <%= className %>Snippet } from './<%= fileName %>.snippet';
+
+describe('<%= className %>Snippet', () => {
+
+  it('should initiate successfully', () => {
+    const <%= propertyName %>Snippet = new <%= className %>Snippet();
+
+    expect(<%= propertyName %>Snippet).toBeTruthy();
+  });
+});

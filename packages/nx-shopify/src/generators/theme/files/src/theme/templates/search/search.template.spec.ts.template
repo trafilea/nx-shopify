@@ -1,0 +1,19 @@
+import { SearchTemplate } from './search.template';
+
+describe('SearchTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let searchTemplate: SearchTemplate;
+
+  beforeEach(() => {
+      searchTemplate = new SearchTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(searchTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(searchTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

@@ -93,6 +93,18 @@ function createLayoutFiles(host: Tree, options: NormalizedSchema) {
     layoutDir,
     templateOptions
   );
+
+  for (const c of host.listChanges()) {
+    let deleteFile = false;
+
+    if (options.skipTests && /.*.spec.ts/.test(c.path)) {
+      deleteFile = true;
+    }
+
+    if (deleteFile) {
+      host.delete(c.path);
+    }
+  }
 }
 
 export async function layoutGenerator(

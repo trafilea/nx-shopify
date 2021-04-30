@@ -1,0 +1,49 @@
+import { ThemeGlobalModule } from '../global';
+import { ThemeOnReady } from './life-cycle';
+import { themeBootstrapFactory } from './theme-bootstrap';
+import { ThemeModule } from './theme-module';
+
+describe('Theme Bootstrap Process', () => {
+  const testThemeName = 'TestName';
+  const mockThemeContext = { themeName: testThemeName };
+
+  afterEach(() => jest.resetAllMocks());
+
+  class MockThemeModule extends ThemeModule implements ThemeOnReady {
+    onReady() {}
+  }
+  it('should load theme modules', async () => {
+    const loadSpy = jest.spyOn(MockThemeModule, 'load');
+
+    const themeBootstrap = themeBootstrapFactory(
+      { theme: () => Promise.resolve(MockThemeModule) },
+      { index: () => Promise.resolve(MockThemeModule) }
+    );
+
+    await themeBootstrap({
+      themeLayoutName: 'theme',
+      themeTemplateName: 'index',
+      themeContext: mockThemeContext,
+      loadGlobal: false,
+    });
+
+    expect(loadSpy).toBeCalledWith(mockThemeContext);
+    expect(loadSpy).toBeCalledTimes(2);
+  });
+
+  it('should load global module', async () => {
+    const loadSpy = jest.spyOn(ThemeGlobalModule, 'load');
+
+    const themeBootstrap = themeBootstrapFactory({}, {});
+
+    await themeBootstrap({
+      themeLayoutName: '',
+      themeTemplateName: '',
+      themeContext: mockThemeContext,
+      loadGlobal: true,
+    });
+
+    expect(loadSpy).toBeCalledWith(mockThemeContext);
+    expect(loadSpy).toBeCalled();
+  });
+});

@@ -1,0 +1,12 @@
+import { ThemeGlobalModule } from './theme-global-module';
+
+describe('ThemeGlobalModule', () => {
+  const testThemeName = 'TestName';
+
+  it('should initiate successfully', () => {
+    const globalModule = new ThemeGlobalModule({ themeName: testThemeName });
+
+    expect(globalModule).toBeTruthy();
+    expect(globalModule.context.themeName).toEqual(testThemeName);
+  });
+});

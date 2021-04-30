@@ -1,0 +1,19 @@
+import { PageContactTemplate } from './page-contact.template';
+
+describe('PageContactTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let pageContactTemplate: PageContactTemplate;
+
+  beforeEach(() => {
+      pageContactTemplate = new PageContactTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(pageContactTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(pageContactTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

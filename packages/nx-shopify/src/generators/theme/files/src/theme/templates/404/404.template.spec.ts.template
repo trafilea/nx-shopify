@@ -1,0 +1,19 @@
+import { NotFound404Template } from './404.template';
+
+describe('NotFound404Template', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let notFound404Template: NotFound404Template;
+
+  beforeEach(() => {
+      notFound404Template = new NotFound404Template(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(notFound404Template).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(notFound404Template.context).toMatchObject(mockThemeContext);
+  });
+});

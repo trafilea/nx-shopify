@@ -93,6 +93,18 @@ function createTemplateFiles(host: Tree, options: NormalizedSchema) {
     templatesDir,
     templateOptions
   );
+
+  for (const c of host.listChanges()) {
+    let deleteFile = false;
+
+    if (options.skipTests && /.*.spec.ts/.test(c.path)) {
+      deleteFile = true;
+    }
+
+    if (deleteFile) {
+      host.delete(c.path);
+    }
+  }
 }
 
 export async function templateGenerator(

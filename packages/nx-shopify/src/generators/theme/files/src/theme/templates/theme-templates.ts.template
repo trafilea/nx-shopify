@@ -53,5 +53,5 @@ export const themeTemplates = {
     ),
   product: () =>
     import('./product/product.template').then((m) => m.ProductTemplate),
-  search: () => import('./search/search.template').then((m) => m.Searchemplate),
+  search: () => import('./search/search.template').then((m) => m.SearchTemplate),
 };

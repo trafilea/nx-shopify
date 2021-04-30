@@ -1,0 +1,19 @@
+import { CollectionTemplate } from './collection.template';
+
+describe('CollectionTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let collectionTemplate: CollectionTemplate;
+
+  beforeEach(() => {
+      collectionTemplate = new CollectionTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(collectionTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(collectionTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

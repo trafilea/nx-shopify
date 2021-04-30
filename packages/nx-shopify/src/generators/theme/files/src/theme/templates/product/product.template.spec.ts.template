@@ -1,0 +1,19 @@
+import { ProductTemplate } from './product.template';
+
+describe('ProductTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let productTemplate: ProductTemplate;
+
+  beforeEach(() => {
+      productTemplate = new ProductTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(productTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(productTemplate.context).toMatchObject(mockThemeContext);
+  });
+});
