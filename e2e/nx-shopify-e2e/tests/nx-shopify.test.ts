@@ -48,8 +48,7 @@ describe('nx-shopify e2e', () => {
     const themeName = uniq('nx-shopify');
     await runNxCommandAsync(`generate @trafilea/nx-shopify:theme ${themeName}`);
     const result = runNxCommandAsync(`test ${themeName}`);
-    expect(result).resolves.toBeTruthy();
-
+    await expect(result).resolves.toBeTruthy();
     done();
   }, 250000);
 });
