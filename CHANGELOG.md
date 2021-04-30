@@ -1,3 +1,20 @@
+# [1.2.0](https://github.com/trafilea/nx-shopify/compare/v1.1.1...v1.2.0) (2021-04-30)
+
+
+### Bug Fixes
+
+* **core:** e2e tests expect themes' unit tests to pass ([cb3782c](https://github.com/trafilea/nx-shopify/commit/cb3782cf2e703a74048ea07c0119cb38d692578a))
+* **docs:** set custom webpack config example to use module.exports ([4ef8164](https://github.com/trafilea/nx-shopify/commit/4ef8164636313d94b0e193787631c81f82ed82c2))
+* **serve:** fix proxy config generated filename ([d0bedba](https://github.com/trafilea/nx-shopify/commit/d0bedbaa6346d208fd732eda39cfeaf957d1bb3e))
+* **theme:** validate paths are not used in theme name ([146bf9b](https://github.com/trafilea/nx-shopify/commit/146bf9b6288050aa6d845d0baf96b29d38d1362a))
+
+
+### Features
+
+* **core:** add jest support ([2dc365f](https://github.com/trafilea/nx-shopify/commit/2dc365f5f882e2f9a64688daf175b732e26ea94a))
+* **core:** support for react ([b429fde](https://github.com/trafilea/nx-shopify/commit/b429fded454e399ed620ba103e33f4ed5a1d1e1a))
+* **serve:** add local proxy feature ([c8e5b49](https://github.com/trafilea/nx-shopify/commit/c8e5b49039029d99c612b006bf9468f3b7f3912f))
+
 ## [1.1.1](https://github.com/trafilea/nx-shopify/compare/v1.1.0...v1.1.1) (2021-04-26)
 
 
