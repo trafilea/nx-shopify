@@ -38,10 +38,10 @@ After cloning the project to your machine, to install the dependencies, run:
 yarn
 ```
 
-To build all the packages, run:
+To build the package, run:
 
 ```bash
-yarn build
+yarn build nx-shopify
 ```
 
 ### Running E2E Tests
