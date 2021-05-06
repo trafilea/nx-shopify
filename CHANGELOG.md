@@ -1,3 +1,13 @@
+# [1.3.0](https://github.com/trafilea/nx-shopify/compare/v1.2.0...v1.3.0) (2021-05-06)
+
+
+### Features
+
+* **layout:** generate liquid only layouts ([8bf5da6](https://github.com/trafilea/nx-shopify/commit/8bf5da6daa12f50ddedfce23f325c1b82a107a5c))
+* **section:** generate liquid only sections ([7a6daa1](https://github.com/trafilea/nx-shopify/commit/7a6daa1218bec3896f04533e54eecae6c56352f7))
+* **snippet:** generate liquid only snippets ([b4495a4](https://github.com/trafilea/nx-shopify/commit/b4495a4ecbdc3927b913d6cc62d5fe608e41734c))
+* **template:** generate liquid only templates ([5e64215](https://github.com/trafilea/nx-shopify/commit/5e6421507af8ce9cd93d25493b3975186212075d))
+
 # [1.2.0](https://github.com/trafilea/nx-shopify/compare/v1.1.1...v1.2.0) (2021-04-30)
 
 
