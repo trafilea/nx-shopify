@@ -101,6 +101,10 @@ function createTemplateFiles(host: Tree, options: NormalizedSchema) {
       deleteFile = true;
     }
 
+    if (options.liquidOnly && !/.*.liquid/.test(c.path)) {
+      deleteFile = true;
+    }
+
     if (deleteFile) {
       host.delete(c.path);
     }

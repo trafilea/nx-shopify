@@ -5,5 +5,6 @@ export interface TemplateGeneratorSchema {
   tags?: string;
   directory?: string;
   flat?: boolean;
+  liquidOnly?: boolean;
   skipTests?: boolean;
 }
