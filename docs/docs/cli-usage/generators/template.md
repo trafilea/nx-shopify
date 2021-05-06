@@ -104,3 +104,19 @@ Default: `false`
 Type: `boolean`
 
 Create template files at the directory root rather than its own directory.
+
+### --liquidOnly
+
+Default: `false`
+
+Type: `boolean`
+
+When true, does not create files other than the liquid file for the new template.
+
+### --skipTests
+
+Default: `false`
+
+Type: `boolean`
+
+When true, does not create \"spec.ts\" test files for the new template.

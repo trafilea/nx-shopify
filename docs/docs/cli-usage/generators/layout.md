@@ -99,3 +99,19 @@ Default: `false`
 Type: `boolean`
 
 Create layout files at the directory root rather than its own directory.
+
+### --liquidOnly
+
+Default: `false`
+
+Type: `boolean`
+
+When true, does not create files other than the liquid file for the new layout.
+
+### --skipTests
+
+Default: `false`
+
+Type: `boolean`
+
+When true, does not create \"spec.ts\" test files for the new layout.
