@@ -7,12 +7,6 @@
   Nx-Shopify
 </h1>
 
-> 🔎 **A [Nx](https://nx.dev) plugin for developing performance-first Shopify themes 🚀**
-
-Be it you need to build a custom Shopify store theme, develop a generic theme or even maintain multiple stores/themes with shared code across them, this Nx plugin helps you power-up your development experience
-
-<hr />
-
 <div align="center">
 
 [![e2e](https://github.com/trafilea/nx-shopify/actions/workflows/e2e.yml/badge.svg)](https://github.com/trafilea/nx-shopify/actions/workflows/e2e.yml)
@@ -29,6 +23,12 @@ Be it you need to build a custom Shopify store theme, develop a generic theme or
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </div>
+
+> 🔎 **A [Nx](https://nx.dev) plugin for developing performance-first Shopify themes 🚀**
+
+Be it you need to build a custom Shopify store theme, develop a generic theme or even maintain multiple stores/themes with shared code across them, this Nx plugin helps you power-up your development experience
+
+<hr />
 
 ## Getting Started
 
