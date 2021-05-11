@@ -1,6 +1,6 @@
 <p align="center">
 
-<img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" height="100">
+<img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="80" height="50">
 
 </p>
 <h1 align="center">
