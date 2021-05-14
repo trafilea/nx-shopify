@@ -24,7 +24,7 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </div>
 
-> 🔎 **A [Nx](https://nx.dev) plugin for developing performance-first Shopify themes 🚀**
+> 🔎 **An [Nx](https://nx.dev) plugin for developing performance-first Shopify themes 🚀**
 
 Be it you need to build a custom Shopify store theme, develop a generic theme or even maintain multiple stores/themes with shared code across them, this Nx plugin helps you power-up your development experience
 
