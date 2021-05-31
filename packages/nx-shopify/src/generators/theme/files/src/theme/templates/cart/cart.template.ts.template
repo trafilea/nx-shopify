@@ -1,0 +1,17 @@
+import {
+  ThemeModule,
+  ThemeContext,
+  ThemeOnReady,
+} from '<%= importPath %>/core';
+
+import './cart.template.scss';
+
+export class CartTemplate extends ThemeModule implements ThemeOnReady {
+  constructor(context: ThemeContext) {
+    super(context);
+  }
+
+  onReady() {
+    console.log('Cart Template: onReady() called');
+  }
+}

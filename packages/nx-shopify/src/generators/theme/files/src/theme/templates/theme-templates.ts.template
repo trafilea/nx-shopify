@@ -3,6 +3,10 @@ export const themeTemplates = {
   article: () =>
     import('./article/article.template').then((m) => m.ArticleTemplate),
   blog: () => import('./blog/blog.template').then((m) => m.BlogTemplate),
+  cart: () =>
+    import('./cart/cart.template').then(
+      (m) => m.CartTemplate
+    ),
   collection: () =>
     import('./collection/collection.template').then(
       (m) => m.CollectionTemplate
