@@ -1,0 +1,19 @@
+import { CartTemplate } from './cart.template';
+
+describe('CartTemplate', () => {
+  const mockThemeContext = { themeName: 'TestName' };
+
+  let cartTemplate: CartTemplate;
+
+  beforeEach(() => {
+      cartTemplate = new CartTemplate(mockThemeContext);
+  });
+
+  it('should initiate successfully', () => {
+    expect(cartTemplate).toBeTruthy();
+  });
+
+  it('should not mutate the context', () => {
+    expect(cartTemplate.context).toMatchObject(mockThemeContext);
+  });
+});

@@ -1,0 +1,63 @@
+{% if cart.item_count > 0 %}
+  <h1>My Cart</h1>
+  <form action="/cart" method="post" novalidate>
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart.items %}
+          <tr class="responsive-table-row">
+            <td>
+              {% if item.image != blank %}
+                <a href="{{ item.url | within: collections.all }}">
+                  {{ item | img_url: '240x240' | img_tag: item.title }}
+                </a>
+              {% endif %}
+            </td>
+            <td>
+              <a href="{{ item.url }}">{{ item.product.title }}</a>
+              {% unless item.product.has_only_default_variant %}
+                <p>{{ item.variant.title }}</p>
+              {% endunless %}
+              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                <small>Remove</small>
+              </a>
+            </td>
+            <td>
+              {% if item.original_line_price != item.line_price %}
+                {{ item.price | money }}
+                <s>{{ item.original_price | money }}</s>
+              {% else %}
+                {{ item.price | money }}
+              {% endif %}
+            </td>
+            <td>
+              <input type="number"
+                     name="updates[]"
+                     id="updates_{{ item.key }}"
+                     value="{{ item.quantity }}"
+                     min="0">
+            </td>
+            <td>
+              {{ item.line_price | money }}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p>Subtotal</p>
+    <p>{{ cart.total_price | money }}</p>
+
+    <input type="submit" name="update" value="Update">
+    <input type="submit" name="checkout" class="button" value="Checkout">
+  </form>
+{% else %}
+  <h1>My Cart</h1>
+{% endif %}
