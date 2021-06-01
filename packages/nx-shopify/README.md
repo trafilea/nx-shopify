@@ -19,7 +19,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </div>
@@ -97,6 +97,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
     <td align="center"><a href="https://www.mvuljevas.com/"><img src="https://avatars1.githubusercontent.com/u/14046897?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mauricio Vuljevas</b></sub></a><br /><a href="#ideas-mvuljevas" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/jsalinasvela"><img src="https://avatars2.githubusercontent.com/u/28662284?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jesus Salinas Vela</b></sub></a><br /><a href="#ideas-jsalinasvela" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-jsalinasvela" title="Project Management">📆</a></td>
     <td align="center"><a href="https://github.com/sophiecarreras"><img src="https://avatars0.githubusercontent.com/u/49928680?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sophie</b></sub></a><br /><a href="#projectManagement-sophiecarreras" title="Project Management">📆</a></td>
+    <td align="center"><a href="https://github.com/jibinycricket"><img src="https://avatars.githubusercontent.com/u/11200396?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jibin Mathew</b></sub></a><br /><a href="https://github.com/trafilea/nx-shopify/commits?author=jibinycricket" title="Code">💻</a> <a href="https://github.com/trafilea/nx-shopify/issues?q=author%3Ajibinycricket" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 

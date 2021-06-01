@@ -69,6 +69,16 @@
       "contributions": [
         "projectManagement"
       ]
+    },
+    {
+      "login": "jibinycricket",
+      "name": "Jibin Mathew",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11200396?v=4",
+      "profile": "https://github.com/jibinycricket",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7
