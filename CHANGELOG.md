@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/trafilea/nx-shopify/compare/v1.3.0...v1.4.0) (2021-06-02)
+
+
+### Bug Fixes
+
+* **theme:** fixed failed e2e test ([23e2eed](https://github.com/trafilea/nx-shopify/commit/23e2eed7d718c6ed277dbfb7b6168c2173d2f38c)), closes [#53](https://github.com/trafilea/nx-shopify/issues/53)
+
+
+### Features
+
+* **theme:** adds the cart template and its corresponding files when a theme gets generated ([1f66126](https://github.com/trafilea/nx-shopify/commit/1f661267973c44f830f35d49f5778d4291398008)), closes [#53](https://github.com/trafilea/nx-shopify/issues/53)
+
 # [1.3.0](https://github.com/trafilea/nx-shopify/compare/v1.2.0...v1.3.0) (2021-05-06)
 
 
